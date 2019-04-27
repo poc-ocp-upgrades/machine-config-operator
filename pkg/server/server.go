@@ -33,6 +33,8 @@ func getAppenders(cr poolRequest, currMachineConfig string, f kubeconfigFunc, os
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	appenders := []appenderFunc{func(config *ignv2_2types.Config) error {
 		return appendNodeAnnotations(config, currMachineConfig)
 	}, func(config *ignv2_2types.Config) error {
@@ -53,9 +55,13 @@ func boolToPtr(b bool) *bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &b
 }
 func appendInitialPivot(conf *ignv2_2types.Config, osimageurl string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -95,6 +101,8 @@ func appendKubeConfig(conf *ignv2_2types.Config, f kubeconfigFunc) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	kcData, _, err := f()
 	if err != nil {
 		return err
@@ -103,6 +111,8 @@ func appendKubeConfig(conf *ignv2_2types.Config, f kubeconfigFunc) error {
 	return nil
 }
 func appendNodeAnnotations(conf *ignv2_2types.Config, currConf string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -131,6 +141,8 @@ func getNodeAnnotation(conf string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	nodeAnnotations := map[string]string{daemonconsts.CurrentMachineConfigAnnotationKey: conf, daemonconsts.DesiredMachineConfigAnnotationKey: conf, daemonconsts.MachineConfigDaemonStateAnnotationKey: daemonconsts.MachineConfigDaemonStateDone}
 	contents, err := json.Marshal(nodeAnnotations)
 	if err != nil {
@@ -139,6 +151,8 @@ func getNodeAnnotation(conf string) (string, error) {
 	return string(contents), nil
 }
 func copyFileToIgnition(conf *ignv2_2types.Config, outPath, srcPath string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -167,6 +181,8 @@ func appendFileToIgnition(conf *ignv2_2types.Config, outPath, contents string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	fileMode := int(420)
 	file := ignv2_2types.File{Node: ignv2_2types.Node{Filesystem: defaultFileSystem, Path: outPath}, FileEmbedded1: ignv2_2types.FileEmbedded1{Contents: ignv2_2types.FileContents{Source: getEncodedContent(contents)}, Mode: &fileMode}}
 	if len(conf.Storage.Files) == 0 {
@@ -185,6 +201,8 @@ func getDecodedContent(inp string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	d, err := dataurl.DecodeString(inp)
 	if err != nil {
 		return "", err
@@ -192,6 +210,8 @@ func getDecodedContent(inp string) (string, error) {
 	return string(d.Data), nil
 }
 func getEncodedContent(inp string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -34,9 +34,13 @@ func (fi bindataFileInfo) Name() string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return fi.name
 }
 func (fi bindataFileInfo) Size() int64 {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -60,9 +64,13 @@ func (fi bindataFileInfo) Mode() os.FileMode {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return fi.mode
 }
 func (fi bindataFileInfo) ModTime() time.Time {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -86,9 +94,13 @@ func (fi bindataFileInfo) IsDir() bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return false
 }
 func (fi bindataFileInfo) Sys() interface{} {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -175,9 +187,13 @@ func manifestsBootstrapPodV2YamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsBootstrapPodV2Yaml, nil
 }
 func manifestsBootstrapPodV2Yaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -230,9 +246,13 @@ func manifestsContainerruntimeconfigCrdYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsContainerruntimeconfigCrdYaml, nil
 }
 func manifestsContainerruntimeconfigCrdYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -291,9 +311,13 @@ func manifestsControllerconfigCrdYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsControllerconfigCrdYaml, nil
 }
 func manifestsControllerconfigCrdYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -344,9 +368,13 @@ func manifestsKubeletconfigCrdYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsKubeletconfigCrdYaml, nil
 }
 func manifestsKubeletconfigCrdYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -415,9 +443,13 @@ func manifestsMachineconfigCrdYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigCrdYaml, nil
 }
 func manifestsMachineconfigCrdYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -468,9 +500,13 @@ func manifestsMachineconfigcontrollerClusterroleYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigcontrollerClusterroleYaml, nil
 }
 func manifestsMachineconfigcontrollerClusterroleYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -515,9 +551,13 @@ func manifestsMachineconfigcontrollerClusterrolebindingYamlBytes() ([]byte, erro
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigcontrollerClusterrolebindingYaml, nil
 }
 func manifestsMachineconfigcontrollerClusterrolebindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -556,9 +596,13 @@ func manifestsMachineconfigcontrollerControllerconfigYamlBytes() ([]byte, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigcontrollerControllerconfigYaml, nil
 }
 func manifestsMachineconfigcontrollerControllerconfigYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -624,9 +668,13 @@ func manifestsMachineconfigcontrollerDeploymentYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigcontrollerDeploymentYaml, nil
 }
 func manifestsMachineconfigcontrollerDeploymentYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -664,9 +712,13 @@ func manifestsMachineconfigcontrollerSaYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigcontrollerSaYaml, nil
 }
 func manifestsMachineconfigcontrollerSaYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -720,9 +772,13 @@ func manifestsMachineconfigdaemonClusterroleYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonClusterroleYaml, nil
 }
 func manifestsMachineconfigdaemonClusterroleYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -767,9 +823,13 @@ func manifestsMachineconfigdaemonClusterrolebindingYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonClusterrolebindingYaml, nil
 }
 func manifestsMachineconfigdaemonClusterrolebindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -880,9 +940,13 @@ func manifestsMachineconfigdaemonDaemonsetYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonDaemonsetYaml, nil
 }
 func manifestsMachineconfigdaemonDaemonsetYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -924,9 +988,13 @@ func manifestsMachineconfigdaemonEventsClusterroleYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonEventsClusterroleYaml, nil
 }
 func manifestsMachineconfigdaemonEventsClusterroleYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -971,9 +1039,13 @@ func manifestsMachineconfigdaemonEventsRolebindingDefaultYamlBytes() ([]byte, er
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonEventsRolebindingDefaultYaml, nil
 }
 func manifestsMachineconfigdaemonEventsRolebindingDefaultYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1018,9 +1090,13 @@ func manifestsMachineconfigdaemonEventsRolebindingTargetYamlBytes() ([]byte, err
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonEventsRolebindingTargetYaml, nil
 }
 func manifestsMachineconfigdaemonEventsRolebindingTargetYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1058,9 +1134,13 @@ func manifestsMachineconfigdaemonSaYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigdaemonSaYaml, nil
 }
 func manifestsMachineconfigdaemonSaYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1135,9 +1215,13 @@ func manifestsMachineconfigpoolCrdYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigpoolCrdYaml, nil
 }
 func manifestsMachineconfigpoolCrdYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1179,9 +1263,13 @@ func manifestsMachineconfigserverClusterroleYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverClusterroleYaml, nil
 }
 func manifestsMachineconfigserverClusterroleYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1226,9 +1314,13 @@ func manifestsMachineconfigserverClusterrolebindingYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverClusterrolebindingYaml, nil
 }
 func manifestsMachineconfigserverClusterrolebindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1277,9 +1369,13 @@ func manifestsMachineconfigserverCsrApproverRoleBindingYamlBytes() ([]byte, erro
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverCsrApproverRoleBindingYaml, nil
 }
 func manifestsMachineconfigserverCsrApproverRoleBindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1324,9 +1420,13 @@ func manifestsMachineconfigserverCsrBootstrapRoleBindingYamlBytes() ([]byte, err
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverCsrBootstrapRoleBindingYaml, nil
 }
 func manifestsMachineconfigserverCsrBootstrapRoleBindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1377,9 +1477,13 @@ func manifestsMachineconfigserverCsrRenewalRoleBindingYamlBytes() ([]byte, error
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverCsrRenewalRoleBindingYaml, nil
 }
 func manifestsMachineconfigserverCsrRenewalRoleBindingYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1458,9 +1562,13 @@ func manifestsMachineconfigserverDaemonsetYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverDaemonsetYaml, nil
 }
 func manifestsMachineconfigserverDaemonsetYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1501,9 +1609,13 @@ func manifestsMachineconfigserverKubeApiserverServingCaConfigmapYamlBytes() ([]b
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverKubeApiserverServingCaConfigmapYaml, nil
 }
 func manifestsMachineconfigserverKubeApiserverServingCaConfigmapYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1541,9 +1653,13 @@ func manifestsMachineconfigserverNodeBootstrapperSaYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverNodeBootstrapperSaYaml, nil
 }
 func manifestsMachineconfigserverNodeBootstrapperSaYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1584,9 +1700,13 @@ func manifestsMachineconfigserverNodeBootstrapperTokenYamlBytes() ([]byte, error
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverNodeBootstrapperTokenYaml, nil
 }
 func manifestsMachineconfigserverNodeBootstrapperTokenYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1624,9 +1744,13 @@ func manifestsMachineconfigserverSaYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMachineconfigserverSaYaml, nil
 }
 func manifestsMachineconfigserverSaYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1671,9 +1795,13 @@ func manifestsMasterMachineconfigpoolYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsMasterMachineconfigpoolYaml, nil
 }
 func manifestsMasterMachineconfigpoolYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1716,9 +1844,13 @@ func manifestsWorkerMachineconfigpoolYamlBytes() ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return _manifestsWorkerMachineconfigpoolYaml, nil
 }
 func manifestsWorkerMachineconfigpoolYaml() (*asset, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1738,6 +1870,8 @@ func manifestsWorkerMachineconfigpoolYaml() (*asset, error) {
 	return a, nil
 }
 func Asset(name string) ([]byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1769,6 +1903,8 @@ func MustAsset(name string) []byte {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	a, err := Asset(name)
 	if err != nil {
 		panic("asset: Asset(" + name + "): " + err.Error())
@@ -1776,6 +1912,8 @@ func MustAsset(name string) []byte {
 	return a
 }
 func AssetInfo(name string) (os.FileInfo, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1807,6 +1945,8 @@ func AssetNames() []string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	names := make([]string, 0, len(_bindata))
 	for name := range _bindata {
 		names = append(names, name)
@@ -1817,6 +1957,8 @@ func AssetNames() []string {
 var _bindata = map[string]func() (*asset, error){"manifests/bootstrap-pod-v2.yaml": manifestsBootstrapPodV2Yaml, "manifests/containerruntimeconfig.crd.yaml": manifestsContainerruntimeconfigCrdYaml, "manifests/controllerconfig.crd.yaml": manifestsControllerconfigCrdYaml, "manifests/kubeletconfig.crd.yaml": manifestsKubeletconfigCrdYaml, "manifests/machineconfig.crd.yaml": manifestsMachineconfigCrdYaml, "manifests/machineconfigcontroller/clusterrole.yaml": manifestsMachineconfigcontrollerClusterroleYaml, "manifests/machineconfigcontroller/clusterrolebinding.yaml": manifestsMachineconfigcontrollerClusterrolebindingYaml, "manifests/machineconfigcontroller/controllerconfig.yaml": manifestsMachineconfigcontrollerControllerconfigYaml, "manifests/machineconfigcontroller/deployment.yaml": manifestsMachineconfigcontrollerDeploymentYaml, "manifests/machineconfigcontroller/sa.yaml": manifestsMachineconfigcontrollerSaYaml, "manifests/machineconfigdaemon/clusterrole.yaml": manifestsMachineconfigdaemonClusterroleYaml, "manifests/machineconfigdaemon/clusterrolebinding.yaml": manifestsMachineconfigdaemonClusterrolebindingYaml, "manifests/machineconfigdaemon/daemonset.yaml": manifestsMachineconfigdaemonDaemonsetYaml, "manifests/machineconfigdaemon/events-clusterrole.yaml": manifestsMachineconfigdaemonEventsClusterroleYaml, "manifests/machineconfigdaemon/events-rolebinding-default.yaml": manifestsMachineconfigdaemonEventsRolebindingDefaultYaml, "manifests/machineconfigdaemon/events-rolebinding-target.yaml": manifestsMachineconfigdaemonEventsRolebindingTargetYaml, "manifests/machineconfigdaemon/sa.yaml": manifestsMachineconfigdaemonSaYaml, "manifests/machineconfigpool.crd.yaml": manifestsMachineconfigpoolCrdYaml, "manifests/machineconfigserver/clusterrole.yaml": manifestsMachineconfigserverClusterroleYaml, "manifests/machineconfigserver/clusterrolebinding.yaml": manifestsMachineconfigserverClusterrolebindingYaml, "manifests/machineconfigserver/csr-approver-role-binding.yaml": manifestsMachineconfigserverCsrApproverRoleBindingYaml, "manifests/machineconfigserver/csr-bootstrap-role-binding.yaml": manifestsMachineconfigserverCsrBootstrapRoleBindingYaml, "manifests/machineconfigserver/csr-renewal-role-binding.yaml": manifestsMachineconfigserverCsrRenewalRoleBindingYaml, "manifests/machineconfigserver/daemonset.yaml": manifestsMachineconfigserverDaemonsetYaml, "manifests/machineconfigserver/kube-apiserver-serving-ca-configmap.yaml": manifestsMachineconfigserverKubeApiserverServingCaConfigmapYaml, "manifests/machineconfigserver/node-bootstrapper-sa.yaml": manifestsMachineconfigserverNodeBootstrapperSaYaml, "manifests/machineconfigserver/node-bootstrapper-token.yaml": manifestsMachineconfigserverNodeBootstrapperTokenYaml, "manifests/machineconfigserver/sa.yaml": manifestsMachineconfigserverSaYaml, "manifests/master.machineconfigpool.yaml": manifestsMasterMachineconfigpoolYaml, "manifests/worker.machineconfigpool.yaml": manifestsWorkerMachineconfigpoolYaml}
 
 func AssetDir(name string) ([]string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1866,6 +2008,8 @@ func RestoreAsset(dir, name string) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	data, err := Asset(name)
 	if err != nil {
 		return err
@@ -1899,6 +2043,8 @@ func RestoreAssets(dir, name string) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	children, err := AssetDir(name)
 	if err != nil {
 		return RestoreAsset(dir, name)
@@ -1912,6 +2058,8 @@ func RestoreAssets(dir, name string) error {
 	return nil
 }
 func _filePath(dir, name string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1936,6 +2084,23 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
@@ -1978,5 +2143,5 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
-	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

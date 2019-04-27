@@ -19,6 +19,8 @@ func ApplyServiceAccount(client coreclientv1.ServiceAccountsGetter, required *co
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existing, err := client.ServiceAccounts(required.Namespace).Get(required.Name, metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		actual, err := client.ServiceAccounts(required.Namespace).Create(required)
@@ -36,6 +38,8 @@ func ApplyServiceAccount(client coreclientv1.ServiceAccountsGetter, required *co
 	return actual, true, err
 }
 func ApplySecret(client coreclientv1.SecretsGetter, required *corev1.Secret) (*corev1.Secret, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

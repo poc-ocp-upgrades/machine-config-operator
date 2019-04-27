@@ -35,9 +35,13 @@ func newMachineConfigs(c *MachineconfigurationV1Client) *machineConfigs {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &machineConfigs{client: c.RESTClient()}
 }
 func (c *machineConfigs) Get(name string, options metav1.GetOptions) (result *v1.MachineConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -53,6 +57,8 @@ func (c *machineConfigs) Get(name string, options metav1.GetOptions) (result *v1
 	return
 }
 func (c *machineConfigs) List(opts metav1.ListOptions) (result *v1.MachineConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -82,6 +88,8 @@ func (c *machineConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -90,6 +98,8 @@ func (c *machineConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error)
 	return c.client.Get().Resource("machineconfigs").VersionedParams(&opts, scheme.ParameterCodec).Timeout(timeout).Watch()
 }
 func (c *machineConfigs) Create(machineConfig *v1.MachineConfig) (result *v1.MachineConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -115,11 +125,15 @@ func (c *machineConfigs) Update(machineConfig *v1.MachineConfig) (result *v1.Mac
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.MachineConfig{}
 	err = c.client.Put().Resource("machineconfigs").Name(machineConfig.Name).Body(machineConfig).Do().Into(result)
 	return
 }
 func (c *machineConfigs) Delete(name string, options *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -143,6 +157,8 @@ func (c *machineConfigs) DeleteCollection(options *metav1.DeleteOptions, listOpt
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if listOptions.TimeoutSeconds != nil {
 		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
@@ -150,6 +166,8 @@ func (c *machineConfigs) DeleteCollection(options *metav1.DeleteOptions, listOpt
 	return c.client.Delete().Resource("machineconfigs").VersionedParams(&listOptions, scheme.ParameterCodec).Timeout(timeout).Body(options).Do().Error()
 }
 func (c *machineConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.MachineConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

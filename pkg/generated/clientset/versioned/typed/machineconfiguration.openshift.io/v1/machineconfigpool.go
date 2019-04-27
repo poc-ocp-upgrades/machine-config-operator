@@ -38,9 +38,13 @@ func newMachineConfigPools(c *MachineconfigurationV1Client) *machineConfigPools 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &machineConfigPools{client: c.RESTClient()}
 }
 func (c *machineConfigPools) Get(name string, options metav1.GetOptions) (result *v1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -56,6 +60,8 @@ func (c *machineConfigPools) Get(name string, options metav1.GetOptions) (result
 	return
 }
 func (c *machineConfigPools) List(opts metav1.ListOptions) (result *v1.MachineConfigPoolList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -85,6 +91,8 @@ func (c *machineConfigPools) Watch(opts metav1.ListOptions) (watch.Interface, er
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -93,6 +101,8 @@ func (c *machineConfigPools) Watch(opts metav1.ListOptions) (watch.Interface, er
 	return c.client.Get().Resource("machineconfigpools").VersionedParams(&opts, scheme.ParameterCodec).Timeout(timeout).Watch()
 }
 func (c *machineConfigPools) Create(machineConfigPool *v1.MachineConfigPool) (result *v1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -118,11 +128,15 @@ func (c *machineConfigPools) Update(machineConfigPool *v1.MachineConfigPool) (re
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.MachineConfigPool{}
 	err = c.client.Put().Resource("machineconfigpools").Name(machineConfigPool.Name).Body(machineConfigPool).Do().Into(result)
 	return
 }
 func (c *machineConfigPools) UpdateStatus(machineConfigPool *v1.MachineConfigPool) (result *v1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -148,9 +162,13 @@ func (c *machineConfigPools) Delete(name string, options *metav1.DeleteOptions) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.client.Delete().Resource("machineconfigpools").Name(name).Body(options).Do().Error()
 }
 func (c *machineConfigPools) DeleteCollection(options *metav1.DeleteOptions, listOptions metav1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -168,6 +186,8 @@ func (c *machineConfigPools) DeleteCollection(options *metav1.DeleteOptions, lis
 	return c.client.Delete().Resource("machineconfigpools").VersionedParams(&listOptions, scheme.ParameterCodec).Timeout(timeout).Body(options).Do().Error()
 }
 func (c *machineConfigPools) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

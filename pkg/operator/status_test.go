@@ -28,6 +28,8 @@ func TestIsMachineConfigPoolConfigurationValid(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	configNotFound := errors.New("Config Not Found")
 	type config struct {
 		name	string
@@ -78,6 +80,8 @@ func (mcpl *mockMCPLister) List(selector labels.Selector) (ret []*mcfgv1.Machine
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return nil, nil
 }
 func (mcpl *mockMCPLister) Get(name string) (ret *mcfgv1.MachineConfigPool, err error) {
@@ -91,9 +95,13 @@ func (mcpl *mockMCPLister) Get(name string) (ret *mcfgv1.MachineConfigPool, err 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return nil, nil
 }
 func TestOperatorSyncStatus(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -175,6 +183,8 @@ func TestOperatorSyncStatus(t *testing.T) {
 	}
 }
 func TestInClusterBringUpStayOnErr(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -26,6 +26,8 @@ func (c *FakeMachineConfigPools) Get(name string, options v1.GetOptions) (result
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootGetAction(machineconfigpoolsResource, name), &machineconfigurationopenshiftiov1.MachineConfigPool{})
 	if obj == nil {
 		return nil, err
@@ -33,6 +35,8 @@ func (c *FakeMachineConfigPools) Get(name string, options v1.GetOptions) (result
 	return obj.(*machineconfigurationopenshiftiov1.MachineConfigPool), err
 }
 func (c *FakeMachineConfigPools) List(opts v1.ListOptions) (result *machineconfigurationopenshiftiov1.MachineConfigPoolList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -70,9 +74,13 @@ func (c *FakeMachineConfigPools) Watch(opts v1.ListOptions) (watch.Interface, er
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewRootWatchAction(machineconfigpoolsResource, opts))
 }
 func (c *FakeMachineConfigPools) Create(machineConfigPool *machineconfigurationopenshiftiov1.MachineConfigPool) (result *machineconfigurationopenshiftiov1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -100,6 +108,8 @@ func (c *FakeMachineConfigPools) Update(machineConfigPool *machineconfigurationo
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateAction(machineconfigpoolsResource, machineConfigPool), &machineconfigurationopenshiftiov1.MachineConfigPool{})
 	if obj == nil {
 		return nil, err
@@ -107,6 +117,8 @@ func (c *FakeMachineConfigPools) Update(machineConfigPool *machineconfigurationo
 	return obj.(*machineconfigurationopenshiftiov1.MachineConfigPool), err
 }
 func (c *FakeMachineConfigPools) UpdateStatus(machineConfigPool *machineconfigurationopenshiftiov1.MachineConfigPool) (*machineconfigurationopenshiftiov1.MachineConfigPool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,10 +146,14 @@ func (c *FakeMachineConfigPools) Delete(name string, options *v1.DeleteOptions) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := c.Fake.Invokes(testing.NewRootDeleteAction(machineconfigpoolsResource, name), &machineconfigurationopenshiftiov1.MachineConfigPool{})
 	return err
 }
 func (c *FakeMachineConfigPools) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -153,6 +169,8 @@ func (c *FakeMachineConfigPools) DeleteCollection(options *v1.DeleteOptions, lis
 	return err
 }
 func (c *FakeMachineConfigPools) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machineconfigurationopenshiftiov1.MachineConfigPool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

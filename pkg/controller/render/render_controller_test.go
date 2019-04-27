@@ -56,12 +56,16 @@ func newFixture(t *testing.T) *fixture {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
 	return f
 }
 func newMachineConfigPool(name string, selector *metav1.LabelSelector, currentMachineConfig string) *mcfgv1.MachineConfigPool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -88,6 +92,8 @@ func newMachineConfig(name string, labels map[string]string, osurl string, files
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if labels == nil {
 		labels = map[string]string{}
 	}
@@ -96,6 +102,8 @@ func newMachineConfig(name string, labels map[string]string, osurl string, files
 	return &mcfgv1.MachineConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Labels: labels, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.MachineConfigSpec{OSImageURL: osurl, Config: ignCfg}}
 }
 func (f *fixture) newController() *Controller {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -142,6 +150,8 @@ func (f *fixture) run(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, false)
 }
 func (f *fixture) runExpectError(mcpname string) {
@@ -155,9 +165,13 @@ func (f *fixture) runExpectError(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, true)
 }
 func (f *fixture) runController(mcpname string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -189,6 +203,8 @@ func (f *fixture) runController(mcpname string, expectError bool) {
 	}
 }
 func checkAction(expected, actual core.Action, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -242,6 +258,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
 		if len(action.GetNamespace()) == 0 && (action.Matches("list", "machineconfigpools") || action.Matches("watch", "machineconfigpools") || action.Matches("list", "controllerconfigs") || action.Matches("watch", "controllerconfigs") || action.Matches("list", "machineconfigs") || action.Matches("watch", "machineconfigs")) {
@@ -252,6 +270,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	return ret
 }
 func (f *fixture) expectGetMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -275,9 +295,13 @@ func (f *fixture) expectCreateMachineConfigAction(config *mcfgv1.MachineConfig) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootCreateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
 func (f *fixture) expectPatchMachineConfigAction(config *mcfgv1.MachineConfig, patch []byte) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -301,9 +325,13 @@ func (f *fixture) expectUpdateMachineConfigAction(config *mcfgv1.MachineConfig) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootUpdateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
 func (f *fixture) expectUpdateMachineConfigPoolStatus(pool *mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -327,9 +355,13 @@ func newControllerConfig(name string) *mcfgv1.ControllerConfig {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mcfgv1.ControllerConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.ControllerConfigSpec{EtcdDiscoveryDomain: fmt.Sprintf("%s.tt.testing", name), OSImageURL: "dummy"}, Status: mcfgv1.ControllerConfigStatus{Conditions: []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue}}}}
 }
 func TestCreatesGeneratedMachineConfig(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -364,6 +396,8 @@ func TestIgnValidationGenerateRenderedMachineConfig(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), "")
 	files := []ignv2_2types.File{{Node: ignv2_2types.Node{Path: "/dummy/0"}}, {Node: ignv2_2types.Node{Path: "/dummy/1"}}}
 	mcs := []*mcfgv1.MachineConfig{newMachineConfig("00-test-cluster-master", map[string]string{"node-role": "master"}, "dummy://", []ignv2_2types.File{files[0]}), newMachineConfig("05-extra-master", map[string]string{"node-role": "master"}, "dummy://1", []ignv2_2types.File{files[1]})}
@@ -379,6 +413,8 @@ func TestIgnValidationGenerateRenderedMachineConfig(t *testing.T) {
 	}
 }
 func TestUpdatesGeneratedMachineConfig(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -428,6 +464,8 @@ func TestGenerateMachineConfigNoOverrideOSImageURL(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), "")
 	mcs := []*mcfgv1.MachineConfig{newMachineConfig("00-test-cluster-master", map[string]string{"node-role": "master"}, "dummy-test-1", []ignv2_2types.File{}), newMachineConfig("00-test-cluster-master-0", map[string]string{"node-role": "master"}, "dummy-change", []ignv2_2types.File{})}
 	cc := newControllerConfig(ctrlcommon.ControllerConfigName)
@@ -438,6 +476,8 @@ func TestGenerateMachineConfigNoOverrideOSImageURL(t *testing.T) {
 	assert.Equal(t, "dummy", gmc.Spec.OSImageURL)
 }
 func TestDoNothing(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -481,6 +521,8 @@ func TestGetMachineConfigsForPool(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	masterPool := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), "")
 	files := []ignv2_2types.File{{Node: ignv2_2types.Node{Path: "/dummy/0"}}, {Node: ignv2_2types.Node{Path: "/dummy/1"}}, {Node: ignv2_2types.Node{Path: "/dummy/2"}}}
 	mcs := []*mcfgv1.MachineConfig{newMachineConfig("00-test-cluster-master", map[string]string{"node-role": "master"}, "dummy://", []ignv2_2types.File{files[0]}), newMachineConfig("05-extra-master", map[string]string{"node-role": "master"}, "dummy://1", []ignv2_2types.File{files[1]}), newMachineConfig("00-test-cluster-worker", map[string]string{"node-role": "worker"}, "dummy://2", []ignv2_2types.File{files[2]})}
@@ -508,6 +550,8 @@ func getKey(config *mcfgv1.MachineConfigPool, t *testing.T) string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(config)
 	if err != nil {
 		t.Errorf("Unexpected error getting key for config %v: %v", config.Name, err)
@@ -516,6 +560,8 @@ func getKey(config *mcfgv1.MachineConfigPool, t *testing.T) string {
 	return key
 }
 func TestMachineConfigsNoBailWithoutPool(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

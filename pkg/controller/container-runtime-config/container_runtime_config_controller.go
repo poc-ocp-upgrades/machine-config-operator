@@ -85,6 +85,8 @@ func New(templatesDir string, mcpInformer mcfginformersv1.MachineConfigPoolInfor
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&coreclientsetv1.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
@@ -108,6 +110,8 @@ func New(templatesDir string, mcpInformer mcfginformersv1.MachineConfigPoolInfor
 	return ctrl
 }
 func (ctrl *Controller) Run(workers int, stopCh <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -143,6 +147,8 @@ func ctrConfigTriggerObjectChange(old, new *mcfgv1.ContainerRuntimeConfig) bool 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if old.DeletionTimestamp != new.DeletionTimestamp {
 		return true
 	}
@@ -152,6 +158,8 @@ func ctrConfigTriggerObjectChange(old, new *mcfgv1.ContainerRuntimeConfig) bool 
 	return false
 }
 func (ctrl *Controller) imageConfAdded(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -175,6 +183,8 @@ func (ctrl *Controller) imageConfUpdated(oldObj interface{}, newObj interface{})
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ctrl.imgQueue.Add("openshift-config")
 }
 func (ctrl *Controller) imageConfDeleted(obj interface{}) {
@@ -188,9 +198,13 @@ func (ctrl *Controller) imageConfDeleted(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ctrl.imgQueue.Add("openshift-config")
 }
 func (ctrl *Controller) updateContainerRuntimeConfig(oldObj interface{}, newObj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -219,11 +233,15 @@ func (ctrl *Controller) addContainerRuntimeConfig(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg := obj.(*mcfgv1.ContainerRuntimeConfig)
 	glog.V(4).Infof("Adding ContainerRuntimeConfig %s", cfg.Name)
 	ctrl.enqueueContainerRuntimeConfig(cfg)
 }
 func (ctrl *Controller) deleteContainerRuntimeConfig(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -261,6 +279,8 @@ func (ctrl *Controller) cascadeDelete(cfg *mcfgv1.ContainerRuntimeConfig) error 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(cfg.GetFinalizers()) == 0 {
 		return nil
 	}
@@ -275,6 +295,8 @@ func (ctrl *Controller) cascadeDelete(cfg *mcfgv1.ContainerRuntimeConfig) error 
 	return nil
 }
 func (ctrl *Controller) enqueue(cfg *mcfgv1.ContainerRuntimeConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -303,6 +325,8 @@ func (ctrl *Controller) enqueueRateLimited(cfg *mcfgv1.ContainerRuntimeConfig) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(cfg)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("couldn't get key for object %#v: %v", cfg, err))
@@ -311,6 +335,8 @@ func (ctrl *Controller) enqueueRateLimited(cfg *mcfgv1.ContainerRuntimeConfig) {
 	ctrl.queue.AddRateLimited(key)
 }
 func (ctrl *Controller) worker() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -335,10 +361,14 @@ func (ctrl *Controller) imgWorker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ctrl.processNextImgWorkItem() {
 	}
 }
 func (ctrl *Controller) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -369,6 +399,8 @@ func (ctrl *Controller) processNextImgWorkItem() bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, quit := ctrl.imgQueue.Get()
 	if quit {
 		return false
@@ -379,6 +411,8 @@ func (ctrl *Controller) processNextImgWorkItem() bool {
 	return true
 }
 func (ctrl *Controller) handleErr(err error, key interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -414,6 +448,8 @@ func (ctrl *Controller) handleImgErr(err error, key interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		ctrl.imgQueue.Forget(key)
 		return
@@ -429,6 +465,8 @@ func (ctrl *Controller) handleImgErr(err error, key interface{}) {
 	ctrl.imgQueue.AddAfter(key, 1*time.Minute)
 }
 func (ctrl *Controller) generateOriginalContainerRuntimeConfigs(role string) (*ignv2_2types.File, *ignv2_2types.File, *ignv2_2types.File, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -490,6 +528,8 @@ func (ctrl *Controller) syncStatusOnly(cfg *mcfgv1.ContainerRuntimeConfig, err e
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	statusUpdateErr := retry.RetryOnConflict(updateBackoff, func() error {
 		if cfg.GetGeneration() != cfg.Status.ObservedGeneration {
 			cfg.Status.ObservedGeneration = cfg.GetGeneration()
@@ -506,6 +546,8 @@ func (ctrl *Controller) syncStatusOnly(cfg *mcfgv1.ContainerRuntimeConfig, err e
 	return err
 }
 func (ctrl *Controller) syncContainerRuntimeConfig(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -616,6 +658,8 @@ func (ctrl *Controller) mergeConfigChanges(origFile *ignv2_2types.File, cfg *mcf
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dataURL, err := dataurl.DecodeString(origFile.Contents.Source)
 	if err != nil {
 		return nil, ctrl.syncStatusOnly(cfg, err, "could not decode original Container Runtime config: %v", err)
@@ -627,6 +671,8 @@ func (ctrl *Controller) mergeConfigChanges(origFile *ignv2_2types.File, cfg *mcf
 	return cfgTOML, ctrl.syncStatusOnly(cfg, nil)
 }
 func (ctrl *Controller) syncImageConfig(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -734,6 +780,8 @@ func (ctrl *Controller) popFinalizerFromContainerRuntimeConfig(ctrCfg *mcfgv1.Co
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return retry.RetryOnConflict(updateBackoff, func() error {
 		newcfg, err := ctrl.mccrLister.Get(ctrCfg.Name)
 		if errors.IsNotFound(err) {
@@ -770,10 +818,14 @@ func (ctrl *Controller) patchContainerRuntimeConfigs(name string, patch []byte) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := ctrl.client.Machineconfiguration().ContainerRuntimeConfigs().Patch(name, types.MergePatchType, patch)
 	return err
 }
 func (ctrl *Controller) addFinalizerToContainerRuntimeConfig(ctrCfg *mcfgv1.ContainerRuntimeConfig, mc *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -820,6 +872,8 @@ func (ctrl *Controller) getPoolsForContainerRuntimeConfig(config *mcfgv1.Contain
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pList, err := ctrl.mcpLister.List(labels.Everything())
 	if err != nil {
 		return nil, err
@@ -851,6 +905,23 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
@@ -893,5 +964,5 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
-	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

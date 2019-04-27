@@ -22,9 +22,13 @@ func newVersionStore() *versionStore {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &versionStore{Mutex: &sync.Mutex{}, versions: map[string]string{}}
 }
 func (vs *versionStore) Set(name, version string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -40,6 +44,8 @@ func (vs *versionStore) Set(name, version string) {
 	vs.versions[name] = version
 }
 func (vs *versionStore) Get(name string) (string, bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -66,6 +72,8 @@ func (vs *versionStore) GetAll() []configv1.OperandVersion {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	vs.Lock()
 	defer vs.Unlock()
 	var opvs []configv1.OperandVersion
@@ -78,6 +86,8 @@ func (vs *versionStore) GetAll() []configv1.OperandVersion {
 	return opvs
 }
 func (vs *versionStore) Equal(opvs []configv1.OperandVersion) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

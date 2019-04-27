@@ -26,6 +26,8 @@ func (c *FakeContainerRuntimeConfigs) Get(name string, options v1.GetOptions) (r
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootGetAction(containerruntimeconfigsResource, name), &machineconfigurationopenshiftiov1.ContainerRuntimeConfig{})
 	if obj == nil {
 		return nil, err
@@ -33,6 +35,8 @@ func (c *FakeContainerRuntimeConfigs) Get(name string, options v1.GetOptions) (r
 	return obj.(*machineconfigurationopenshiftiov1.ContainerRuntimeConfig), err
 }
 func (c *FakeContainerRuntimeConfigs) List(opts v1.ListOptions) (result *machineconfigurationopenshiftiov1.ContainerRuntimeConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -70,9 +74,13 @@ func (c *FakeContainerRuntimeConfigs) Watch(opts v1.ListOptions) (watch.Interfac
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewRootWatchAction(containerruntimeconfigsResource, opts))
 }
 func (c *FakeContainerRuntimeConfigs) Create(containerRuntimeConfig *machineconfigurationopenshiftiov1.ContainerRuntimeConfig) (result *machineconfigurationopenshiftiov1.ContainerRuntimeConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -100,6 +108,8 @@ func (c *FakeContainerRuntimeConfigs) Update(containerRuntimeConfig *machineconf
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateAction(containerruntimeconfigsResource, containerRuntimeConfig), &machineconfigurationopenshiftiov1.ContainerRuntimeConfig{})
 	if obj == nil {
 		return nil, err
@@ -107,6 +117,8 @@ func (c *FakeContainerRuntimeConfigs) Update(containerRuntimeConfig *machineconf
 	return obj.(*machineconfigurationopenshiftiov1.ContainerRuntimeConfig), err
 }
 func (c *FakeContainerRuntimeConfigs) UpdateStatus(containerRuntimeConfig *machineconfigurationopenshiftiov1.ContainerRuntimeConfig) (*machineconfigurationopenshiftiov1.ContainerRuntimeConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,10 +146,14 @@ func (c *FakeContainerRuntimeConfigs) Delete(name string, options *v1.DeleteOpti
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := c.Fake.Invokes(testing.NewRootDeleteAction(containerruntimeconfigsResource, name), &machineconfigurationopenshiftiov1.ContainerRuntimeConfig{})
 	return err
 }
 func (c *FakeContainerRuntimeConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -153,6 +169,8 @@ func (c *FakeContainerRuntimeConfigs) DeleteCollection(options *v1.DeleteOptions
 	return err
 }
 func (c *FakeContainerRuntimeConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machineconfigurationopenshiftiov1.ContainerRuntimeConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

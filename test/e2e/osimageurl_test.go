@@ -17,6 +17,8 @@ func TestOSImageURL(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cs := framework.NewClientSet("")
 	mcp, err := cs.MachineConfigPools().Get("worker", metav1.GetOptions{})
 	if err != nil {

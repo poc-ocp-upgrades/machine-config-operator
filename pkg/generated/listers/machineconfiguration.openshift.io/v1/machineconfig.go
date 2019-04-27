@@ -25,9 +25,13 @@ func NewMachineConfigLister(indexer cache.Indexer) MachineConfigLister {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &machineConfigLister{indexer: indexer}
 }
 func (s *machineConfigLister) List(selector labels.Selector) (ret []*v1.MachineConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -44,6 +48,8 @@ func (s *machineConfigLister) List(selector labels.Selector) (ret []*v1.MachineC
 	return ret, err
 }
 func (s *machineConfigLister) Get(name string) (*v1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

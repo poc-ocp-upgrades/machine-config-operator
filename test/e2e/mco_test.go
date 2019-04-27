@@ -17,6 +17,8 @@ func TestClusterOperatorRelatedObjects(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cs := framework.NewClientSet("")
 	co, err := cs.ClusterOperators().Get("machine-config", metav1.GetOptions{})
 	if err != nil {

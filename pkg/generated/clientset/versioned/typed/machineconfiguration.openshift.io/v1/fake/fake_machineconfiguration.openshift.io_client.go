@@ -19,9 +19,13 @@ func (c *FakeMachineconfigurationV1) ContainerRuntimeConfigs() v1.ContainerRunti
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &FakeContainerRuntimeConfigs{c}
 }
 func (c *FakeMachineconfigurationV1) ControllerConfigs() v1.ControllerConfigInterface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -45,9 +49,13 @@ func (c *FakeMachineconfigurationV1) KubeletConfigs() v1.KubeletConfigInterface 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &FakeKubeletConfigs{c}
 }
 func (c *FakeMachineconfigurationV1) MCOConfigs(namespace string) v1.MCOConfigInterface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -71,6 +79,8 @@ func (c *FakeMachineconfigurationV1) MachineConfigs() v1.MachineConfigInterface 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &FakeMachineConfigs{c}
 }
 func (c *FakeMachineconfigurationV1) MachineConfigPools() v1.MachineConfigPoolInterface {
@@ -84,9 +94,13 @@ func (c *FakeMachineconfigurationV1) MachineConfigPools() v1.MachineConfigPoolIn
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &FakeMachineConfigPools{c}
 }
 func (c *FakeMachineconfigurationV1) RESTClient() rest.Interface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

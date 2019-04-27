@@ -49,9 +49,13 @@ func NewNodeUpdaterClient() NodeUpdaterClient {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &RpmOstreeClient{}
 }
 func (r *RpmOstreeClient) getBootedDeployment(rootMount string) (*RpmOstreeDeployment, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -88,6 +92,8 @@ func (r *RpmOstreeClient) GetStatus() (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	output, err := RunGetOut("rpm-ostree", "status")
 	if err != nil {
 		return "", err
@@ -95,6 +101,8 @@ func (r *RpmOstreeClient) GetStatus() (string, error) {
 	return string(output), nil
 }
 func (r *RpmOstreeClient) GetBootedOSImageURL(rootMount string) (string, string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -128,6 +136,8 @@ func (r *RpmOstreeClient) RunPivot(osImageURL string) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := os.MkdirAll(filepath.Dir(constants.EtcPivotFile), os.FileMode(0755)); err != nil {
 		return fmt.Errorf("error creating leading dirs for %s: %v", constants.EtcPivotFile, err)
 	}
@@ -144,6 +154,8 @@ func (r *RpmOstreeClient) RunPivot(osImageURL string) error {
 	return nil
 }
 func followPivotJournalLogs(stopCh <-chan time.Time) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

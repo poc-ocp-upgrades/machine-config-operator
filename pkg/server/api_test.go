@@ -24,6 +24,8 @@ func (ms *mockServer) GetConfig(pr poolRequest) (*ignv2_2types.Config, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return ms.GetConfigFn(pr)
 }
 
@@ -36,6 +38,8 @@ type scenario struct {
 }
 
 func TestAPIHandler(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -96,6 +100,8 @@ func TestHealthzHandler(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	scenarios := []scenario{{name: "get healthz", request: httptest.NewRequest(http.MethodGet, "http://testrequest/healthz", nil), serverFunc: func(poolRequest) (*ignv2_2types.Config, error) {
 		return new(ignv2_2types.Config), nil
 	}, checkResponse: func(t *testing.T, response *http.Response) {
@@ -137,6 +143,8 @@ func TestDefaultHandler(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	scenarios := []scenario{{name: "get root", request: httptest.NewRequest(http.MethodGet, "http://testrequest/", nil), serverFunc: func(poolRequest) (*ignv2_2types.Config, error) {
 		return new(ignv2_2types.Config), nil
 	}, checkResponse: func(t *testing.T, response *http.Response) {
@@ -168,6 +176,8 @@ func TestDefaultHandler(t *testing.T) {
 	}
 }
 func TestAPIServer(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -264,11 +274,15 @@ func checkStatus(t *testing.T, response *http.Response, expected int) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if response.StatusCode != expected {
 		t.Errorf("expected response status %d, received %d", expected, response.StatusCode)
 	}
 }
 func checkContentType(t *testing.T, response *http.Response, expected string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -295,11 +309,15 @@ func checkContentLength(t *testing.T, response *http.Response, l int) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if int(response.ContentLength) != l {
 		t.Errorf("expected response Content-Length %d, received %d", l, int(response.ContentLength))
 	}
 }
 func checkBodyLength(t *testing.T, response *http.Response, l int) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -31,10 +31,14 @@ func TestMain(m *testing.M) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	flag.Parse()
 	os.Exit(m.Run())
 }
 func TestCloudProvider(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -65,6 +69,8 @@ func TestCloudProvider(t *testing.T) {
 	}
 }
 func TestEtcdPeerCertDNSNames(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -106,6 +112,8 @@ func TestEtcdServerCertDNSNames(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dummyTemplate := []byte(`{{etcdServerCertDNSNames .}}`)
 	cases := []struct {
 		url	string
@@ -126,6 +134,8 @@ func TestEtcdServerCertDNSNames(t *testing.T) {
 	}
 }
 func TestSkipMissing(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -177,6 +187,8 @@ func TestInvalidPlatform(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	controllerConfig, err := controllerConfigFromFile(configs["aws"])
 	if err != nil {
 		t.Fatalf("failed to get controllerconfig config: %v", err)
@@ -200,6 +212,8 @@ func TestInvalidPlatform(t *testing.T) {
 	expectErr(err, "failed to create MachineConfig for role master: platform _base unsupported")
 }
 func TestGenerateMachineConfigs(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -248,6 +262,8 @@ func controllerConfigFromFile(path string) (*mcfgv1.ControllerConfig, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -263,6 +279,8 @@ func controllerConfigFromFile(path string) (*mcfgv1.ControllerConfig, error) {
 	return cc, nil
 }
 func verifyIgnFiles(files []ignv2_2types.File, dir string, update bool, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -307,6 +325,8 @@ func verifyIgnUnits(units []ignv2_2types.Unit, dir string, update bool, t *testi
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var actual [][]byte
 	for _, u := range units {
 		j, err := json.MarshalIndent(u, "", "  ")
@@ -330,6 +350,8 @@ func verifyIgnUnits(units []ignv2_2types.Unit, dir string, update bool, t *testi
 	verifyIgn(actual, dir, t)
 }
 func verifyIgn(actual [][]byte, dir string, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

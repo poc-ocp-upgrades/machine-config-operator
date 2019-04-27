@@ -22,6 +22,8 @@ func TestUpdateOS(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	expectedError := fmt.Errorf("broken")
 	testClient := RpmOstreeClientMock{GetBootedOSImageURLReturns: []GetBootedOSImageURLReturn{}, RunPivotReturns: []error{nil, expectedError}}
 	d := Daemon{name: "nodeName", OperatingSystem: machineConfigDaemonOSRHCOS, NodeUpdaterClient: testClient, kubeClient: k8sfake.NewSimpleClientset(), rootMount: "/", bootedOSImageURL: "test"}
@@ -35,6 +37,8 @@ func TestUpdateOS(t *testing.T) {
 	}
 }
 func TestReconcilable(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -96,6 +100,8 @@ func TestReconcilableSSH(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	expectedError := fmt.Errorf("broken")
 	testClient := RpmOstreeClientMock{GetBootedOSImageURLReturns: []GetBootedOSImageURLReturn{}, RunPivotReturns: []error{nil, expectedError}}
 	d := Daemon{name: "nodeName", OperatingSystem: machineConfigDaemonOSRHCOS, NodeUpdaterClient: testClient, kubeClient: k8sfake.NewSimpleClientset(), rootMount: "/", bootedOSImageURL: "test"}
@@ -138,6 +144,8 @@ func TestUpdateSSHKeys(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	expectedError := fmt.Errorf("broken")
 	testClient := RpmOstreeClientMock{GetBootedOSImageURLReturns: []GetBootedOSImageURLReturn{}, RunPivotReturns: []error{nil, expectedError}}
 	d := Daemon{name: "nodeName", OperatingSystem: machineConfigDaemonOSRHCOS, NodeUpdaterClient: testClient, kubeClient: k8sfake.NewSimpleClientset(), rootMount: "/", bootedOSImageURL: "test"}
@@ -157,6 +165,8 @@ func TestUpdateSSHKeys(t *testing.T) {
 	}
 }
 func TestInvalidIgnConfig(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -191,6 +201,8 @@ func checkReconcilableResults(t *testing.T, key string, reconcilableError error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if reconcilableError != nil {
 		t.Errorf("%s values should be reconcilable. Received error: %v", key, reconcilableError)
 	}
@@ -206,11 +218,15 @@ func checkIrreconcilableResults(t *testing.T, key string, reconcilableError erro
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if reconcilableError == nil {
 		t.Errorf("Different %s values should not be reconcilable.", key)
 	}
 }
 func TestSkipReboot(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

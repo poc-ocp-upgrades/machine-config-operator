@@ -117,6 +117,8 @@ func New(rootMount string, nodeName string, operatingSystem string, nodeUpdaterC
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var (
 		osImageURL	string
 		err		error
@@ -134,6 +136,8 @@ func New(rootMount string, nodeName string, operatingSystem string, nodeUpdaterC
 	return dn, nil
 }
 func NewClusterDrivenDaemon(rootMount, nodeName, operatingSystem string, nodeUpdaterClient NodeUpdaterClient, mcInformer mcfginformersv1.MachineConfigInformer, kubeClient kubernetes.Interface, bootID, onceFrom string, skipReboot bool, nodeInformer coreinformersv1.NodeInformer, kubeletHealthzEnabled bool, kubeletHealthzEndpoint string, nodeWriter NodeWriter, exitCh chan<- error, stopCh <-chan struct{}) (*Daemon, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -176,10 +180,14 @@ func (dn *Daemon) worker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for dn.processNextWorkItem() {
 	}
 }
 func (dn *Daemon) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -217,6 +225,8 @@ func (dn *Daemon) bootstrapNode() error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	node, err := dn.nodeLister.Get(dn.name)
 	if err != nil {
 		return err
@@ -233,6 +243,8 @@ func (dn *Daemon) bootstrapNode() error {
 	return nil
 }
 func (dn *Daemon) handleErr(err error, key interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -269,6 +281,8 @@ func (dn *Daemon) updateErrorState(err error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch errors.Cause(err) {
 	case errUnreconcilable:
 		dn.nodeWriter.SetUnreconcilable(err, dn.kubeClient.CoreV1().Nodes(), dn.nodeLister, dn.name)
@@ -277,6 +291,8 @@ func (dn *Daemon) updateErrorState(err error) {
 	}
 }
 func (dn *Daemon) syncNode(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -336,6 +352,8 @@ func (dn *Daemon) enqueueAfter(node *corev1.Node, after time.Duration) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(node)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("couldn't get key for object %#v: %v", node, err))
@@ -354,6 +372,8 @@ func (dn *Daemon) enqueueDefault(node *corev1.Node) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dn.enqueueAfter(node, updateDelay)
 }
 
@@ -362,6 +382,8 @@ const (
 )
 
 func (dn *Daemon) detectEarlySSHAccessesFromBoot() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -396,6 +418,8 @@ func (dn *Daemon) runOnceFrom() error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	configi, contentFrom, err := dn.senseAndLoadOnceFrom()
 	if err != nil {
 		glog.Warningf("Unable to decipher onceFrom config type: %s", err)
@@ -412,6 +436,8 @@ func (dn *Daemon) runOnceFrom() error {
 	return errors.New("unsupported onceFrom type provided")
 }
 func (dn *Daemon) Run(stopCh <-chan struct{}, exitCh <-chan error) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -455,6 +481,8 @@ func (dn *Daemon) BindPodMounts() error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	targetSecrets := filepath.Join(dn.rootMount, "/run/secrets")
 	if err := os.MkdirAll(targetSecrets, 0755); err != nil {
 		return err
@@ -463,6 +491,8 @@ func (dn *Daemon) BindPodMounts() error {
 	return mnt.Run()
 }
 func (dn *Daemon) runLoginMonitor(stopCh <-chan struct{}, exitCh chan<- error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -527,12 +557,16 @@ func (dn *Daemon) applySSHAccessedAnnotation() error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := dn.nodeWriter.SetSSHAccessed(dn.kubeClient.CoreV1().Nodes(), dn.nodeLister, dn.name); err != nil {
 		return fmt.Errorf("error: cannot apply annotation for SSH access due to: %v", err)
 	}
 	return nil
 }
 func (dn *Daemon) runKubeletHealthzMonitor(stopCh <-chan struct{}, exitCh chan<- error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -562,6 +596,8 @@ func (dn *Daemon) runKubeletHealthzMonitor(stopCh <-chan struct{}, exitCh chan<-
 	}
 }
 func (dn *Daemon) getHealth() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -607,6 +643,8 @@ type stateAndConfigs struct {
 }
 
 func (dn *Daemon) getStateAndConfigs(pendingConfigName string) (*stateAndConfigs, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -681,6 +719,8 @@ func (dn *Daemon) getPendingConfig() (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	s, err := ioutil.ReadFile(pathStateJSON)
 	if err != nil {
 		if !os.IsNotExist(err) {
@@ -698,6 +738,8 @@ func (dn *Daemon) getPendingConfig() (string, error) {
 	return p.PendingConfig, nil
 }
 func (dn *Daemon) CheckStateOnBoot() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -791,6 +833,8 @@ func (dn *Daemon) runOnceFromMachineConfig(machineConfig mcfgv1.MachineConfig, c
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if contentFrom == onceFromRemoteConfig {
 		if dn.kubeClient == nil || dn.mcClient == nil {
 			panic("running in onceFrom mode with a remote MachineConfig without a cluster")
@@ -826,6 +870,8 @@ func (dn *Daemon) runOnceFromIgnition(ignConfig ignv2_2types.Config) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := dn.writeFiles(ignConfig.Storage.Files); err != nil {
 		return err
 	}
@@ -835,6 +881,8 @@ func (dn *Daemon) runOnceFromIgnition(ignConfig ignv2_2types.Config) error {
 	return dn.reboot("runOnceFromIgnition complete", defaultRebootTimeout, exec.Command(defaultRebootCommand))
 }
 func (dn *Daemon) handleNodeUpdate(old, cur interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -861,6 +909,8 @@ func (dn *Daemon) getCurrentMCOnDisk() (*mcfgv1.MachineConfig, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcJSON, err := os.Open(dn.currentConfigPath)
 	if err != nil {
 		return nil, err
@@ -873,6 +923,8 @@ func (dn *Daemon) getCurrentMCOnDisk() (*mcfgv1.MachineConfig, error) {
 	return currentOnDisk, nil
 }
 func (dn *Daemon) prepUpdateFromCluster() (*mcfgv1.MachineConfig, *mcfgv1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -927,6 +979,8 @@ func (dn *Daemon) completeUpdate(node *corev1.Node, desiredConfigName string) er
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := drain.Uncordon(dn.kubeClient.CoreV1().Nodes(), node, nil); err != nil {
 		return err
 	}
@@ -934,6 +988,8 @@ func (dn *Daemon) completeUpdate(node *corev1.Node, desiredConfigName string) er
 	return nil
 }
 func (dn *Daemon) triggerUpdateWithMachineConfig(currentConfig *mcfgv1.MachineConfig, desiredConfig *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -977,6 +1033,8 @@ func (dn *Daemon) validateOnDiskState(currentConfig *mcfgv1.MachineConfig) bool 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	osMatch, err := dn.checkOS(currentConfig.Spec.OSImageURL)
 	if err != nil {
 		glog.Errorf("%s", err)
@@ -1005,6 +1063,8 @@ func getRefDigest(ref string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	refParsed, err := imgref.ParseNamed(ref)
 	if err != nil {
 		return "", errors.Wrapf(err, "parsing reference: %q", ref)
@@ -1016,6 +1076,8 @@ func getRefDigest(ref string) (string, error) {
 	return canon.Digest().String(), nil
 }
 func compareOSImageURL(current, desired string) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1058,6 +1120,8 @@ func (dn *Daemon) checkOS(osImageURL string) (bool, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if dn.OperatingSystem != machineConfigDaemonOSRHCOS {
 		glog.Infof(`Not booted into Red Hat CoreOS, ignoring target OSImageURL %s`, osImageURL)
 		return true, nil
@@ -1065,6 +1129,8 @@ func (dn *Daemon) checkOS(osImageURL string) (bool, error) {
 	return compareOSImageURL(dn.bootedOSImageURL, osImageURL)
 }
 func checkUnits(units []ignv2_2types.Unit) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1114,6 +1180,8 @@ func checkFiles(files []ignv2_2types.File) bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	checkedFiles := make(map[string]bool)
 	for i := len(files) - 1; i >= 0; i-- {
 		f := files[i]
@@ -1137,6 +1205,8 @@ func checkFiles(files []ignv2_2types.File) bool {
 	return true
 }
 func checkFileContentsAndMode(filePath string, expectedContent []byte, mode os.FileMode) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1178,8 +1248,12 @@ func (dn *Daemon) Close() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 }
 func ValidPath(path string) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1198,6 +1272,8 @@ func ValidPath(path string) bool {
 	return false
 }
 func (dn *Daemon) senseAndLoadOnceFrom() (interface{}, onceFromOrigin, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -1258,6 +1334,23 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
@@ -1300,5 +1393,5 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
-	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

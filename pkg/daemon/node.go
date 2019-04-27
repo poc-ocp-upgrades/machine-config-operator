@@ -20,6 +20,8 @@ func (dn *Daemon) loadNodeAnnotations(node *core_v1.Node) (*core_v1.Node, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ccAnnotation, err := getNodeAnnotation(node, constants.CurrentMachineConfigAnnotationKey)
 	if err == nil && ccAnnotation != "" {
 		return node, nil
@@ -50,9 +52,13 @@ func getNodeAnnotation(node *core_v1.Node, k string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return getNodeAnnotationExt(node, k, false)
 }
 func getNodeAnnotationExt(node *core_v1.Node, k string, allowNoent bool) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

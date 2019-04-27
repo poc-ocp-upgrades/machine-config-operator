@@ -43,6 +43,8 @@ func TestValidPath(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var isValid bool
 	for _, tt := range pathtests {
 		isValid = ValidPath(tt.path)
@@ -52,6 +54,8 @@ func TestValidPath(t *testing.T) {
 	}
 }
 func TestOverwrittenFile(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -87,6 +91,8 @@ func TestCompareOSImageURL(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	refA := "registry.example.com/foo/bar@sha256:0743a3cc3bcf3b4aabb814500c2739f84cb085ff4e7ec7996aef7977c4c19c7f"
 	refB := "registry.example.com/foo/baz@sha256:0743a3cc3bcf3b4aabb814500c2739f84cb085ff4e7ec7996aef7977c4c19c7f"
 	refC := "registry.example.com/foo/bar@sha256:2a76681fd15bfc06fa4aa0ff6913ba17527e075417fc92ea29f6bcc2afca24ff"
@@ -108,6 +114,8 @@ func TestCompareOSImageURL(t *testing.T) {
 	}
 }
 func TestDaemonOnceFromNoPanic(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -155,6 +163,8 @@ func newFixture(t *testing.T) *fixture {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
@@ -172,6 +182,8 @@ var (
 )
 
 func (f *fixture) newController() *Daemon {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -218,6 +230,8 @@ func (f *fixture) run(node string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(node, false)
 }
 func (f *fixture) runExpectError(node string) {
@@ -231,9 +245,13 @@ func (f *fixture) runExpectError(node string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(node, true)
 }
 func (f *fixture) runController(node string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -287,6 +305,8 @@ func checkAction(expected, actual core.Action, t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if !(expected.Matches(actual.GetVerb(), actual.GetResource().Resource) && actual.GetSubresource() == expected.GetSubresource()) {
 		t.Errorf("Expected\n\t%#v\ngot\n\t%#v", expected, actual)
 		return
@@ -330,6 +350,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
 		if len(action.GetNamespace()) == 0 && (action.Matches("list", "machineconfigs") || action.Matches("watch", "machineconfigs") || action.Matches("list", "nodes") || action.Matches("watch", "nodes")) {
@@ -350,6 +372,8 @@ func getKey(node *corev1.Node, t *testing.T) string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(node)
 	if err != nil {
 		t.Errorf("Unexpected error getting key for node %v: %v", node.Name, err)
@@ -358,6 +382,8 @@ func getKey(node *corev1.Node, t *testing.T) string {
 	return key
 }
 func filterLastTransitionTime(obj runtime.Object) runtime.Object {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -389,6 +415,8 @@ func newNode(annotations map[string]string) *corev1.Node {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &corev1.Node{ObjectMeta: metav1.ObjectMeta{Annotations: annotations}}
 }
 func newMachineConfig(name string) *mcfgv1.MachineConfig {
@@ -402,9 +430,13 @@ func newMachineConfig(name string) *mcfgv1.MachineConfig {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mcfgv1.MachineConfig{ObjectMeta: metav1.ObjectMeta{Name: name}}
 }
 func TestPrepUpdateFromClusterOnDiskDrift(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

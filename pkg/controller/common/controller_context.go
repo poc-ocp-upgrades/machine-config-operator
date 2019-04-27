@@ -26,6 +26,8 @@ func resyncPeriod() func() time.Duration {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return func() time.Duration {
 		factor := rand.Float64() + 1
 		return time.Duration(float64(minResyncPeriod.Nanoseconds()) * factor)
@@ -48,6 +50,8 @@ type ControllerContext struct {
 }
 
 func CreateControllerContext(cb *clients.Builder, stop <-chan struct{}, targetNamespace string) *ControllerContext {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

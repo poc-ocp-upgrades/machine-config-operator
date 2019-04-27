@@ -16,6 +16,8 @@ func EnsureObjectMeta(modified *bool, existing *metav1.ObjectMeta, required meta
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setStringIfSet(modified, &existing.Namespace, required.Namespace)
 	setStringIfSet(modified, &existing.Name, required.Name)
 	mergeMap(modified, &existing.Labels, required.Labels)
@@ -23,6 +25,8 @@ func EnsureObjectMeta(modified *bool, existing *metav1.ObjectMeta, required meta
 	mergeOwnerRefs(modified, &existing.OwnerReferences, required.OwnerReferences)
 }
 func setStringIfSet(modified *bool, existing *string, required string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -52,6 +56,8 @@ func setBytesIfSet(modified *bool, existing *[]byte, required []byte) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(required) == 0 {
 		return
 	}
@@ -61,6 +67,8 @@ func setBytesIfSet(modified *bool, existing *[]byte, required []byte) {
 	}
 }
 func mergeMap(modified *bool, existing *map[string]string, required map[string]string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -92,6 +100,8 @@ func mergeOwnerRefs(modified *bool, existing *[]metav1.OwnerReference, required 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ridx := range required {
 		found := false
 		for eidx := range *existing {
@@ -111,6 +121,8 @@ func mergeOwnerRefs(modified *bool, existing *[]metav1.OwnerReference, required 
 	}
 }
 func BoolPtr(val bool) *bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

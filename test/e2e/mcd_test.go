@@ -29,6 +29,8 @@ func TestMCDToken(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cs := framework.NewClientSet("")
 	listOptions := metav1.ListOptions{LabelSelector: labels.SelectorFromSet(labels.Set{"k8s-app": "machine-config-daemon"}).String()}
 	mcdList, err := cs.Pods("openshift-machine-config-operator").List(listOptions)
@@ -58,11 +60,15 @@ func mcLabelForWorkers() map[string]string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcLabels := make(map[string]string)
 	mcLabels["machineconfiguration.openshift.io/role"] = "worker"
 	return mcLabels
 }
 func createIgnFile(path, content, fs string, mode int) ignv2_2types.File {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -86,6 +92,8 @@ func createMCToAddFile(name, filename, data, fs string) *mcv1.MachineConfig {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcName := fmt.Sprintf("%s-%s", name, uuid.NewUUID())
 	mcadd := &mcv1.MachineConfig{}
 	mcadd.ObjectMeta = metav1.ObjectMeta{Name: mcName, Labels: mcLabelForWorkers()}
@@ -93,6 +101,8 @@ func createMCToAddFile(name, filename, data, fs string) *mcv1.MachineConfig {
 	return mcadd
 }
 func TestMCDeployed(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -151,6 +161,8 @@ func TestMCDeployed(t *testing.T) {
 	}
 }
 func TestUpdateSSH(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -241,6 +253,8 @@ func getNodesByRole(cs *framework.ClientSet, role string) ([]v1.Node, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	listOptions := metav1.ListOptions{LabelSelector: labels.SelectorFromSet(labels.Set{fmt.Sprintf("node-role.kubernetes.io/%s", role): ""}).String()}
 	nodes, err := cs.Nodes().List(listOptions)
 	if err != nil {
@@ -249,6 +263,8 @@ func getNodesByRole(cs *framework.ClientSet, role string) ([]v1.Node, error) {
 	return nodes.Items, nil
 }
 func TestPoolDegradedOnFailToRender(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -295,6 +311,8 @@ func TestPoolDegradedOnFailToRender(t *testing.T) {
 	}
 }
 func TestReconcileAfterBadMC(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

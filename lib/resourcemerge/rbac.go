@@ -16,6 +16,8 @@ func EnsureClusterRoleBinding(modified *bool, existing *rbacv1.ClusterRoleBindin
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	if !equality.Semantic.DeepEqual(existing.Subjects, required.Subjects) {
 		*modified = true
@@ -37,6 +39,8 @@ func EnsureRoleBinding(modified *bool, existing *rbacv1.RoleBinding, required rb
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	if !equality.Semantic.DeepEqual(existing.Subjects, required.Subjects) {
 		*modified = true
@@ -48,6 +52,8 @@ func EnsureRoleBinding(modified *bool, existing *rbacv1.RoleBinding, required rb
 	}
 }
 func EnsureClusterRole(modified *bool, existing *rbacv1.ClusterRole, required rbacv1.ClusterRole) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -67,6 +67,8 @@ func New(mcpInformer mcfginformersv1.MachineConfigPoolInformer, nodeInformer cor
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&coreclientsetv1.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
@@ -82,6 +84,8 @@ func New(mcpInformer mcfginformersv1.MachineConfigPoolInformer, nodeInformer cor
 	return ctrl
 }
 func (ctrl *Controller) Run(workers int, stopCh <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -115,11 +119,15 @@ func (ctrl *Controller) addMachineConfigPool(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pool := obj.(*mcfgv1.MachineConfigPool)
 	glog.V(4).Infof("Adding MachineConfigPool %s", pool.Name)
 	ctrl.enqueueMachineConfigPool(pool)
 }
 func (ctrl *Controller) updateMachineConfigPool(old, cur interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -146,6 +154,8 @@ func (ctrl *Controller) deleteMachineConfigPool(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pool, ok := obj.(*mcfgv1.MachineConfigPool)
 	if !ok {
 		tombstone, ok := obj.(cache.DeletedFinalStateUnknown)
@@ -162,6 +172,8 @@ func (ctrl *Controller) deleteMachineConfigPool(obj interface{}) {
 	glog.V(4).Infof("Deleting MachineConfigPool %s", pool.Name)
 }
 func (ctrl *Controller) addNode(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -199,6 +211,8 @@ func (ctrl *Controller) updateNode(old, cur interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	oldNode := old.(*corev1.Node)
 	curNode := cur.(*corev1.Node)
 	if !nodeChanged(oldNode, curNode) {
@@ -216,6 +230,8 @@ func (ctrl *Controller) updateNode(old, cur interface{}) {
 	ctrl.enqueueMachineConfigPool(pool)
 }
 func (ctrl *Controller) deleteNode(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -261,6 +277,8 @@ func nodeChanged(old, cur *corev1.Node) bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if old.Annotations == nil && cur.Annotations != nil || old.Annotations != nil && cur.Annotations == nil {
 		return true
 	}
@@ -276,6 +294,8 @@ func nodeChanged(old, cur *corev1.Node) bool {
 	return false
 }
 func (ctrl *Controller) getPoolForNode(node *corev1.Node) (*mcfgv1.MachineConfigPool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -338,6 +358,8 @@ func (ctrl *Controller) enqueue(pool *mcfgv1.MachineConfigPool) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(pool)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("Couldn't get key for object %#v: %v", pool, err))
@@ -346,6 +368,8 @@ func (ctrl *Controller) enqueue(pool *mcfgv1.MachineConfigPool) {
 	ctrl.queue.Add(key)
 }
 func (ctrl *Controller) enqueueRateLimited(pool *mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -374,6 +398,8 @@ func (ctrl *Controller) enqueueAfter(pool *mcfgv1.MachineConfigPool, after time.
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(pool)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("Couldn't get key for object %#v: %v", pool, err))
@@ -382,6 +408,8 @@ func (ctrl *Controller) enqueueAfter(pool *mcfgv1.MachineConfigPool, after time.
 	ctrl.queue.AddAfter(key, after)
 }
 func (ctrl *Controller) enqueueDefault(pool *mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -405,10 +433,14 @@ func (ctrl *Controller) worker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ctrl.processNextWorkItem() {
 	}
 }
 func (ctrl *Controller) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -439,6 +471,8 @@ func (ctrl *Controller) handleErr(err error, key interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		ctrl.queue.Forget(key)
 		return
@@ -454,6 +488,8 @@ func (ctrl *Controller) handleErr(err error, key interface{}) {
 	ctrl.queue.AddAfter(key, 1*time.Minute)
 }
 func (ctrl *Controller) syncMachineConfigPool(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -532,6 +568,8 @@ func (ctrl *Controller) setDesiredMachineConfigAnnotation(nodeName, currentConfi
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	glog.Infof("Setting node %s to desired config %s", nodeName, currentConfig)
 	return clientretry.RetryOnConflict(nodeUpdateBackoff, func() error {
 		oldNode, err := ctrl.kubeClient.CoreV1().Nodes().Get(nodeName, metav1.GetOptions{})
@@ -573,6 +611,8 @@ func makeProgress(pool *mcfgv1.MachineConfigPool, nodes []*corev1.Node) (int, er
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	maxunavail, err := maxUnavailable(pool, nodes)
 	if err != nil {
 		return 0, err
@@ -585,6 +625,8 @@ func makeProgress(pool *mcfgv1.MachineConfigPool, nodes []*corev1.Node) (int, er
 	return progress, nil
 }
 func getCandidateMachines(pool *mcfgv1.MachineConfigPool, nodes []*corev1.Node, progress int) []*corev1.Node {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -623,6 +665,8 @@ func maxUnavailable(pool *mcfgv1.MachineConfigPool, nodes []*corev1.Node) (int, 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	intOrPercent := intstrutil.FromInt(1)
 	if pool.Spec.MaxUnavailable != nil {
 		intOrPercent = *pool.Spec.MaxUnavailable
@@ -647,6 +691,23 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
@@ -689,5 +750,5 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
-	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

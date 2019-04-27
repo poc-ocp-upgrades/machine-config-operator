@@ -37,6 +37,8 @@ func NewClusterServer(kubeConfig, apiserverURL string) (Server, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	restConfig, err := getClientConfig(kubeConfig)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to create Kubernetes rest client: %v", err)
@@ -47,6 +49,8 @@ func NewClusterServer(kubeConfig, apiserverURL string) (Server, error) {
 	}}, nil
 }
 func (cs *clusterServer) GetConfig(cr poolRequest) (*ignv2_2types.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -85,12 +89,16 @@ func getClientConfig(path string) (*rest.Config, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if path != inClusterConfig {
 		return clientcmd.BuildConfigFromFlags("", path)
 	}
 	return rest.InClusterConfig()
 }
 func kubeconfigFromSecret(secertDir string, apiserverURL string) ([]byte, []byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

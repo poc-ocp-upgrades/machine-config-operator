@@ -22,11 +22,15 @@ func init() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := corev1.AddToScheme(coreScheme); err != nil {
 		panic(err)
 	}
 }
 func ReadConfigMapV1OrDie(objBytes []byte) *corev1.ConfigMap {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -54,6 +58,8 @@ func ReadServiceAccountV1OrDie(objBytes []byte) *corev1.ServiceAccount {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	requiredObj, err := runtime.Decode(coreCodecs.UniversalDecoder(corev1.SchemeGroupVersion), objBytes)
 	if err != nil {
 		panic(err)
@@ -61,6 +67,8 @@ func ReadServiceAccountV1OrDie(objBytes []byte) *corev1.ServiceAccount {
 	return requiredObj.(*corev1.ServiceAccount)
 }
 func ReadSecretV1OrDie(objBytes []byte) *corev1.Secret {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

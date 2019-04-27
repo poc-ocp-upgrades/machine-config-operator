@@ -26,6 +26,8 @@ func (c *FakeKubeletConfigs) Get(name string, options v1.GetOptions) (result *ma
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootGetAction(kubeletconfigsResource, name), &machineconfigurationopenshiftiov1.KubeletConfig{})
 	if obj == nil {
 		return nil, err
@@ -33,6 +35,8 @@ func (c *FakeKubeletConfigs) Get(name string, options v1.GetOptions) (result *ma
 	return obj.(*machineconfigurationopenshiftiov1.KubeletConfig), err
 }
 func (c *FakeKubeletConfigs) List(opts v1.ListOptions) (result *machineconfigurationopenshiftiov1.KubeletConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -70,9 +74,13 @@ func (c *FakeKubeletConfigs) Watch(opts v1.ListOptions) (watch.Interface, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewRootWatchAction(kubeletconfigsResource, opts))
 }
 func (c *FakeKubeletConfigs) Create(kubeletConfig *machineconfigurationopenshiftiov1.KubeletConfig) (result *machineconfigurationopenshiftiov1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -100,6 +108,8 @@ func (c *FakeKubeletConfigs) Update(kubeletConfig *machineconfigurationopenshift
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateAction(kubeletconfigsResource, kubeletConfig), &machineconfigurationopenshiftiov1.KubeletConfig{})
 	if obj == nil {
 		return nil, err
@@ -107,6 +117,8 @@ func (c *FakeKubeletConfigs) Update(kubeletConfig *machineconfigurationopenshift
 	return obj.(*machineconfigurationopenshiftiov1.KubeletConfig), err
 }
 func (c *FakeKubeletConfigs) UpdateStatus(kubeletConfig *machineconfigurationopenshiftiov1.KubeletConfig) (*machineconfigurationopenshiftiov1.KubeletConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,10 +146,14 @@ func (c *FakeKubeletConfigs) Delete(name string, options *v1.DeleteOptions) erro
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := c.Fake.Invokes(testing.NewRootDeleteAction(kubeletconfigsResource, name), &machineconfigurationopenshiftiov1.KubeletConfig{})
 	return err
 }
 func (c *FakeKubeletConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -153,6 +169,8 @@ func (c *FakeKubeletConfigs) DeleteCollection(options *v1.DeleteOptions, listOpt
 	return err
 }
 func (c *FakeKubeletConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machineconfigurationopenshiftiov1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

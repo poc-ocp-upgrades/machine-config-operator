@@ -25,9 +25,13 @@ func NewMCOConfigLister(indexer cache.Indexer) MCOConfigLister {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mCOConfigLister{indexer: indexer}
 }
 func (s *mCOConfigLister) List(selector labels.Selector) (ret []*v1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -44,6 +48,8 @@ func (s *mCOConfigLister) List(selector labels.Selector) (ret []*v1.MCOConfig, e
 	return ret, err
 }
 func (s *mCOConfigLister) MCOConfigs(namespace string) MCOConfigNamespaceLister {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -78,12 +84,16 @@ func (s mCOConfigNamespaceLister) List(selector labels.Selector) (ret []*v1.MCOC
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err = cache.ListAllByNamespace(s.indexer, s.namespace, selector, func(m interface{}) {
 		ret = append(ret, m.(*v1.MCOConfig))
 	})
 	return ret, err
 }
 func (s mCOConfigNamespaceLister) Get(name string) (*v1.MCOConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

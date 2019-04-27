@@ -34,6 +34,8 @@ func (optr *Operator) syncAll(rconfig renderConfig, syncFuncs []syncFunc) error 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := optr.syncProgressingStatus(); err != nil {
 		return fmt.Errorf("error syncing progressing status: %v", err)
 	}
@@ -62,6 +64,8 @@ func (optr *Operator) syncAll(rconfig renderConfig, syncFuncs []syncFunc) error 
 	return agg
 }
 func (optr *Operator) syncCustomResourceDefinitions() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -102,6 +106,8 @@ func (optr *Operator) syncMachineConfigPools(config renderConfig) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mcps := []string{"manifests/master.machineconfigpool.yaml", "manifests/worker.machineconfigpool.yaml"}
 	for _, mcp := range mcps {
 		mcpBytes, err := renderAsset(config, mcp)
@@ -117,6 +123,8 @@ func (optr *Operator) syncMachineConfigPools(config renderConfig) error {
 	return nil
 }
 func (optr *Operator) syncMachineConfigController(config renderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -192,6 +200,8 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, path := range []string{"manifests/machineconfigdaemon/clusterrole.yaml", "manifests/machineconfigdaemon/events-clusterrole.yaml"} {
 		crBytes, err := renderAsset(config, path)
 		if err != nil {
@@ -247,6 +257,8 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 	return nil
 }
 func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -324,6 +336,8 @@ func (optr *Operator) syncRequiredMachineConfigPools(config renderConfig) error 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	sel, err := metav1.LabelSelectorAsSelector(metav1.AddLabelToSelector(&metav1.LabelSelector{}, requiredForUpgradeMachineConfigPoolLabelKey, ""))
 	if err != nil {
 		return err
@@ -375,6 +389,8 @@ func (optr *Operator) waitForCustomResourceDefinition(resource *apiextv1beta1.Cu
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(customResourceReadyInterval, customResourceReadyTimeout, func() (bool, error) {
 		crd, err := optr.crdLister.Get(resource.Name)
@@ -398,6 +414,8 @@ func (optr *Operator) waitForCustomResourceDefinition(resource *apiextv1beta1.Cu
 	return nil
 }
 func (optr *Operator) waitForDeploymentRollout(resource *appsv1.Deployment) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -445,6 +463,8 @@ func (optr *Operator) waitForDaemonsetRollout(resource *appsv1.DaemonSet) error 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(daemonsetRolloutPollInterval, daemonsetRolloutTimeout, func() (bool, error) {
 		d, err := optr.daemonsetLister.DaemonSets(resource.Namespace).Get(resource.Name)
@@ -472,6 +492,8 @@ func (optr *Operator) waitForDaemonsetRollout(resource *appsv1.DaemonSet) error 
 	return nil
 }
 func (optr *Operator) waitForControllerConfigToBeCompleted(resource *mcfgv1.ControllerConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

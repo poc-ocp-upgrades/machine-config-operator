@@ -35,6 +35,8 @@ func TestStringDecode(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	inp := "data:,Hello%2C%20world!"
 	exp := "Hello, world!"
 	dec, err := getDecodedContent(inp)
@@ -56,6 +58,8 @@ func TestStringEncode(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	inp := "Hello, world!"
 	exp := "data:,Hello%2C%20world!"
 	enc := getEncodedContent(inp)
@@ -64,6 +68,8 @@ func TestStringEncode(t *testing.T) {
 	}
 }
 func TestBootstrapServer(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -112,6 +118,8 @@ func TestBootstrapServer(t *testing.T) {
 	validateIgnitionSystemd(t, res.Systemd.Units, mc.Spec.Config.Systemd.Units)
 }
 func TestClusterServer(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -181,9 +189,13 @@ func getKubeConfigContent(t *testing.T) ([]byte, []byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return []byte("dummy-kubeconfig"), []byte("dummy-root-ca"), nil
 }
 func validateIgnitionFiles(t *testing.T, exp, got []ignv2_2types.File) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -217,6 +229,8 @@ func validateIgnitionSystemd(t *testing.T, exp, got []ignv2_2types.Unit) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	expMap := createUnitMap(exp)
 	gotMap := createUnitMap(got)
 	for k, v := range expMap {
@@ -230,6 +244,8 @@ func validateIgnitionSystemd(t *testing.T, exp, got []ignv2_2types.Unit) {
 	}
 }
 func createUnitMap(units []ignv2_2types.Unit) map[string]ignv2_2types.Unit {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -257,6 +273,8 @@ func createFileMap(files []ignv2_2types.File) map[string]ignv2_2types.File {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	m := make(map[string]ignv2_2types.File)
 	for i := range files {
 		file := path.Join(files[i].Filesystem, files[i].Path)
@@ -265,6 +283,8 @@ func createFileMap(files []ignv2_2types.File) map[string]ignv2_2types.File {
 	return m
 }
 func getTestMachineConfigPool() (*v1.MachineConfigPool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

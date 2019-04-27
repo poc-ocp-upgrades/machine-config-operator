@@ -67,12 +67,16 @@ func newFixture(t *testing.T) *fixture {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
 	return f
 }
 func (f *fixture) validateActions() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -108,12 +112,16 @@ func newMachineConfig(name string, labels map[string]string, osurl string, files
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if labels == nil {
 		labels = map[string]string{}
 	}
 	return &mcfgv1.MachineConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Labels: labels, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.MachineConfigSpec{OSImageURL: osurl, Config: ignv2_2types.Config{Storage: ignv2_2types.Storage{Files: files}}}}
 }
 func newControllerConfig(name, platform string) *mcfgv1.ControllerConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -138,9 +146,13 @@ func newMachineConfigPool(name string, labels map[string]string, selector *metav
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mcfgv1.MachineConfigPool{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Labels: labels, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.MachineConfigPoolSpec{MachineConfigSelector: selector}, Status: mcfgv1.MachineConfigPoolStatus{Configuration: mcfgv1.MachineConfigPoolStatusConfiguration{ObjectReference: corev1.ObjectReference{Name: currentMachineConfig}}}}
 }
 func newContainerRuntimeConfig(name string, ctrconf *mcfgv1.ContainerRuntimeConfiguration, selector *metav1.LabelSelector) *mcfgv1.ContainerRuntimeConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -164,6 +176,8 @@ func newImageConfig(name string, regconf *apicfgv1.RegistrySources) *apicfgv1.Im
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &apicfgv1.Image{TypeMeta: metav1.TypeMeta{APIVersion: apicfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, UID: types.UID(utilrand.String(5)), Generation: 1}, Spec: apicfgv1.ImageSpec{RegistrySources: *regconf}}
 }
 func newClusterVersionConfig(name, desiredImage string) *apicfgv1.ClusterVersion {
@@ -177,9 +191,13 @@ func newClusterVersionConfig(name, desiredImage string) *apicfgv1.ClusterVersion
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &apicfgv1.ClusterVersion{TypeMeta: metav1.TypeMeta{APIVersion: apicfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, UID: types.UID(utilrand.String(5)), Generation: 1}, Status: apicfgv1.ClusterVersionStatus{Desired: apicfgv1.Update{Image: desiredImage}}}
 }
 func (f *fixture) newController() *Controller {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -239,6 +257,8 @@ func (f *fixture) run(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, false)
 }
 func (f *fixture) runExpectError(mcpname string) {
@@ -252,9 +272,13 @@ func (f *fixture) runExpectError(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, true)
 }
 func (f *fixture) runController(mcpname string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -291,6 +315,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
 		if len(action.GetNamespace()) == 0 && (action.Matches("list", "machineconfigpools") || action.Matches("watch", "machineconfigpools") || action.Matches("list", "controllerconfigs") || action.Matches("watch", "controllerconfigs") || action.Matches("list", "containerruntimeconfigs") || action.Matches("watch", "containerruntimeconfigs") || action.Matches("list", "machineconfigs") || action.Matches("watch", "machineconfigs")) {
@@ -301,6 +327,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	return ret
 }
 func checkAction(expected, actual core.Action, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -352,9 +380,13 @@ func (f *fixture) expectGetContainerRuntimeConfigAction(config *mcfgv1.Container
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootGetAction(schema.GroupVersionResource{Resource: "containerruntimeconfigs"}, config.Name))
 }
 func (f *fixture) expectGetMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -378,9 +410,13 @@ func (f *fixture) expectCreateMachineConfigAction(config *mcfgv1.MachineConfig) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootCreateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
 func (f *fixture) expectUpdateMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -404,9 +440,13 @@ func (f *fixture) expectPatchContainerRuntimeConfig(config *mcfgv1.ContainerRunt
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootPatchAction(schema.GroupVersionResource{Version: "v1", Group: "machineconfiguration.openshift.io", Resource: "containerruntimeconfigs"}, config.Name, types.MergePatchType, patch))
 }
 func (f *fixture) expectUpdateContainerRuntimeConfig(config *mcfgv1.ContainerRuntimeConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -423,6 +463,8 @@ func (f *fixture) expectUpdateContainerRuntimeConfig(config *mcfgv1.ContainerRun
 var ctrcfgPatchBytes = []uint8{0x7b, 0x22, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x22, 0x3a, 0x7b, 0x22, 0x66, 0x69, 0x6e, 0x61, 0x6c, 0x69, 0x7a, 0x65, 0x72, 0x73, 0x22, 0x3a, 0x5b, 0x22, 0x39, 0x39, 0x2d, 0x6d, 0x61, 0x73, 0x74, 0x65, 0x72, 0x2d, 0x73, 0x78, 0x32, 0x76, 0x72, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x72, 0x75, 0x6e, 0x74, 0x69, 0x6d, 0x65, 0x22, 0x5d, 0x7d, 0x7d}
 
 func TestContainerRuntimeConfigCreate(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -457,6 +499,8 @@ func TestContainerRuntimeConfigCreate(t *testing.T) {
 	}
 }
 func TestContainerRuntimeConfigUpdate(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -531,6 +575,8 @@ func TestImageConfigCreate(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, platform := range []string{"aws", "none", "unrecognized"} {
 		t.Run(platform, func(t *testing.T) {
 			f := newFixture(t)
@@ -556,6 +602,8 @@ func TestImageConfigCreate(t *testing.T) {
 	}
 }
 func TestImageConfigUpdate(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -631,6 +679,8 @@ func TestRegistriesValidation(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	failureTests := []struct {
 		name	string
 		config	*apicfgv1.RegistrySources
@@ -683,6 +733,8 @@ func TestContainerRuntimeConfigOptions(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	failureTests := []struct {
 		name	string
 		config	*mcfgv1.ContainerRuntimeConfiguration
@@ -707,6 +759,8 @@ func TestContainerRuntimeConfigOptions(t *testing.T) {
 	}
 }
 func getKey(config *mcfgv1.ContainerRuntimeConfig, t *testing.T) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -35,10 +35,14 @@ func (ctrl *Controller) featureWorker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ctrl.processNextFeatureWorkItem() {
 	}
 }
 func (ctrl *Controller) processNextFeatureWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -59,6 +63,8 @@ func (ctrl *Controller) processNextFeatureWorkItem() bool {
 	return true
 }
 func (ctrl *Controller) syncFeatureHandler(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -150,6 +156,8 @@ func (ctrl *Controller) enqueueFeature(feat *osev1.FeatureGate) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(feat)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("Couldn't get key for object %#v: %v", feat, err))
@@ -158,6 +166,8 @@ func (ctrl *Controller) enqueueFeature(feat *osev1.FeatureGate) {
 	ctrl.featureQueue.Add(key)
 }
 func (ctrl *Controller) updateFeature(old, cur interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -186,11 +196,15 @@ func (ctrl *Controller) addFeature(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	features := obj.(*osev1.FeatureGate)
 	glog.V(4).Infof("Adding Feature %s", features.Name)
 	ctrl.enqueueFeature(features)
 }
 func (ctrl *Controller) deleteFeature(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -217,6 +231,8 @@ func (ctrl *Controller) deleteFeature(obj interface{}) {
 	glog.V(4).Infof("Deleted Feature %s and restored default config", features.Name)
 }
 func (ctrl *Controller) generateFeatureMap(features *osev1.FeatureGate) (*map[string]bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

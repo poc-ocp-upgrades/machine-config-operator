@@ -32,6 +32,8 @@ func TestGetMachineConfigPoolCondition(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	s := status()
 	tests := []struct {
 		status		MachineConfigPoolStatus
@@ -49,6 +51,8 @@ func TestGetMachineConfigPoolCondition(t *testing.T) {
 	}
 }
 func TestSetMachineConfigPoolCondition(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -84,6 +88,8 @@ func TestRemoveMachineConfigPoolCondition(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		status		*MachineConfigPoolStatus
 		condType	MachineConfigPoolConditionType
@@ -99,6 +105,8 @@ func TestRemoveMachineConfigPoolCondition(t *testing.T) {
 	}
 }
 func TestIsControllerConfigCompleted(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

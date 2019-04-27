@@ -29,9 +29,13 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &version{factory: f, namespace: namespace, tweakListOptions: tweakListOptions}
 }
 func (v *version) ContainerRuntimeConfigs() ContainerRuntimeConfigInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -55,9 +59,13 @@ func (v *version) ControllerConfigs() ControllerConfigInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &controllerConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 func (v *version) KubeletConfigs() KubeletConfigInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -81,6 +89,8 @@ func (v *version) MCOConfigs() MCOConfigInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mCOConfigInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 func (v *version) MachineConfigs() MachineConfigInformer {
@@ -94,9 +104,13 @@ func (v *version) MachineConfigs() MachineConfigInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &machineConfigInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }
 func (v *version) MachineConfigPools() MachineConfigPoolInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

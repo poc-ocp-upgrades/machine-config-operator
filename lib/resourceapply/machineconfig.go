@@ -19,6 +19,8 @@ func ApplyMachineConfig(client mcfgclientv1.MachineConfigsGetter, required *mcfg
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existing, err := client.MachineConfigs().Get(required.GetName(), metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		actual, err := client.MachineConfigs().Create(required)
@@ -46,6 +48,8 @@ func ApplyMachineConfigPool(client mcfgclientv1.MachineConfigPoolsGetter, requir
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existing, err := client.MachineConfigPools().Get(required.GetName(), metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		actual, err := client.MachineConfigPools().Create(required)
@@ -63,6 +67,8 @@ func ApplyMachineConfigPool(client mcfgclientv1.MachineConfigPoolsGetter, requir
 	return actual, true, err
 }
 func ApplyControllerConfig(client mcfgclientv1.ControllerConfigsGetter, required *mcfgv1.ControllerConfig) (*mcfgv1.ControllerConfig, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

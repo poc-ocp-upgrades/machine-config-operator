@@ -17,6 +17,8 @@ func (in *MachineConfig) DeepCopyInto(out *MachineConfig) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	*out = *in
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
@@ -24,6 +26,8 @@ func (in *MachineConfig) DeepCopyInto(out *MachineConfig) {
 	return
 }
 func (in *MachineConfig) DeepCopy() *MachineConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -52,9 +56,13 @@ func (in *MachineConfig) DeepCopyObject() runtime.Object {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return in.DeepCopy()
 }
 func (in *MachineConfigSpec) DeepCopyInto(out *MachineConfigSpec) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -80,11 +88,15 @@ func deepCopyIgnConfig(in ignv2_2types.Config) ignv2_2types.Config {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var out ignv2_2types.Config
 	out.Ignition.Version = in.Ignition.Version
 	return ignv2_2.Append(out, in)
 }
 func (in *MachineConfigSpec) DeepCopy() *MachineConfigSpec {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

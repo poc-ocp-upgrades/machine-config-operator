@@ -18,6 +18,8 @@ func TestFeaturesDefault(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, platform := range []string{"aws", "none", "unrecognized"} {
 		t.Run(platform, func(t *testing.T) {
 			f := newFixture(t)

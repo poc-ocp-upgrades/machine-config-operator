@@ -94,6 +94,8 @@ func New(namespace, name string, imagesFile string, mcpInformer mcfginformersv1.
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&coreclientsetv1.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
@@ -129,6 +131,8 @@ func New(namespace, name string, imagesFile string, mcpInformer mcfginformersv1.
 	return optr
 }
 func (optr *Operator) Run(workers int, stopCh <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -180,6 +184,8 @@ func (optr *Operator) eventHandler() cache.ResourceEventHandler {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	workQueueKey := fmt.Sprintf("%s/%s", optr.namespace, optr.name)
 	return cache.ResourceEventHandlerFuncs{AddFunc: func(obj interface{}) {
 		optr.queue.Add(workQueueKey)
@@ -200,10 +206,14 @@ func (optr *Operator) worker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for optr.processNextWorkItem() {
 	}
 }
 func (optr *Operator) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -234,6 +244,8 @@ func (optr *Operator) handleErr(err error, key interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		optr.queue.Forget(key)
 		return
@@ -249,6 +261,8 @@ func (optr *Operator) handleErr(err error, key interface{}) {
 	optr.queue.AddAfter(key, 1*time.Minute)
 }
 func (optr *Operator) sync(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -339,6 +353,8 @@ func (optr *Operator) getOsImageURL(namespace string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cm, err := optr.mcoCmLister.ConfigMaps(namespace).Get(osImageConfigMapName)
 	if err != nil {
 		return "", err
@@ -346,6 +362,8 @@ func (optr *Operator) getOsImageURL(namespace string) (string, error) {
 	return cm.Data["osImageURL"], nil
 }
 func (optr *Operator) getCAsFromConfigMap(namespace, name, key string) ([]byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -383,6 +401,8 @@ func (optr *Operator) getGlobalConfig() (*configv1.Infrastructure, *configv1.Net
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	infra, err := optr.infraLister.Get("cluster")
 	if err != nil {
 		return nil, nil, err
@@ -394,6 +414,8 @@ func (optr *Operator) getGlobalConfig() (*configv1.Infrastructure, *configv1.Net
 	return infra, network, nil
 }
 func getRenderConfig(tnamespace, kubeAPIServerServingCA string, ccSpec *mcfgv1.ControllerConfigSpec, imgs Images, apiServerURL string) renderConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

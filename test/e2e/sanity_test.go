@@ -17,6 +17,8 @@ func TestOperatorLabel(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cs := framework.NewClientSet("")
 	d, err := cs.DaemonSets("openshift-machine-config-operator").Get("machine-config-daemon", metav1.GetOptions{})
 	if err != nil {

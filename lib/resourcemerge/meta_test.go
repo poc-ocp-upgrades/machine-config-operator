@@ -19,6 +19,8 @@ func TestMergeOwnerRefs(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		existing		[]metav1.OwnerReference
 		input			[]metav1.OwnerReference

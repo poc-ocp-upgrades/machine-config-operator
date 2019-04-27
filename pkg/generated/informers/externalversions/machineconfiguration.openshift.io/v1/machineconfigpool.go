@@ -32,9 +32,13 @@ func NewMachineConfigPoolInformer(client versioned.Interface, resyncPeriod time.
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredMachineConfigPoolInformer(client, resyncPeriod, indexers, nil)
 }
 func NewFilteredMachineConfigPoolInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -68,6 +72,8 @@ func (f *machineConfigPoolInformer) defaultInformer(client versioned.Interface, 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredMachineConfigPoolInformer(client, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 func (f *machineConfigPoolInformer) Informer() cache.SharedIndexInformer {
@@ -81,9 +87,13 @@ func (f *machineConfigPoolInformer) Informer() cache.SharedIndexInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.factory.InformerFor(&machineconfigurationopenshiftiov1.MachineConfigPool{}, f.defaultInformer)
 }
 func (f *machineConfigPoolInformer) Lister() v1.MachineConfigPoolLister {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

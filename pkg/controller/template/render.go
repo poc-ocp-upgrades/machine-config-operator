@@ -50,6 +50,8 @@ func generateTemplateMachineConfigs(config *RenderConfig, templateDir string) ([
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	infos, err := ioutil.ReadDir(templateDir)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read dir %q: %v", templateDir, err)
@@ -77,6 +79,8 @@ func generateTemplateMachineConfigs(config *RenderConfig, templateDir string) ([
 	return cfgs, nil
 }
 func GenerateMachineConfigsForRole(config *RenderConfig, role string, path string) ([]*mcfgv1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -118,6 +122,8 @@ func platformFromControllerConfigSpec(ic *mcfgv1.ControllerConfigSpec) (string, 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch ic.Platform {
 	case "":
 		return "", fmt.Errorf("cannot generateMachineConfigs with an empty platform field")
@@ -131,6 +137,8 @@ func platformFromControllerConfigSpec(ic *mcfgv1.ControllerConfigSpec) (string, 
 	}
 }
 func filterTemplates(toFilter map[string]string, path string, config *RenderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -166,6 +174,8 @@ func filterTemplates(toFilter map[string]string, path string, config *RenderConf
 	return filepath.Walk(path, walkFn)
 }
 func generateMachineConfigForName(config *RenderConfig, role, name, path string) (*mcfgv1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -253,10 +263,14 @@ func MachineConfigFromIgnConfig(role string, name string, ignCfg *ignv2_2types.C
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	labels := map[string]string{machineConfigRoleLabelKey: role}
 	return &mcfgv1.MachineConfig{ObjectMeta: metav1.ObjectMeta{Labels: labels, Name: name}, Spec: mcfgv1.MachineConfigSpec{OSImageURL: "", Config: *ignCfg}}
 }
 func transpileToIgn(files, units []string) (*ignv2_2types.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -299,6 +313,8 @@ func renderTemplate(config RenderConfig, path string, b []byte) ([]byte, error) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	funcs := sprig.TxtFuncMap()
 	funcs["skip"] = skipMissing
 	funcs["etcdServerCertDNSNames"] = etcdServerCertDNSNames
@@ -328,6 +344,8 @@ func skipMissing(key string) (interface{}, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if !skipKeyValidate.Match([]byte(key)) {
 		return nil, fmt.Errorf("invalid key for skipKey")
 	}
@@ -344,10 +362,14 @@ func etcdServerCertDNSNames(cfg RenderConfig) (interface{}, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var dnsNames = []string{"localhost", "etcd.kube-system.svc", "etcd.kube-system.svc.cluster.local", "etcd.openshift-etcd.svc", "etcd.openshift-etcd.svc.cluster.local", "${ETCD_DNS_NAME}"}
 	return strings.Join(dnsNames, ","), nil
 }
 func etcdPeerCertDNSNames(cfg RenderConfig) (interface{}, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -375,6 +397,8 @@ func cloudProvider(cfg RenderConfig) (interface{}, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch cfg.Platform {
 	case platformAWS:
 		return platformAWS, nil
@@ -388,6 +412,8 @@ func cloudProvider(cfg RenderConfig) (interface{}, error) {
 	return "", nil
 }
 func existsDir(path string) (bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

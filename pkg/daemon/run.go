@@ -18,6 +18,8 @@ func Run(command string, args ...string) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	glog.Infof("Running: %s %s\n", command, strings.Join(args, " "))
 	cmd := exec.Command(command, args...)
 	cmd.Stdout = os.Stdout
@@ -25,6 +27,8 @@ func Run(command string, args ...string) error {
 	return cmd.Run()
 }
 func RunGetOut(command string, args ...string) ([]byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

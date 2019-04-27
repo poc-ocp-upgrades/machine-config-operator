@@ -47,9 +47,13 @@ func NewNodeWriter() NodeWriter {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &clusterNodeWriter{writer: make(chan message, defaultWriterQueue)}
 }
 func (nw *clusterNodeWriter) Run(stop <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -81,6 +85,8 @@ func (nw *clusterNodeWriter) SetDone(client corev1.NodeInterface, lister corelis
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	annos := map[string]string{constants.MachineConfigDaemonStateAnnotationKey: constants.MachineConfigDaemonStateDone, constants.CurrentMachineConfigAnnotationKey: dcAnnotation, constants.MachineConfigDaemonReasonAnnotationKey: ""}
 	respChan := make(chan error, 1)
 	nw.writer <- message{client: client, lister: lister, node: node, annos: annos, responseChannel: respChan}
@@ -97,12 +103,16 @@ func (nw *clusterNodeWriter) SetWorking(client corev1.NodeInterface, lister core
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	annos := map[string]string{constants.MachineConfigDaemonStateAnnotationKey: constants.MachineConfigDaemonStateWorking}
 	respChan := make(chan error, 1)
 	nw.writer <- message{client: client, lister: lister, node: node, annos: annos, responseChannel: respChan}
 	return <-respChan
 }
 func (nw *clusterNodeWriter) SetUnreconcilable(err error, client corev1.NodeInterface, lister corelisterv1.NodeLister, node string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,6 +144,8 @@ func (nw *clusterNodeWriter) SetDegraded(err error, client corev1.NodeInterface,
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	glog.Errorf("Marking Degraded due to: %v", err)
 	annos := map[string]string{constants.MachineConfigDaemonStateAnnotationKey: constants.MachineConfigDaemonStateDegraded, constants.MachineConfigDaemonReasonAnnotationKey: err.Error()}
 	respChan := make(chan error, 1)
@@ -155,12 +167,16 @@ func (nw *clusterNodeWriter) SetSSHAccessed(client corev1.NodeInterface, lister 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	annos := map[string]string{machineConfigDaemonSSHAccessAnnotationKey: machineConfigDaemonSSHAccessValue}
 	respChan := make(chan error, 1)
 	nw.writer <- message{client: client, lister: lister, node: node, annos: annos, responseChannel: respChan}
 	return <-respChan
 }
 func updateNodeRetry(client corev1.NodeInterface, lister corelisterv1.NodeLister, nodeName string, f func(*v1.Node)) (*v1.Node, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -199,6 +215,8 @@ func updateNodeRetry(client corev1.NodeInterface, lister corelisterv1.NodeLister
 	return node, nil
 }
 func setNodeAnnotations(client corev1.NodeInterface, lister corelisterv1.NodeLister, nodeName string, m map[string]string) (*v1.Node, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

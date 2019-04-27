@@ -25,9 +25,13 @@ func NewControllerConfigLister(indexer cache.Indexer) ControllerConfigLister {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &controllerConfigLister{indexer: indexer}
 }
 func (s *controllerConfigLister) List(selector labels.Selector) (ret []*v1.ControllerConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -44,6 +48,8 @@ func (s *controllerConfigLister) List(selector labels.Selector) (ret []*v1.Contr
 	return ret, err
 }
 func (s *controllerConfigLister) Get(name string) (*v1.ControllerConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

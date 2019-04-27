@@ -40,9 +40,13 @@ func newMCOConfigs(c *MachineconfigurationV1Client, namespace string) *mCOConfig
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mCOConfigs{client: c.RESTClient(), ns: namespace}
 }
 func (c *mCOConfigs) Get(name string, options metav1.GetOptions) (result *v1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -58,6 +62,8 @@ func (c *mCOConfigs) Get(name string, options metav1.GetOptions) (result *v1.MCO
 	return
 }
 func (c *mCOConfigs) List(opts metav1.ListOptions) (result *v1.MCOConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -87,6 +93,8 @@ func (c *mCOConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -95,6 +103,8 @@ func (c *mCOConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error) {
 	return c.client.Get().Namespace(c.ns).Resource("mcoconfigs").VersionedParams(&opts, scheme.ParameterCodec).Timeout(timeout).Watch()
 }
 func (c *mCOConfigs) Create(mCOConfig *v1.MCOConfig) (result *v1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -120,11 +130,15 @@ func (c *mCOConfigs) Update(mCOConfig *v1.MCOConfig) (result *v1.MCOConfig, err 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.MCOConfig{}
 	err = c.client.Put().Namespace(c.ns).Resource("mcoconfigs").Name(mCOConfig.Name).Body(mCOConfig).Do().Into(result)
 	return
 }
 func (c *mCOConfigs) Delete(name string, options *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -148,6 +162,8 @@ func (c *mCOConfigs) DeleteCollection(options *metav1.DeleteOptions, listOptions
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if listOptions.TimeoutSeconds != nil {
 		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
@@ -155,6 +171,8 @@ func (c *mCOConfigs) DeleteCollection(options *metav1.DeleteOptions, listOptions
 	return c.client.Delete().Namespace(c.ns).Resource("mcoconfigs").VersionedParams(&listOptions, scheme.ParameterCodec).Timeout(timeout).Body(options).Do().Error()
 }
 func (c *mCOConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

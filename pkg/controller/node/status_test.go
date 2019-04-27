@@ -21,6 +21,8 @@ func TestIsNodeReady(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	nodeList := &corev1.NodeList{Items: []corev1.Node{{ObjectMeta: metav1.ObjectMeta{Name: "node1"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionTrue}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node2"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionFalse}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node3"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeOutOfDisk, Status: corev1.ConditionTrue}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node4"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeOutOfDisk, Status: corev1.ConditionFalse}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node5"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionTrue}, {Type: corev1.NodeOutOfDisk, Status: corev1.ConditionTrue}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node6"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionTrue}, {Type: corev1.NodeOutOfDisk, Status: corev1.ConditionFalse}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node7"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionFalse}, {Type: corev1.NodeOutOfDisk, Status: corev1.ConditionTrue}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node8"}, Status: corev1.NodeStatus{Conditions: []corev1.NodeCondition{{Type: corev1.NodeReady, Status: corev1.ConditionFalse}, {Type: corev1.NodeOutOfDisk, Status: corev1.ConditionFalse}}}}, {ObjectMeta: metav1.ObjectMeta{Name: "node9"}, Spec: corev1.NodeSpec{Unschedulable: true}}, {ObjectMeta: metav1.ObjectMeta{Name: "node10"}, Spec: corev1.NodeSpec{Unschedulable: false}}, {ObjectMeta: metav1.ObjectMeta{Name: "node11"}}}}
 	nodeNames := []string{}
 	for _, node := range nodeList.Items {
@@ -34,6 +36,8 @@ func TestIsNodeReady(t *testing.T) {
 	}
 }
 func newNode(name string, currentConfig, desiredConfig string) *corev1.Node {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -64,6 +68,8 @@ func newNodeWithLabel(name string, currentConfig, desiredConfig string, labels m
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	node := newNode(name, currentConfig, desiredConfig)
 	if node.Labels == nil {
 		node.Labels = map[string]string{}
@@ -74,6 +80,8 @@ func newNodeWithLabel(name string, currentConfig, desiredConfig string, labels m
 	return node
 }
 func newNodeWithReady(name string, currentConfig, desiredConfig string, status corev1.ConditionStatus) *corev1.Node {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -99,6 +107,8 @@ func newNodeWithReadyAndDaemonState(name string, currentConfig, desiredConfig st
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	node := newNodeWithReady(name, currentConfig, desiredConfig, status)
 	if node.Annotations == nil {
 		node.Annotations = map[string]string{}
@@ -107,6 +117,8 @@ func newNodeWithReadyAndDaemonState(name string, currentConfig, desiredConfig st
 	return node
 }
 func TestGetUpdatedMachines(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -142,6 +154,8 @@ func TestGetReadyMachines(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		nodes		[]*corev1.Node
 		currentConfig	string
@@ -167,6 +181,8 @@ func TestGetUnavailableMachines(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		nodes		[]*corev1.Node
 		currentConfig	string
@@ -182,6 +198,8 @@ func TestGetUnavailableMachines(t *testing.T) {
 	}
 }
 func TestCalculateStatus(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

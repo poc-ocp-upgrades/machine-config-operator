@@ -16,6 +16,8 @@ func EnsureMachineConfig(modified *bool, existing *mcfgv1.MachineConfig, require
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	ensureMachineConfigSpec(modified, &existing.Spec, required.Spec)
 }
@@ -30,10 +32,14 @@ func EnsureControllerConfig(modified *bool, existing *mcfgv1.ControllerConfig, r
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	ensureControllerConfigSpec(modified, &existing.Spec, required.Spec)
 }
 func EnsureMachineConfigPool(modified *bool, existing *mcfgv1.MachineConfigPool, required mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -73,6 +79,8 @@ func ensureMachineConfigSpec(modified *bool, existing *mcfgv1.MachineConfigSpec,
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setStringIfSet(modified, &existing.OSImageURL, required.OSImageURL)
 	if !equality.Semantic.DeepEqual(existing.Config, required.Config) {
 		*modified = true
@@ -80,6 +88,8 @@ func ensureMachineConfigSpec(modified *bool, existing *mcfgv1.MachineConfigSpec,
 	}
 }
 func ensureControllerConfigSpec(modified *bool, existing *mcfgv1.ControllerConfigSpec, required mcfgv1.ControllerConfigSpec) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -30,6 +30,8 @@ func NewBootstrapServer(dir, kubeconfig string) (Server, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if _, err := os.Stat(kubeconfig); err != nil {
 		return nil, fmt.Errorf("kubeconfig not found at location: %s", kubeconfig)
 	}
@@ -38,6 +40,8 @@ func NewBootstrapServer(dir, kubeconfig string) (Server, error) {
 	}}, nil
 }
 func (bsc *bootstrapServer) GetConfig(cr poolRequest) (*ignv2_2types.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -88,6 +92,8 @@ func (bsc *bootstrapServer) GetConfig(cr poolRequest) (*ignv2_2types.Config, err
 	return &mc.Spec.Config, nil
 }
 func kubeconfigFromFile(path string) ([]byte, []byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

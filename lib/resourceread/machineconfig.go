@@ -24,11 +24,15 @@ func init() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := mcfgv1.AddToScheme(mcfgScheme); err != nil {
 		panic(err)
 	}
 }
 func ReadMachineConfigV1(objBytes []byte) (*mcfgv1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -66,6 +70,8 @@ func ReadMachineConfigV1OrDie(objBytes []byte) *mcfgv1.MachineConfig {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mc, err := ReadMachineConfigV1(objBytes)
 	if err != nil {
 		panic(err)
@@ -83,6 +89,8 @@ func ReadMachineConfigPoolV1OrDie(objBytes []byte) *mcfgv1.MachineConfigPool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	requiredObj, err := runtime.Decode(mcfgCodecs.UniversalDecoder(mcfgv1.SchemeGroupVersion), objBytes)
 	if err != nil {
 		panic(err)
@@ -90,6 +98,8 @@ func ReadMachineConfigPoolV1OrDie(objBytes []byte) *mcfgv1.MachineConfigPool {
 	return requiredObj.(*mcfgv1.MachineConfigPool)
 }
 func ReadControllerConfigV1OrDie(objBytes []byte) *mcfgv1.ControllerConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

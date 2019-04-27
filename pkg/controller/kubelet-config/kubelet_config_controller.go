@@ -77,6 +77,8 @@ func New(templatesDir string, mcpInformer mcfginformersv1.MachineConfigPoolInfor
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&coreclientsetv1.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
@@ -97,6 +99,8 @@ func New(templatesDir string, mcpInformer mcfginformersv1.MachineConfigPoolInfor
 	return ctrl
 }
 func (ctrl *Controller) Run(workers int, stopCh <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,6 +138,8 @@ func kubeletConfigTriggerObjectChange(old, new *mcfgv1.KubeletConfig) bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if old.DeletionTimestamp != new.DeletionTimestamp {
 		return true
 	}
@@ -143,6 +149,8 @@ func kubeletConfigTriggerObjectChange(old, new *mcfgv1.KubeletConfig) bool {
 	return false
 }
 func (ctrl *Controller) updateKubeletConfig(old, cur interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -171,11 +179,15 @@ func (ctrl *Controller) addKubeletConfig(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg := obj.(*mcfgv1.KubeletConfig)
 	glog.V(4).Infof("Adding KubeletConfig %s", cfg.Name)
 	ctrl.enqueueKubeletConfig(cfg)
 }
 func (ctrl *Controller) deleteKubeletConfig(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -213,6 +225,8 @@ func (ctrl *Controller) cascadeDelete(cfg *mcfgv1.KubeletConfig) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(cfg.GetFinalizers()) == 0 {
 		return nil
 	}
@@ -227,6 +241,8 @@ func (ctrl *Controller) cascadeDelete(cfg *mcfgv1.KubeletConfig) error {
 	return nil
 }
 func (ctrl *Controller) enqueue(cfg *mcfgv1.KubeletConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -255,6 +271,8 @@ func (ctrl *Controller) enqueueRateLimited(cfg *mcfgv1.KubeletConfig) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(cfg)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("couldn't get key for object %#v: %v", cfg, err))
@@ -263,6 +281,8 @@ func (ctrl *Controller) enqueueRateLimited(cfg *mcfgv1.KubeletConfig) {
 	ctrl.queue.AddRateLimited(key)
 }
 func (ctrl *Controller) worker() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -287,6 +307,8 @@ func (ctrl *Controller) processNextWorkItem() bool {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, quit := ctrl.queue.Get()
 	if quit {
 		return false
@@ -297,6 +319,8 @@ func (ctrl *Controller) processNextWorkItem() bool {
 	return true
 }
 func (ctrl *Controller) handleErr(err error, key interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -332,6 +356,8 @@ func (ctrl *Controller) handleFeatureErr(err error, key interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		ctrl.featureQueue.Forget(key)
 		return
@@ -347,6 +373,8 @@ func (ctrl *Controller) handleFeatureErr(err error, key interface{}) {
 	ctrl.featureQueue.AddAfter(key, 1*time.Minute)
 }
 func (ctrl *Controller) generateOriginalKubeletConfig(role string) (*ignv2_2types.File, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -387,6 +415,8 @@ func (ctrl *Controller) syncStatusOnly(cfg *mcfgv1.KubeletConfig, err error, arg
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	statusUpdateError := retry.RetryOnConflict(updateBackoff, func() error {
 		newcfg, getErr := ctrl.mckLister.Get(cfg.Name)
 		if getErr != nil {
@@ -402,6 +432,8 @@ func (ctrl *Controller) syncStatusOnly(cfg *mcfgv1.KubeletConfig, err error, arg
 	return err
 }
 func (ctrl *Controller) syncKubeletConfig(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -534,6 +566,8 @@ func (ctrl *Controller) popFinalizerFromKubeletConfig(kc *mcfgv1.KubeletConfig) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return retry.RetryOnConflict(updateBackoff, func() error {
 		newcfg, err := ctrl.mckLister.Get(kc.Name)
 		if errors.IsNotFound(err) {
@@ -570,10 +604,14 @@ func (ctrl *Controller) patchKubeletConfigs(name string, patch []byte) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := ctrl.client.MachineconfigurationV1().KubeletConfigs().Patch(name, types.MergePatchType, patch)
 	return err
 }
 func (ctrl *Controller) addFinalizerToKubeletConfig(kc *mcfgv1.KubeletConfig, mc *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -610,6 +648,8 @@ func (ctrl *Controller) addFinalizerToKubeletConfig(kc *mcfgv1.KubeletConfig, mc
 	})
 }
 func (ctrl *Controller) getPoolsForKubeletConfig(config *mcfgv1.KubeletConfig) ([]*mcfgv1.MachineConfigPool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

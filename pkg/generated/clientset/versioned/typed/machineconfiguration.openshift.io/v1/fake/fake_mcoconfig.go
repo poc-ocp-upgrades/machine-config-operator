@@ -29,6 +29,8 @@ func (c *FakeMCOConfigs) Get(name string, options v1.GetOptions) (result *machin
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewGetAction(mcoconfigsResource, c.ns, name), &machineconfigurationopenshiftiov1.MCOConfig{})
 	if obj == nil {
 		return nil, err
@@ -36,6 +38,8 @@ func (c *FakeMCOConfigs) Get(name string, options v1.GetOptions) (result *machin
 	return obj.(*machineconfigurationopenshiftiov1.MCOConfig), err
 }
 func (c *FakeMCOConfigs) List(opts v1.ListOptions) (result *machineconfigurationopenshiftiov1.MCOConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -73,9 +77,13 @@ func (c *FakeMCOConfigs) Watch(opts v1.ListOptions) (watch.Interface, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewWatchAction(mcoconfigsResource, c.ns, opts))
 }
 func (c *FakeMCOConfigs) Create(mCOConfig *machineconfigurationopenshiftiov1.MCOConfig) (result *machineconfigurationopenshiftiov1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -103,6 +111,8 @@ func (c *FakeMCOConfigs) Update(mCOConfig *machineconfigurationopenshiftiov1.MCO
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewUpdateAction(mcoconfigsResource, c.ns, mCOConfig), &machineconfigurationopenshiftiov1.MCOConfig{})
 	if obj == nil {
 		return nil, err
@@ -110,6 +120,8 @@ func (c *FakeMCOConfigs) Update(mCOConfig *machineconfigurationopenshiftiov1.MCO
 	return obj.(*machineconfigurationopenshiftiov1.MCOConfig), err
 }
 func (c *FakeMCOConfigs) Delete(name string, options *v1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,11 +146,15 @@ func (c *FakeMCOConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	action := testing.NewDeleteCollectionAction(mcoconfigsResource, c.ns, listOptions)
 	_, err := c.Fake.Invokes(action, &machineconfigurationopenshiftiov1.MCOConfigList{})
 	return err
 }
 func (c *FakeMCOConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machineconfigurationopenshiftiov1.MCOConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

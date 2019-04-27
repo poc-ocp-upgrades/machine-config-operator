@@ -25,6 +25,8 @@ func TestReadMachineConfig(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tcs := []struct {
 		desc		string
 		wantError	bool

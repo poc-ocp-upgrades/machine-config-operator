@@ -33,6 +33,8 @@ func renderAsset(config renderConfig, path string) ([]byte, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	objBytes, err := assets.Asset(path)
 	if err != nil {
 		return nil, fmt.Errorf("error getting asset %s: %v", path, err)
@@ -60,6 +62,8 @@ func toYAML(i interface{}) []byte {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	out, err := yaml.Marshal(i)
 	if err != nil {
 		panic(err)
@@ -67,6 +71,8 @@ func toYAML(i interface{}) []byte {
 	return out
 }
 func createDiscoveredControllerConfigSpec(infra *configv1.Infrastructure, network *configv1.Network) (*mcfgv1.ControllerConfigSpec, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -100,6 +106,8 @@ func createDiscoveredControllerConfigSpec(infra *configv1.Infrastructure, networ
 	return &mcfgv1.ControllerConfigSpec{ClusterDNSIP: dnsIP, CloudProviderConfig: "", EtcdDiscoveryDomain: infra.Status.EtcdDiscoveryDomain, Platform: platform}, nil
 }
 func clusterDNSIP(iprange string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

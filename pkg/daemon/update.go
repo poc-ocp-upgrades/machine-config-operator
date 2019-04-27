@@ -46,9 +46,13 @@ func writeFileAtomicallyWithDefaults(fpath string, b []byte) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return writeFileAtomically(fpath, b, defaultDirectoryPermissions, defaultFilePermissions, -1, -1)
 }
 func writeFileAtomically(fpath string, b []byte, dirMode, fileMode os.FileMode, uid, gid int) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -95,6 +99,8 @@ func (dn *Daemon) writePendingState(desiredConfig *mcfgv1.MachineConfig) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	t := &pendingConfigState{PendingConfig: desiredConfig.GetName(), BootID: dn.bootID}
 	b, err := json.Marshal(t)
 	if err != nil {
@@ -113,9 +119,13 @@ func getNodeRef(node *corev1.Node) *corev1.ObjectReference {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &corev1.ObjectReference{Kind: "Node", Name: node.GetName(), UID: types.UID(node.GetUID())}
 }
 func (dn *Daemon) updateOSAndReboot(newConfig *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -166,6 +176,8 @@ func (dn *Daemon) catchIgnoreSIGTERM() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if dn.installedSigterm {
 		return
 	}
@@ -183,6 +195,8 @@ func (dn *Daemon) catchIgnoreSIGTERM() {
 var errUnreconcilable = errors.New("unreconcilable")
 
 func (dn *Daemon) update(oldConfig, newConfig *mcfgv1.MachineConfig) (retErr error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -248,6 +262,8 @@ func (dn *Daemon) update(oldConfig, newConfig *mcfgv1.MachineConfig) (retErr err
 	return dn.updateOSAndReboot(newConfig)
 }
 func (dn *Daemon) reconcilable(oldConfig, newConfig *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -329,6 +345,8 @@ func verifyUserFields(pwdUser ignv2_2types.PasswdUser) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	emptyUser := ignv2_2types.PasswdUser{}
 	tempUser := pwdUser
 	if tempUser.Name == coreUserName && len(tempUser.SSHAuthorizedKeys) >= 1 {
@@ -354,6 +372,8 @@ func (dn *Daemon) updateFiles(oldConfig, newConfig *mcfgv1.MachineConfig) error 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	glog.Info("Updating files")
 	if err := dn.writeFiles(newConfig.Spec.Config.Storage.Files); err != nil {
 		return err
@@ -367,6 +387,8 @@ func (dn *Daemon) updateFiles(oldConfig, newConfig *mcfgv1.MachineConfig) error 
 	return nil
 }
 func (dn *Daemon) deleteStaleData(oldConfig, newConfig *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -449,6 +471,8 @@ func (dn *Daemon) enableUnit(unit ignv2_2types.Unit) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	wantsPath := filepath.Join(wantsPathSystemd, unit.Name)
 	if _, err := os.Stat(wantsPath); err == nil {
 		glog.Infof("%s already exists. Not making a new symlink", wantsPath)
@@ -475,6 +499,8 @@ func (dn *Daemon) disableUnit(unit ignv2_2types.Unit) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	wantsPath := filepath.Join(wantsPathSystemd, unit.Name)
 	if _, err := os.Stat(wantsPath); err != nil {
 		glog.Infof("%s was not present. No need to remove", wantsPath)
@@ -484,6 +510,8 @@ func (dn *Daemon) disableUnit(unit ignv2_2types.Unit) error {
 	return os.Remove(wantsPath)
 }
 func (dn *Daemon) writeUnits(units []ignv2_2types.Unit) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -558,6 +586,8 @@ func (dn *Daemon) writeFiles(files []ignv2_2types.File) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, file := range files {
 		glog.Infof("Writing file %q", file.Path)
 		contents, err := dataurl.DecodeString(file.Contents.Source)
@@ -584,6 +614,8 @@ func (dn *Daemon) writeFiles(files []ignv2_2types.File) error {
 	return nil
 }
 func getFileOwnership(file ignv2_2types.File) (int, int, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -632,6 +664,8 @@ func (dn *Daemon) atomicallyWriteSSHKey(newUser ignv2_2types.PasswdUser, keys st
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	authKeyPath := filepath.Join(coreUserSSHPath, "authorized_keys")
 	glog.Infof("Writing SSHKeys at %q", authKeyPath)
 	if err := writeFileAtomicallyWithDefaults(authKeyPath, []byte(keys)); err != nil {
@@ -641,6 +675,8 @@ func (dn *Daemon) atomicallyWriteSSHKey(newUser ignv2_2types.PasswdUser, keys st
 	return nil
 }
 func (dn *Daemon) updateSSHKeys(newUsers []ignv2_2types.PasswdUser) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -664,6 +700,8 @@ func (dn *Daemon) updateSSHKeys(newUsers []ignv2_2types.PasswdUser) error {
 	return nil
 }
 func (dn *Daemon) updateOS(config *mcfgv1.MachineConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -703,6 +741,8 @@ func (dn *Daemon) logSystem(format string, a ...interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	message := fmt.Sprintf(format, a...)
 	glog.Info(message)
 	logger := exec.Command("logger")
@@ -732,12 +772,16 @@ func (dn *Daemon) cancelSIGTERM() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if dn.installedSigterm {
 		signal.Reset(syscall.SIGTERM)
 		dn.installedSigterm = false
 	}
 }
 func (dn *Daemon) reboot(rationale string, timeout time.Duration, rebootCmd *exec.Cmd) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -31,6 +31,8 @@ func init() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	rootCmd.PersistentFlags().AddGoFlagSet(flag.CommandLine)
 	rootCmd.PersistentFlags().IntVar(&rootOpts.sport, "secure-port", 22623, "secure port to serve ignition configs")
 	rootCmd.PersistentFlags().StringVar(&rootOpts.cert, "cert", "/etc/ssl/mcs/tls.crt", "cert file for TLS")
@@ -38,6 +40,8 @@ func init() {
 	rootCmd.PersistentFlags().IntVar(&rootOpts.isport, "insecure-port", 22624, "insecure port to serve ignition configs")
 }
 func main() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -58,6 +58,8 @@ func newFixture(t *testing.T) *fixture {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
@@ -75,9 +77,13 @@ func newMachineConfigPool(name string, selector *metav1.LabelSelector, maxUnavai
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mcfgv1.MachineConfigPool{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name}, Spec: mcfgv1.MachineConfigPoolSpec{NodeSelector: selector, MaxUnavailable: maxUnavail}, Status: mcfgv1.MachineConfigPoolStatus{Configuration: mcfgv1.MachineConfigPoolStatusConfiguration{ObjectReference: corev1.ObjectReference{Name: currentMachineConfig}}}}
 }
 func (f *fixture) newController() *Controller {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -121,6 +127,8 @@ func (f *fixture) run(pool string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(pool, false)
 }
 func (f *fixture) runExpectError(pool string) {
@@ -134,9 +142,13 @@ func (f *fixture) runExpectError(pool string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(pool, true)
 }
 func (f *fixture) runController(pool string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -190,6 +202,8 @@ func checkAction(expected, actual core.Action, t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if !(expected.Matches(actual.GetVerb(), actual.GetResource().Resource) && actual.GetSubresource() == expected.GetSubresource()) {
 		t.Errorf("Expected\n\t%#v\ngot\n\t%#v", expected, actual)
 		return
@@ -233,6 +247,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
 		if len(action.GetNamespace()) == 0 && (action.Matches("list", "machineconfigpools") || action.Matches("watch", "machineconfigpools") || action.Matches("list", "nodes") || action.Matches("watch", "nodes")) {
@@ -243,6 +259,8 @@ func filterInformerActions(actions []core.Action) []core.Action {
 	return ret
 }
 func (f *fixture) expectUpdateMachineConfigPoolStatus(pool *mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -266,6 +284,8 @@ func (f *fixture) expectGetNodeAction(node *corev1.Node) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.kubeactions = append(f.kubeactions, core.NewGetAction(schema.GroupVersionResource{Resource: "nodes"}, node.Namespace, node.Name))
 }
 func (f *fixture) expectPatchNodeAction(node *corev1.Node, patch []byte) {
@@ -279,9 +299,13 @@ func (f *fixture) expectPatchNodeAction(node *corev1.Node, patch []byte) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.kubeactions = append(f.kubeactions, core.NewPatchAction(schema.GroupVersionResource{Resource: "nodes"}, node.Namespace, node.Name, types.MergePatchType, patch))
 }
 func TestGetPoolForNode(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -331,9 +355,13 @@ func intStrPtr(obj intstr.IntOrString) *intstr.IntOrString {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &obj
 }
 func TestMaxUnavailable(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -374,6 +402,8 @@ func TestGetCandidateMachines(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		nodes		[]*corev1.Node
 		progress	int
@@ -390,6 +420,8 @@ func TestGetCandidateMachines(t *testing.T) {
 	}
 }
 func TestMakeProgress(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -419,6 +451,8 @@ func TestMakeProgress(t *testing.T) {
 	}
 }
 func TestSetDesiredMachineConfigAnnotation(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -571,6 +605,8 @@ func TestShouldMakeProgress(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), intStrPtr(intstr.FromInt(1)), "v1")
 	nodes := []*corev1.Node{newNodeWithLabel("node-0", "v1", "v1", map[string]string{"node-role": "master"}), newNodeWithLabel("node-1", "v0", "v0", map[string]string{"node-role": "master"})}
@@ -613,6 +649,8 @@ func TestEmptyCurrentMachineConfig(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), intStrPtr(intstr.FromInt(1)), "")
 	f.mcpLister = append(f.mcpLister, mcp)
@@ -620,6 +658,8 @@ func TestEmptyCurrentMachineConfig(t *testing.T) {
 	f.run(getKey(mcp, t))
 }
 func TestPaused(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -657,6 +697,8 @@ func TestShouldUpdateStatusOnlyUpdated(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), intStrPtr(intstr.FromInt(1)), "v1")
 	nodes := []*corev1.Node{newNodeWithLabel("node-0", "v1", "v1", map[string]string{"node-role": "master"}), newNodeWithLabel("node-1", "v1", "v1", map[string]string{"node-role": "master"})}
@@ -673,6 +715,8 @@ func TestShouldUpdateStatusOnlyUpdated(t *testing.T) {
 	f.run(getKey(mcp, t))
 }
 func TestShouldUpdateStatusOnlyNoProgress(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -709,6 +753,8 @@ func TestShouldDoNothing(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	mcp := newMachineConfigPool("test-cluster-master", metav1.AddLabelToSelector(&metav1.LabelSelector{}, "node-role", "master"), intStrPtr(intstr.FromInt(1)), "v1")
 	nodes := []*corev1.Node{newNodeWithLabel("node-0", "v1", "v1", map[string]string{"node-role": "master"}), newNodeWithLabel("node-1", "v1", "v1", map[string]string{"node-role": "master"})}
@@ -733,6 +779,8 @@ func getKey(config *mcfgv1.MachineConfigPool, t *testing.T) string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(config)
 	if err != nil {
 		t.Errorf("Unexpected error getting key for config %v: %v", config.Name, err)
@@ -741,6 +789,8 @@ func getKey(config *mcfgv1.MachineConfigPool, t *testing.T) string {
 	return key
 }
 func filterLastTransitionTime(obj runtime.Object) runtime.Object {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

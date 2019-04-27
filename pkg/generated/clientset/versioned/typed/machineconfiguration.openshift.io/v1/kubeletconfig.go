@@ -36,9 +36,13 @@ func newKubeletConfigs(c *MachineconfigurationV1Client) *kubeletConfigs {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &kubeletConfigs{client: c.RESTClient()}
 }
 func (c *kubeletConfigs) Get(name string, options metav1.GetOptions) (result *v1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -54,6 +58,8 @@ func (c *kubeletConfigs) Get(name string, options metav1.GetOptions) (result *v1
 	return
 }
 func (c *kubeletConfigs) List(opts metav1.ListOptions) (result *v1.KubeletConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -83,6 +89,8 @@ func (c *kubeletConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -91,6 +99,8 @@ func (c *kubeletConfigs) Watch(opts metav1.ListOptions) (watch.Interface, error)
 	return c.client.Get().Resource("kubeletconfigs").VersionedParams(&opts, scheme.ParameterCodec).Timeout(timeout).Watch()
 }
 func (c *kubeletConfigs) Create(kubeletConfig *v1.KubeletConfig) (result *v1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -116,11 +126,15 @@ func (c *kubeletConfigs) Update(kubeletConfig *v1.KubeletConfig) (result *v1.Kub
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.KubeletConfig{}
 	err = c.client.Put().Resource("kubeletconfigs").Name(kubeletConfig.Name).Body(kubeletConfig).Do().Into(result)
 	return
 }
 func (c *kubeletConfigs) UpdateStatus(kubeletConfig *v1.KubeletConfig) (result *v1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -146,9 +160,13 @@ func (c *kubeletConfigs) Delete(name string, options *metav1.DeleteOptions) erro
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.client.Delete().Resource("kubeletconfigs").Name(name).Body(options).Do().Error()
 }
 func (c *kubeletConfigs) DeleteCollection(options *metav1.DeleteOptions, listOptions metav1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -166,6 +184,8 @@ func (c *kubeletConfigs) DeleteCollection(options *metav1.DeleteOptions, listOpt
 	return c.client.Delete().Resource("kubeletconfigs").VersionedParams(&listOptions, scheme.ParameterCodec).Timeout(timeout).Body(options).Do().Error()
 }
 func (c *kubeletConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

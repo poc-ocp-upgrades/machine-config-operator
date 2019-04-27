@@ -25,6 +25,8 @@ func TestApplyMachineConfig(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
 		existing		[]runtime.Object
 		input			*mcfgv1.MachineConfig

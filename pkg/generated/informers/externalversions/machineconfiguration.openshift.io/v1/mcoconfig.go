@@ -33,9 +33,13 @@ func NewMCOConfigInformer(client versioned.Interface, namespace string, resyncPe
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredMCOConfigInformer(client, namespace, resyncPeriod, indexers, nil)
 }
 func NewFilteredMCOConfigInformer(client versioned.Interface, namespace string, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -69,6 +73,8 @@ func (f *mCOConfigInformer) defaultInformer(client versioned.Interface, resyncPe
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredMCOConfigInformer(client, f.namespace, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 func (f *mCOConfigInformer) Informer() cache.SharedIndexInformer {
@@ -82,9 +88,13 @@ func (f *mCOConfigInformer) Informer() cache.SharedIndexInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.factory.InformerFor(&machineconfigurationopenshiftiov1.MCOConfig{}, f.defaultInformer)
 }
 func (f *mCOConfigInformer) Lister() v1.MCOConfigLister {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

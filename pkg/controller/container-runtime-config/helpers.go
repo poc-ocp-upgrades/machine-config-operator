@@ -63,6 +63,8 @@ func createNewCtrRuntimeConfigIgnition(storageTOMLConfig, crioTOMLConfig []byte)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tempIgnConfig := ctrlcommon.NewIgnConfig()
 	mode := 0644
 	if storageTOMLConfig != nil {
@@ -80,6 +82,8 @@ func createNewCtrRuntimeConfigIgnition(storageTOMLConfig, crioTOMLConfig []byte)
 	return tempIgnConfig
 }
 func createNewRegistriesConfigIgnition(registriesTOMLConfig []byte) ignv2_2types.Config {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -111,6 +115,8 @@ func findStorageConfig(mc *mcfgv1.MachineConfig) (*ignv2_2types.File, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, c := range mc.Spec.Config.Storage.Files {
 		if c.Path == storageConfigPath {
 			return &c, nil
@@ -119,6 +125,8 @@ func findStorageConfig(mc *mcfgv1.MachineConfig) (*ignv2_2types.File, error) {
 	return nil, fmt.Errorf("could not find Storage Config")
 }
 func findCRIOConfig(mc *mcfgv1.MachineConfig) (*ignv2_2types.File, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -147,6 +155,8 @@ func findRegistriesConfig(mc *mcfgv1.MachineConfig) (*ignv2_2types.File, error) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, c := range mc.Spec.Config.Storage.Files {
 		if c.Path == registriesConfigPath {
 			return &c, nil
@@ -155,6 +165,8 @@ func findRegistriesConfig(mc *mcfgv1.MachineConfig) (*ignv2_2types.File, error) 
 	return nil, fmt.Errorf("could not find Registries Config")
 }
 func getManagedKeyCtrCfg(pool *mcfgv1.MachineConfigPool, config *mcfgv1.ContainerRuntimeConfig) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -178,9 +190,13 @@ func getManagedKeyReg(pool *mcfgv1.MachineConfigPool, config *apicfgv1.Image) st
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return fmt.Sprintf("99-%s-%s-registries", pool.Name, pool.ObjectMeta.UID)
 }
 func wrapErrorWithCondition(err error, args ...interface{}) mcfgv1.ContainerRuntimeConfigCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -216,6 +232,8 @@ func updateStorageConfig(data []byte, internal *mcfgv1.ContainerRuntimeConfigura
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tomlConf := new(tomlConfigStorage)
 	if _, err := toml.DecodeReader(bytes.NewBuffer(data), tomlConf); err != nil {
 		return nil, fmt.Errorf("error decoding crio config: %v", err)
@@ -231,6 +249,8 @@ func updateStorageConfig(data []byte, internal *mcfgv1.ContainerRuntimeConfigura
 	return newData.Bytes(), nil
 }
 func updateCRIOConfig(data []byte, internal *mcfgv1.ContainerRuntimeConfiguration) ([]byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -273,6 +293,8 @@ func updateRegistriesConfig(data []byte, internalInsecure, internalBlocked []str
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tomlConf := new(tomlConfigRegistries)
 	if _, err := toml.Decode(string(data), tomlConf); err != nil {
 		return nil, fmt.Errorf("error unmarshalling registries config: %v", err)
@@ -291,6 +313,8 @@ func updateRegistriesConfig(data []byte, internalInsecure, internalBlocked []str
 	return newData.Bytes(), nil
 }
 func validateUserContainerRuntimeConfig(cfg *mcfgv1.ContainerRuntimeConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -324,6 +348,8 @@ func validateUserContainerRuntimeConfig(cfg *mcfgv1.ContainerRuntimeConfig) erro
 	return nil
 }
 func getValidRegistries(clusterVersionStatus *apicfgv1.ClusterVersionStatus, imgSpec *apicfgv1.ImageSpec) ([]string, []string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

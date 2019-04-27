@@ -26,6 +26,8 @@ func (optr *Operator) syncVersion() error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	co, err := optr.fetchClusterOperator()
 	if err != nil {
 		return err
@@ -42,6 +44,8 @@ func (optr *Operator) syncVersion() error {
 	return err
 }
 func (optr *Operator) syncAvailableStatus() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -71,6 +75,8 @@ func (optr *Operator) syncAvailableStatus() error {
 	return optr.updateStatus(co, coStatus)
 }
 func (optr *Operator) syncProgressingStatus() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -114,6 +120,8 @@ func (optr *Operator) updateStatus(co *configv1.ClusterOperator, status configv1
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existingCondition := cov1helpers.FindStatusCondition(co.Status.Conditions, status.Type)
 	if existingCondition.Status != status.Status {
 		status.LastTransitionTime = metav1.Now()
@@ -124,6 +132,8 @@ func (optr *Operator) updateStatus(co *configv1.ClusterOperator, status configv1
 	return err
 }
 func (optr *Operator) syncDegradedStatus(ierr error) (err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -173,6 +183,8 @@ func (optr *Operator) fetchClusterOperator() (*configv1.ClusterOperator, error) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	co, err := optr.configClient.ConfigV1().ClusterOperators().Get(optr.name, metav1.GetOptions{})
 	if meta.IsNoMatchError(err) {
 		return nil, nil
@@ -186,6 +198,8 @@ func (optr *Operator) fetchClusterOperator() (*configv1.ClusterOperator, error) 
 	return co, nil
 }
 func (optr *Operator) initializeClusterOperator() (*configv1.ClusterOperator, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -218,6 +232,8 @@ func (optr *Operator) setMachineConfigPoolStatuses(status *configv1.ClusterOpera
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	statuses, err := optr.allMachineConfigPoolStatus()
 	if err != nil {
 		glog.Error(err)
@@ -231,6 +247,8 @@ func (optr *Operator) setMachineConfigPoolStatuses(status *configv1.ClusterOpera
 	status.Extension.Raw = raw
 }
 func (optr *Operator) allMachineConfigPoolStatus() (map[string]string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -268,6 +286,8 @@ func isMachineConfigPoolConfigurationValid(pool *mcfgv1.MachineConfigPool, versi
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(pool.Status.Configuration.Name) == 0 {
 		return fmt.Errorf("configuration for pool %s is empty", pool.GetName())
 	}
@@ -294,6 +314,8 @@ func isMachineConfigPoolConfigurationValid(pool *mcfgv1.MachineConfigPool, versi
 	return nil
 }
 func machineConfigPoolStatus(pool *mcfgv1.MachineConfigPool) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

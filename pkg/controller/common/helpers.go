@@ -15,5 +15,7 @@ func NewIgnConfig() ignv2_2types.Config {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return ignv2_2types.Config{Ignition: ignv2_2types.Ignition{Version: "2.2.0"}}
 }

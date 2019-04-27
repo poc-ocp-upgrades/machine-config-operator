@@ -22,6 +22,8 @@ func (ctrl *Controller) syncStatusOnly(pool *mcfgv1.MachineConfigPool) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	selector, err := metav1.LabelSelectorAsSelector(pool.Spec.NodeSelector)
 	if err != nil {
 		return err
@@ -40,6 +42,8 @@ func (ctrl *Controller) syncStatusOnly(pool *mcfgv1.MachineConfigPool) error {
 	return err
 }
 func calculateStatus(pool *mcfgv1.MachineConfigPool, nodes []*corev1.Node) mcfgv1.MachineConfigPoolStatus {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -113,6 +117,8 @@ func getUpdatedMachines(currentConfig string, nodes []*corev1.Node) []*corev1.No
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var updated []*corev1.Node
 	for _, node := range nodes {
 		if node.Annotations == nil {
@@ -147,6 +153,8 @@ func getReadyMachines(currentConfig string, nodes []*corev1.Node) []*corev1.Node
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	updated := getUpdatedMachines(currentConfig, nodes)
 	var ready []*corev1.Node
 	for _, node := range updated {
@@ -157,6 +165,8 @@ func getReadyMachines(currentConfig string, nodes []*corev1.Node) []*corev1.Node
 	return ready
 }
 func isNodeReady(node *corev1.Node) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -195,6 +205,8 @@ func getUnavailableMachines(currentConfig string, nodes []*corev1.Node) []*corev
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var unavail []*corev1.Node
 	for _, node := range nodes {
 		if node.Annotations == nil {
@@ -217,6 +229,8 @@ func getUnavailableMachines(currentConfig string, nodes []*corev1.Node) []*corev
 	return unavail
 }
 func getDegradedMachines(currentConfig string, nodes []*corev1.Node) []*corev1.Node {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

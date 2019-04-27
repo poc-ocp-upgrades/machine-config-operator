@@ -60,6 +60,8 @@ func New(templatesDir string, ccInformer mcfginformersv1.ControllerConfigInforme
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&corev1clientset.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
@@ -77,6 +79,8 @@ func New(templatesDir string, ccInformer mcfginformersv1.ControllerConfigInforme
 	return ctrl
 }
 func (ctrl *Controller) filterSecret(secret *v1.Secret) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -108,6 +112,8 @@ func (ctrl *Controller) addSecret(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	secret := obj.(*v1.Secret)
 	if secret.DeletionTimestamp != nil {
 		ctrl.deleteSecret(secret)
@@ -127,11 +133,15 @@ func (ctrl *Controller) updateSecret(old, new interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	secret := new.(*v1.Secret)
 	glog.V(4).Infof("Update Secret %v", secret)
 	ctrl.filterSecret(secret)
 }
 func (ctrl *Controller) deleteSecret(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -176,6 +186,8 @@ func (ctrl *Controller) Run(workers int, stopCh <-chan struct{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	defer utilruntime.HandleCrash()
 	defer ctrl.queue.ShutDown()
 	if !cache.WaitForCacheSync(stopCh, ctrl.ccListerSynced, ctrl.mcListerSynced, ctrl.secretsInformerSynced) {
@@ -189,6 +201,8 @@ func (ctrl *Controller) Run(workers int, stopCh <-chan struct{}) {
 	<-stopCh
 }
 func (ctrl *Controller) addControllerConfig(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -214,12 +228,16 @@ func (ctrl *Controller) updateControllerConfig(old, cur interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	oldCfg := old.(*mcfgv1.ControllerConfig)
 	curCfg := cur.(*mcfgv1.ControllerConfig)
 	glog.V(4).Infof("Updating ControllerConfig %s", oldCfg.Name)
 	ctrl.enqueueControllerConfig(curCfg)
 }
 func (ctrl *Controller) deleteControllerConfig(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -256,6 +274,8 @@ func (ctrl *Controller) addMachineConfig(obj interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	mc := obj.(*mcfgv1.MachineConfig)
 	if mc.DeletionTimestamp != nil {
 		ctrl.deleteMachineConfig(mc)
@@ -282,6 +302,8 @@ func (ctrl *Controller) updateMachineConfig(old, cur interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	curMC := cur.(*mcfgv1.MachineConfig)
 	if controllerRef := metav1.GetControllerOf(curMC); controllerRef != nil {
 		cfg := ctrl.resolveControllerRef(controllerRef)
@@ -294,6 +316,8 @@ func (ctrl *Controller) updateMachineConfig(old, cur interface{}) {
 	}
 }
 func (ctrl *Controller) deleteMachineConfig(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -339,6 +363,8 @@ func (ctrl *Controller) resolveControllerRef(controllerRef *metav1.OwnerReferenc
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if controllerRef.Kind != controllerKind.Kind {
 		return nil
 	}
@@ -352,6 +378,8 @@ func (ctrl *Controller) resolveControllerRef(controllerRef *metav1.OwnerReferenc
 	return cfg
 }
 func (ctrl *Controller) enqueue(config *mcfgv1.ControllerConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -380,6 +408,8 @@ func (ctrl *Controller) enqueueRateLimited(controllerconfig *mcfgv1.ControllerCo
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(controllerconfig)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("Couldn't get key for object %#v: %v", controllerconfig, err))
@@ -388,6 +418,8 @@ func (ctrl *Controller) enqueueRateLimited(controllerconfig *mcfgv1.ControllerCo
 	ctrl.queue.AddRateLimited(key)
 }
 func (ctrl *Controller) enqueueAfter(controllerconfig *mcfgv1.ControllerConfig, after time.Duration) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -416,10 +448,14 @@ func (ctrl *Controller) worker() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ctrl.processNextWorkItem() {
 	}
 }
 func (ctrl *Controller) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -450,6 +486,8 @@ func (ctrl *Controller) handleErr(err error, key interface{}) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		ctrl.queue.Forget(key)
 		return
@@ -465,6 +503,8 @@ func (ctrl *Controller) handleErr(err error, key interface{}) {
 	ctrl.queue.AddAfter(key, 1*time.Minute)
 }
 func (ctrl *Controller) syncControllerConfig(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -535,6 +575,8 @@ func getMachineConfigsForControllerConfig(templatesDir string, config *mcfgv1.Co
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	buf := &bytes.Buffer{}
 	if err := json.Compact(buf, pullSecretRaw); err != nil {
 		return nil, fmt.Errorf("couldn't compact pullsecret %q: %v", string(pullSecretRaw), err)
@@ -554,6 +596,8 @@ func getMachineConfigsForControllerConfig(templatesDir string, config *mcfgv1.Co
 	return mcs, nil
 }
 func RunBootstrap(templatesDir string, config *mcfgv1.ControllerConfig, pullSecretRaw []byte) ([]*mcfgv1.MachineConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

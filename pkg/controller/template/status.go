@@ -21,6 +21,8 @@ func (ctrl *Controller) syncRunningStatus(ctrlconfig *mcfgv1.ControllerConfig) e
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	updateFunc := func(cfg *mcfgv1.ControllerConfig) error {
 		reason := fmt.Sprintf("syncing towards (%d) generation using controller version %s", cfg.GetGeneration(), version.Version)
 		rcond := mcfgv1.NewControllerConfigStatusCondition(mcfgv1.TemplateContollerRunning, corev1.ConditionTrue, reason, "")
@@ -35,6 +37,8 @@ func (ctrl *Controller) syncRunningStatus(ctrlconfig *mcfgv1.ControllerConfig) e
 	return updateControllerConfigStatus(ctrlconfig.GetName(), ctrl.ccLister.Get, ctrl.client.MachineconfigurationV1().ControllerConfigs(), updateFunc)
 }
 func (ctrl *Controller) syncFailingStatus(ctrlconfig *mcfgv1.ControllerConfig, oerr error) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -76,6 +80,8 @@ func (ctrl *Controller) syncCompletedStatus(ctrlconfig *mcfgv1.ControllerConfig)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	updateFunc := func(cfg *mcfgv1.ControllerConfig) error {
 		reason := fmt.Sprintf("sync completed towards (%d) generation using controller version %s", cfg.GetGeneration(), version.Version)
 		acond := mcfgv1.NewControllerConfigStatusCondition(mcfgv1.TemplateContollerCompleted, corev1.ConditionTrue, reason, "")
@@ -93,6 +99,8 @@ func (ctrl *Controller) syncCompletedStatus(ctrlconfig *mcfgv1.ControllerConfig)
 type updateControllerConfigStatusFunc func(*mcfgv1.ControllerConfig) error
 
 func updateControllerConfigStatus(name string, controllerConfigGetter func(name string) (*mcfgv1.ControllerConfig, error), client mcfgclientv1.ControllerConfigInterface, updateFuncs ...updateControllerConfigStatusFunc) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

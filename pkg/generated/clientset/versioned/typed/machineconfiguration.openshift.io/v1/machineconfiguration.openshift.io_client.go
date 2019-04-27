@@ -29,9 +29,13 @@ func (c *MachineconfigurationV1Client) ContainerRuntimeConfigs() ContainerRuntim
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return newContainerRuntimeConfigs(c)
 }
 func (c *MachineconfigurationV1Client) ControllerConfigs() ControllerConfigInterface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -55,9 +59,13 @@ func (c *MachineconfigurationV1Client) KubeletConfigs() KubeletConfigInterface {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return newKubeletConfigs(c)
 }
 func (c *MachineconfigurationV1Client) MCOConfigs(namespace string) MCOConfigInterface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -81,6 +89,8 @@ func (c *MachineconfigurationV1Client) MachineConfigs() MachineConfigInterface {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return newMachineConfigs(c)
 }
 func (c *MachineconfigurationV1Client) MachineConfigPools() MachineConfigPoolInterface {
@@ -94,9 +104,13 @@ func (c *MachineconfigurationV1Client) MachineConfigPools() MachineConfigPoolInt
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return newMachineConfigPools(c)
 }
 func NewForConfig(c *rest.Config) (*MachineconfigurationV1Client, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -128,6 +142,8 @@ func NewForConfigOrDie(c *rest.Config) *MachineconfigurationV1Client {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -135,6 +151,8 @@ func NewForConfigOrDie(c *rest.Config) *MachineconfigurationV1Client {
 	return client
 }
 func New(c rest.Interface) *MachineconfigurationV1Client {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -158,6 +176,8 @@ func setConfigDefaults(config *rest.Config) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	gv := v1.SchemeGroupVersion
 	config.GroupVersion = &gv
 	config.APIPath = "/apis"
@@ -168,6 +188,8 @@ func setConfigDefaults(config *rest.Config) error {
 	return nil
 }
 func (c *MachineconfigurationV1Client) RESTClient() rest.Interface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -32,9 +32,13 @@ func NewKubeletConfigInformer(client versioned.Interface, resyncPeriod time.Dura
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredKubeletConfigInformer(client, resyncPeriod, indexers, nil)
 }
 func NewFilteredKubeletConfigInformer(client versioned.Interface, resyncPeriod time.Duration, indexers cache.Indexers, tweakListOptions internalinterfaces.TweakListOptionsFunc) cache.SharedIndexInformer {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -68,6 +72,8 @@ func (f *kubeletConfigInformer) defaultInformer(client versioned.Interface, resy
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return NewFilteredKubeletConfigInformer(client, resyncPeriod, cache.Indexers{cache.NamespaceIndex: cache.MetaNamespaceIndexFunc}, f.tweakListOptions)
 }
 func (f *kubeletConfigInformer) Informer() cache.SharedIndexInformer {
@@ -81,9 +87,13 @@ func (f *kubeletConfigInformer) Informer() cache.SharedIndexInformer {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.factory.InformerFor(&machineconfigurationopenshiftiov1.KubeletConfig{}, f.defaultInformer)
 }
 func (f *kubeletConfigInformer) Lister() v1.KubeletConfigLister {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

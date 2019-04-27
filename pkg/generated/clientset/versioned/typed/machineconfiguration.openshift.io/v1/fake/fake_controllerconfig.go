@@ -26,6 +26,8 @@ func (c *FakeControllerConfigs) Get(name string, options v1.GetOptions) (result 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootGetAction(controllerconfigsResource, name), &machineconfigurationopenshiftiov1.ControllerConfig{})
 	if obj == nil {
 		return nil, err
@@ -33,6 +35,8 @@ func (c *FakeControllerConfigs) Get(name string, options v1.GetOptions) (result 
 	return obj.(*machineconfigurationopenshiftiov1.ControllerConfig), err
 }
 func (c *FakeControllerConfigs) List(opts v1.ListOptions) (result *machineconfigurationopenshiftiov1.ControllerConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -70,9 +74,13 @@ func (c *FakeControllerConfigs) Watch(opts v1.ListOptions) (watch.Interface, err
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewRootWatchAction(controllerconfigsResource, opts))
 }
 func (c *FakeControllerConfigs) Create(controllerConfig *machineconfigurationopenshiftiov1.ControllerConfig) (result *machineconfigurationopenshiftiov1.ControllerConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -100,6 +108,8 @@ func (c *FakeControllerConfigs) Update(controllerConfig *machineconfigurationope
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateAction(controllerconfigsResource, controllerConfig), &machineconfigurationopenshiftiov1.ControllerConfig{})
 	if obj == nil {
 		return nil, err
@@ -107,6 +117,8 @@ func (c *FakeControllerConfigs) Update(controllerConfig *machineconfigurationope
 	return obj.(*machineconfigurationopenshiftiov1.ControllerConfig), err
 }
 func (c *FakeControllerConfigs) UpdateStatus(controllerConfig *machineconfigurationopenshiftiov1.ControllerConfig) (*machineconfigurationopenshiftiov1.ControllerConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -134,10 +146,14 @@ func (c *FakeControllerConfigs) Delete(name string, options *v1.DeleteOptions) e
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := c.Fake.Invokes(testing.NewRootDeleteAction(controllerconfigsResource, name), &machineconfigurationopenshiftiov1.ControllerConfig{})
 	return err
 }
 func (c *FakeControllerConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -153,6 +169,8 @@ func (c *FakeControllerConfigs) DeleteCollection(options *v1.DeleteOptions, list
 	return err
 }
 func (c *FakeControllerConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *machineconfigurationopenshiftiov1.ControllerConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

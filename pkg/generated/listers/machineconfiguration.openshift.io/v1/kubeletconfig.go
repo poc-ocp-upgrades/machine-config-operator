@@ -25,9 +25,13 @@ func NewKubeletConfigLister(indexer cache.Indexer) KubeletConfigLister {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &kubeletConfigLister{indexer: indexer}
 }
 func (s *kubeletConfigLister) List(selector labels.Selector) (ret []*v1.KubeletConfig, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -44,6 +48,8 @@ func (s *kubeletConfigLister) List(selector labels.Selector) (ret []*v1.KubeletC
 	return ret, err
 }
 func (s *kubeletConfigLister) Get(name string) (*v1.KubeletConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

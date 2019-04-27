@@ -63,6 +63,8 @@ func newFixture(t *testing.T) *fixture {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
@@ -70,6 +72,8 @@ func newFixture(t *testing.T) *fixture {
 	return f
 }
 func (f *fixture) validateActions() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -105,12 +109,16 @@ func newMachineConfig(name string, labels map[string]string, osurl string, files
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if labels == nil {
 		labels = map[string]string{}
 	}
 	return &mcfgv1.MachineConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Labels: labels, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.MachineConfigSpec{OSImageURL: osurl, Config: ignv2_2types.Config{Storage: ignv2_2types.Storage{Files: files}}}}
 }
 func newFeatures(name string, enabled, disabled []string, labels map[string]string) *osev1.FeatureGate {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -137,10 +145,14 @@ func newControllerConfig(name, platform string) *mcfgv1.ControllerConfig {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cc := &mcfgv1.ControllerConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, UID: types.UID(utilrand.String(5))}, Spec: mcfgv1.ControllerConfigSpec{EtcdDiscoveryDomain: fmt.Sprintf("%s.tt.testing", name), Platform: platform}}
 	return cc
 }
 func newMachineConfigPool(name string, labels map[string]string, selector *metav1.LabelSelector, currentMachineConfig string) *mcfgv1.MachineConfigPool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -164,9 +176,13 @@ func newKubeletConfig(name string, kubeconf *kubeletconfigv1beta1.KubeletConfigu
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &mcfgv1.KubeletConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, UID: types.UID(utilrand.String(5)), Generation: 1}, Spec: mcfgv1.KubeletConfigSpec{KubeletConfig: kubeconf, MachineConfigPoolSelector: selector}, Status: mcfgv1.KubeletConfigStatus{}}
 }
 func (f *fixture) newController() *Controller {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -220,9 +236,13 @@ func (f *fixture) run(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, false)
 }
 func (f *fixture) runFeature(featname string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -246,9 +266,13 @@ func (f *fixture) runExpectError(mcpname string) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(mcpname, true)
 }
 func (f *fixture) runController(mcpname string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -279,6 +303,8 @@ func (f *fixture) runFeatureController(featname string, expectError bool) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	c := f.newController()
 	err := c.syncFeatureHandler(featname)
 	if !expectError && err != nil {
@@ -289,6 +315,8 @@ func (f *fixture) runFeatureController(featname string, expectError bool) {
 	f.validateActions()
 }
 func filterInformerActions(actions []core.Action) []core.Action {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -319,6 +347,8 @@ func filterOSEActions(actions []core.Action) []core.Action {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
 		ret = append(ret, action)
@@ -326,6 +356,8 @@ func filterOSEActions(actions []core.Action) []core.Action {
 	return ret
 }
 func checkAction(expected, actual core.Action, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -377,9 +409,13 @@ func (f *fixture) expectGetKubeletConfigAction(config *mcfgv1.KubeletConfig) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootGetAction(schema.GroupVersionResource{Resource: "kubeletconfigs"}, config.Name))
 }
 func (f *fixture) expectGetMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -403,9 +439,13 @@ func (f *fixture) expectCreateMachineConfigAction(config *mcfgv1.MachineConfig) 
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootCreateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
 func (f *fixture) expectUpdateMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -429,6 +469,8 @@ func (f *fixture) expectPatchKubeletConfig(config *mcfgv1.KubeletConfig, patch [
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootPatchAction(schema.GroupVersionResource{Version: "v1", Group: "machineconfiguration.openshift.io", Resource: "kubeletconfigs"}, config.Name, types.MergePatchType, patch))
 }
 func (f *fixture) expectUpdateKubeletConfig(config *mcfgv1.KubeletConfig) {
@@ -442,9 +484,13 @@ func (f *fixture) expectUpdateKubeletConfig(config *mcfgv1.KubeletConfig) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootUpdateSubresourceAction(schema.GroupVersionResource{Version: "v1", Group: "machineconfiguration.openshift.io", Resource: "kubeletconfigs"}, "status", config))
 }
 func TestKubeletConfigCreate(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -477,6 +523,8 @@ func TestKubeletConfigCreate(t *testing.T) {
 	}
 }
 func TestKubeletConfigUpdates(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -547,6 +595,8 @@ func TestKubeletConfigBlacklistedOptions(t *testing.T) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	failureTests := []struct {
 		name	string
 		config	*kubeletconfigv1beta1.KubeletConfiguration
@@ -571,6 +621,8 @@ func TestKubeletConfigBlacklistedOptions(t *testing.T) {
 	}
 }
 func TestKubeletFeatureExists(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -615,6 +667,8 @@ func getKey(config *mcfgv1.KubeletConfig, t *testing.T) string {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(config)
 	if err != nil {
 		t.Errorf("Unexpected error getting key for config %v: %v", config.Name, err)
@@ -623,6 +677,8 @@ func getKey(config *mcfgv1.KubeletConfig, t *testing.T) string {
 	return key
 }
 func getKeyFromFeatureGate(gate *osev1.FeatureGate, t *testing.T) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

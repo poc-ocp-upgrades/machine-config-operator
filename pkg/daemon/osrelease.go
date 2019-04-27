@@ -23,6 +23,8 @@ func GetHostRunningOS(rootFs string) (string, error) {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	libPath := path.Join(rootFs, "usr", "lib", "os-release")
 	etcPath := path.Join(rootFs, "etc", "os-release")
 	or, err := osrelease.NewWithOverrides(etcPath, libPath)

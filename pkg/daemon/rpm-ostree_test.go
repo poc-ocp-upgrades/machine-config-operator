@@ -21,6 +21,8 @@ func (r RpmOstreeClientMock) GetBootedOSImageURL(string) (string, string, error)
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	returnValues := r.GetBootedOSImageURLReturns[0]
 	if len(r.GetBootedOSImageURLReturns) > 1 {
 		r.GetBootedOSImageURLReturns = r.GetBootedOSImageURLReturns[1:]
@@ -38,6 +40,8 @@ func (r RpmOstreeClientMock) RunPivot(string) error {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err := r.RunPivotReturns[0]
 	if len(r.RunPivotReturns) > 1 {
 		r.RunPivotReturns = r.RunPivotReturns[1:]
@@ -45,6 +49,8 @@ func (r RpmOstreeClientMock) RunPivot(string) error {
 	return err
 }
 func (r RpmOstreeClientMock) GetStatus() (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

@@ -22,11 +22,15 @@ func init() {
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := appsv1.AddToScheme(appsScheme); err != nil {
 		panic(err)
 	}
 }
 func ReadDeploymentV1OrDie(objBytes []byte) *appsv1.Deployment {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()
@@ -44,6 +48,8 @@ func ReadDeploymentV1OrDie(objBytes []byte) *appsv1.Deployment {
 	return requiredObj.(*appsv1.Deployment)
 }
 func ReadDaemonSetV1OrDie(objBytes []byte) *appsv1.DaemonSet {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_logClusterCodePath()

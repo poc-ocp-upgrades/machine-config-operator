@@ -30,6 +30,8 @@ func CreateResourceLock(cb *clients.Builder, componentNamespace, componentName s
 	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	recorder := record.NewBroadcaster().NewRecorder(runtime.NewScheme(), v1.EventSource{Component: componentName})
 	id, err := os.Hostname()
 	if err != nil {
