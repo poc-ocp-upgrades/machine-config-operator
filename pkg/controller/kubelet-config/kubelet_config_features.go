@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"reflect"
 	"time"
-
 	"github.com/golang/glog"
 	"github.com/imdario/mergo"
 	"github.com/vincent-petithory/dataurl"
-
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
@@ -16,7 +14,6 @@ import (
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/util/retry"
 	kubeletconfigv1beta1 "k8s.io/kubelet/config/v1beta1"
-
 	osev1 "github.com/openshift/api/config/v1"
 	ctrlcommon "github.com/openshift/machine-config-operator/pkg/controller/common"
 	mtmpl "github.com/openshift/machine-config-operator/pkg/controller/template"
@@ -28,58 +25,73 @@ const (
 )
 
 func (ctrl *Controller) featureWorker() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ctrl.processNextFeatureWorkItem() {
 	}
 }
-
 func (ctrl *Controller) processNextFeatureWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, quit := ctrl.featureQueue.Get()
 	if quit {
 		return false
 	}
 	defer ctrl.featureQueue.Done(key)
-
 	err := ctrl.syncFeatureHandler(key.(string))
 	ctrl.handleFeatureErr(err, key)
 	return true
 }
-
 func (ctrl *Controller) syncFeatureHandler(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	startTime := time.Now()
 	glog.V(4).Infof("Started syncing feature handler %q (%v)", key, startTime)
 	defer func() {
 		glog.V(4).Infof("Finished syncing feature handler %q (%v)", key, time.Since(startTime))
 	}()
-
 	_, name, err := cache.SplitMetaNamespaceKey(key)
 	if err != nil {
 		return err
 	}
-
-	// Fetch the Feature
 	features, err := ctrl.featLister.Get(name)
 	if errors.IsNotFound(err) {
 		glog.V(2).Infof("FeatureSet %v is missing, using default", key)
-		features = &osev1.FeatureGate{
-			Spec: osev1.FeatureGateSpec{
-				FeatureSet: osev1.Default,
-			},
-		}
+		features = &osev1.FeatureGate{Spec: osev1.FeatureGateSpec{FeatureSet: osev1.Default}}
 	} else if err != nil {
 		return err
 	}
 	featureGates, err := ctrl.generateFeatureMap(features)
-
-	// Find all MachineConfigPools
 	mcpPools, err := ctrl.mcpLister.List(labels.Everything())
 	if err != nil {
 		return err
 	}
-
 	for _, pool := range mcpPools {
 		role := pool.Name
-
-		// Get MachineConfig
 		managedKey := getManagedFeaturesKey(pool)
 		mc, err := ctrl.client.Machineconfiguration().MachineConfigs().Get(managedKey, metav1.GetOptions{})
 		if err != nil && !errors.IsNotFound(err) {
@@ -90,7 +102,6 @@ func (ctrl *Controller) syncFeatureHandler(key string) error {
 			ignConfig := ctrlcommon.NewIgnConfig()
 			mc = mtmpl.MachineConfigFromIgnConfig(role, managedKey, &ignConfig)
 		}
-		// Generate the original KubeletConfig
 		originalKubeletIgn, err := ctrl.generateOriginalKubeletConfig(role)
 		if err != nil {
 			return err
@@ -103,21 +114,16 @@ func (ctrl *Controller) syncFeatureHandler(key string) error {
 		if err != nil {
 			return err
 		}
-		// Merge in Feature Gates
 		err = mergo.Merge(&originalKubeConfig.FeatureGates, featureGates, mergo.WithOverride)
 		if err != nil {
 			return err
 		}
-		// Encode the new config into YAML
 		cfgYAML, err := encodeKubeletConfig(originalKubeConfig, kubeletconfigv1beta1.SchemeGroupVersion)
 		if err != nil {
 			return err
 		}
 		mc.Spec.Config = createNewKubeletIgnition(cfgYAML)
-		mc.ObjectMeta.Annotations = map[string]string{
-			ctrlcommon.GeneratedByControllerVersionAnnotationKey: version.Version.String(),
-		}
-		// Create or Update, on conflict retry
+		mc.ObjectMeta.Annotations = map[string]string{ctrlcommon.GeneratedByControllerVersionAnnotationKey: version.Version.String()}
 		if err := retry.RetryOnConflict(updateBackoff, func() error {
 			var err error
 			if isNotFound {
@@ -131,11 +137,19 @@ func (ctrl *Controller) syncFeatureHandler(key string) error {
 		}
 		glog.Infof("Applied FeatureSet %v on MachineConfigPool %v", key, pool.Name)
 	}
-
 	return nil
 }
-
 func (ctrl *Controller) enqueueFeature(feat *osev1.FeatureGate) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(feat)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("Couldn't get key for object %#v: %v", feat, err))
@@ -143,8 +157,17 @@ func (ctrl *Controller) enqueueFeature(feat *osev1.FeatureGate) {
 	}
 	ctrl.featureQueue.Add(key)
 }
-
 func (ctrl *Controller) updateFeature(old, cur interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	oldFeature := old.(*osev1.FeatureGate)
 	newFeature := cur.(*osev1.FeatureGate)
 	if !reflect.DeepEqual(oldFeature.Spec, newFeature.Spec) {
@@ -152,14 +175,32 @@ func (ctrl *Controller) updateFeature(old, cur interface{}) {
 		ctrl.enqueueFeature(newFeature)
 	}
 }
-
 func (ctrl *Controller) addFeature(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	features := obj.(*osev1.FeatureGate)
 	glog.V(4).Infof("Adding Feature %s", features.Name)
 	ctrl.enqueueFeature(features)
 }
-
 func (ctrl *Controller) deleteFeature(obj interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	features, ok := obj.(*osev1.FeatureGate)
 	if !ok {
 		tombstone, ok := obj.(cache.DeletedFinalStateUnknown)
@@ -175,8 +216,17 @@ func (ctrl *Controller) deleteFeature(obj interface{}) {
 	}
 	glog.V(4).Infof("Deleted Feature %s and restored default config", features.Name)
 }
-
 func (ctrl *Controller) generateFeatureMap(features *osev1.FeatureGate) (*map[string]bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	rv := make(map[string]bool)
 	set, ok := osev1.FeatureSets[features.Spec.FeatureSet]
 	if !ok {

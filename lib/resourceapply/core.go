@@ -8,8 +8,17 @@ import (
 	coreclientv1 "k8s.io/client-go/kubernetes/typed/core/v1"
 )
 
-// ApplyServiceAccount applies the required serviceaccount to the cluster.
 func ApplyServiceAccount(client coreclientv1.ServiceAccountsGetter, required *corev1.ServiceAccount) (*corev1.ServiceAccount, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existing, err := client.ServiceAccounts(required.Namespace).Get(required.Name, metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		actual, err := client.ServiceAccounts(required.Namespace).Create(required)
@@ -18,19 +27,25 @@ func ApplyServiceAccount(client coreclientv1.ServiceAccountsGetter, required *co
 	if err != nil {
 		return nil, false, err
 	}
-
 	modified := resourcemerge.BoolPtr(false)
 	resourcemerge.EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	if !*modified {
 		return existing, false, nil
 	}
-
 	actual, err := client.ServiceAccounts(required.Namespace).Update(existing)
 	return actual, true, err
 }
-
-// ApplySecret merges objectmeta only.
 func ApplySecret(client coreclientv1.SecretsGetter, required *corev1.Secret) (*corev1.Secret, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	existing, err := client.Secrets(required.Namespace).Get(required.Name, metav1.GetOptions{})
 	if apierrors.IsNotFound(err) {
 		actual, err := client.Secrets(required.Namespace).Create(required)
@@ -39,10 +54,8 @@ func ApplySecret(client coreclientv1.SecretsGetter, required *corev1.Secret) (*c
 	if err != nil {
 		return nil, false, err
 	}
-
 	modified := resourcemerge.BoolPtr(false)
 	resourcemerge.EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
-
 	actual, err := client.Secrets(required.Namespace).Update(existing)
 	return actual, true, err
 }

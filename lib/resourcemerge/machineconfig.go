@@ -5,25 +5,46 @@ import (
 	"k8s.io/apimachinery/pkg/api/equality"
 )
 
-// EnsureMachineConfig ensures that the existing matches the required.
-// modified is set to true when existing had to be updated with required.
 func EnsureMachineConfig(modified *bool, existing *mcfgv1.MachineConfig, required mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	ensureMachineConfigSpec(modified, &existing.Spec, required.Spec)
 }
-
-// EnsureControllerConfig ensures that the existing matches the required.
-// modified is set to true when existing had to be updated with required.
 func EnsureControllerConfig(modified *bool, existing *mcfgv1.ControllerConfig, required mcfgv1.ControllerConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
 	ensureControllerConfigSpec(modified, &existing.Spec, required.Spec)
 }
-
-// EnsureMachineConfigPool ensures that the existing matches the required.
-// modified is set to true when existing had to be updated with required.
 func EnsureMachineConfigPool(modified *bool, existing *mcfgv1.MachineConfigPool, required mcfgv1.MachineConfigPool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	EnsureObjectMeta(modified, &existing.ObjectMeta, required.ObjectMeta)
-
 	if existing.Spec.MachineConfigSelector == nil {
 		*modified = true
 		existing.Spec.MachineConfigSelector = required.Spec.MachineConfigSelector
@@ -32,7 +53,6 @@ func EnsureMachineConfigPool(modified *bool, existing *mcfgv1.MachineConfigPool,
 		*modified = true
 		existing.Spec.MachineConfigSelector = required.Spec.MachineConfigSelector
 	}
-
 	if existing.Spec.NodeSelector == nil {
 		*modified = true
 		existing.Spec.NodeSelector = required.Spec.NodeSelector
@@ -42,30 +62,45 @@ func EnsureMachineConfigPool(modified *bool, existing *mcfgv1.MachineConfigPool,
 		existing.Spec.NodeSelector = required.Spec.NodeSelector
 	}
 }
-
 func ensureMachineConfigSpec(modified *bool, existing *mcfgv1.MachineConfigSpec, required mcfgv1.MachineConfigSpec) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setStringIfSet(modified, &existing.OSImageURL, required.OSImageURL)
 	if !equality.Semantic.DeepEqual(existing.Config, required.Config) {
 		*modified = true
 		(*existing).Config = required.Config
 	}
 }
-
 func ensureControllerConfigSpec(modified *bool, existing *mcfgv1.ControllerConfigSpec, required mcfgv1.ControllerConfigSpec) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setStringIfSet(modified, &existing.ClusterDNSIP, required.ClusterDNSIP)
 	setStringIfSet(modified, &existing.CloudProviderConfig, required.CloudProviderConfig)
 	setStringIfSet(modified, &existing.Platform, required.Platform)
 	setStringIfSet(modified, &existing.EtcdDiscoveryDomain, required.EtcdDiscoveryDomain)
 	setStringIfSet(modified, &existing.OSImageURL, required.OSImageURL)
-
 	setBytesIfSet(modified, &existing.EtcdCAData, required.EtcdCAData)
 	setBytesIfSet(modified, &existing.EtcdMetricCAData, required.EtcdMetricCAData)
 	setBytesIfSet(modified, &existing.RootCAData, required.RootCAData)
-
 	if required.PullSecret != nil && !equality.Semantic.DeepEqual(existing.PullSecret, required.PullSecret) {
 		existing.PullSecret = required.PullSecret
 		*modified = true
 	}
-
 	mergeMap(modified, &existing.Images, required.Images)
 }

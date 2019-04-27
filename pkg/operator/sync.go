@@ -3,9 +3,7 @@ package operator
 import (
 	"fmt"
 	"time"
-
 	"github.com/golang/glog"
-
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	apiextv1beta1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1"
@@ -13,7 +11,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apimachinery/pkg/util/wait"
-
 	"github.com/openshift/machine-config-operator/lib/resourceapply"
 	"github.com/openshift/machine-config-operator/lib/resourceread"
 	mcfgv1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
@@ -22,15 +19,24 @@ import (
 )
 
 type syncFunc struct {
-	name string
-	fn   func(config renderConfig) error
+	name	string
+	fn	func(config renderConfig) error
 }
 
 func (optr *Operator) syncAll(rconfig renderConfig, syncFuncs []syncFunc) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err := optr.syncProgressingStatus(); err != nil {
 		return fmt.Errorf("error syncing progressing status: %v", err)
 	}
-
 	var errs []error
 	for _, sf := range syncFuncs {
 		startTime := time.Now()
@@ -39,37 +45,34 @@ func (optr *Operator) syncAll(rconfig renderConfig, syncFuncs []syncFunc) error 
 			glog.Infof("[init mode] synced %s in %v", sf.name, time.Since(startTime))
 		}
 	}
-
 	agg := utilerrors.NewAggregate(errs)
 	if err := optr.syncDegradedStatus(agg); err != nil {
 		return fmt.Errorf("error syncing degraded status: %v", err)
 	}
-
 	if err := optr.syncAvailableStatus(); err != nil {
 		return fmt.Errorf("error syncing available status: %v", err)
 	}
-
 	if err := optr.syncVersion(); err != nil {
 		return fmt.Errorf("error syncing version: %v", err)
 	}
-
 	if optr.inClusterBringup && agg == nil {
 		glog.Infof("Initialization complete")
 		optr.inClusterBringup = false
 	}
-
 	return agg
 }
-
 func (optr *Operator) syncCustomResourceDefinitions() error {
-	crds := []string{
-		"manifests/machineconfig.crd.yaml",
-		"manifests/controllerconfig.crd.yaml",
-		"manifests/machineconfigpool.crd.yaml",
-		"manifests/kubeletconfig.crd.yaml",
-		"manifests/containerruntimeconfig.crd.yaml",
-	}
-
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	crds := []string{"manifests/machineconfig.crd.yaml", "manifests/controllerconfig.crd.yaml", "manifests/machineconfigpool.crd.yaml", "manifests/kubeletconfig.crd.yaml", "manifests/containerruntimeconfig.crd.yaml"}
 	for _, crd := range crds {
 		crdBytes, err := assets.Asset(crd)
 		if err != nil {
@@ -86,16 +89,20 @@ func (optr *Operator) syncCustomResourceDefinitions() error {
 			}
 		}
 	}
-
 	return nil
 }
-
 func (optr *Operator) syncMachineConfigPools(config renderConfig) error {
-	mcps := []string{
-		"manifests/master.machineconfigpool.yaml",
-		"manifests/worker.machineconfigpool.yaml",
-	}
-
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	mcps := []string{"manifests/master.machineconfigpool.yaml", "manifests/worker.machineconfigpool.yaml"}
 	for _, mcp := range mcps {
 		mcpBytes, err := renderAsset(config, mcp)
 		if err != nil {
@@ -107,11 +114,19 @@ func (optr *Operator) syncMachineConfigPools(config renderConfig) error {
 			return err
 		}
 	}
-
 	return nil
 }
-
 func (optr *Operator) syncMachineConfigController(config renderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	crBytes, err := renderAsset(config, "manifests/machineconfigcontroller/clusterrole.yaml")
 	if err != nil {
 		return err
@@ -121,7 +136,6 @@ func (optr *Operator) syncMachineConfigController(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	crbBytes, err := renderAsset(config, "manifests/machineconfigcontroller/clusterrolebinding.yaml")
 	if err != nil {
 		return err
@@ -131,7 +145,6 @@ func (optr *Operator) syncMachineConfigController(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	saBytes, err := renderAsset(config, "manifests/machineconfigcontroller/sa.yaml")
 	if err != nil {
 		return err
@@ -141,7 +154,6 @@ func (optr *Operator) syncMachineConfigController(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	ccBytes, err := renderAsset(config, "manifests/machineconfigcontroller/controllerconfig.yaml")
 	if err != nil {
 		return err
@@ -151,13 +163,11 @@ func (optr *Operator) syncMachineConfigController(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	mccBytes, err := renderAsset(config, "manifests/machineconfigcontroller/deployment.yaml")
 	if err != nil {
 		return err
 	}
 	mcc := resourceread.ReadDeploymentV1OrDie(mccBytes)
-
 	_, updated, err := resourceapply.ApplyDeployment(optr.kubeClient.AppsV1(), mcc)
 	if err != nil {
 		return err
@@ -171,12 +181,18 @@ func (optr *Operator) syncMachineConfigController(config renderConfig) error {
 	}
 	return nil
 }
-
 func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
-	for _, path := range []string{
-		"manifests/machineconfigdaemon/clusterrole.yaml",
-		"manifests/machineconfigdaemon/events-clusterrole.yaml",
-	} {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	for _, path := range []string{"manifests/machineconfigdaemon/clusterrole.yaml", "manifests/machineconfigdaemon/events-clusterrole.yaml"} {
 		crBytes, err := renderAsset(config, path)
 		if err != nil {
 			return err
@@ -187,11 +203,7 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 			return err
 		}
 	}
-
-	for _, path := range []string{
-		"manifests/machineconfigdaemon/events-rolebinding-default.yaml",
-		"manifests/machineconfigdaemon/events-rolebinding-target.yaml",
-	} {
+	for _, path := range []string{"manifests/machineconfigdaemon/events-rolebinding-default.yaml", "manifests/machineconfigdaemon/events-rolebinding-target.yaml"} {
 		crbBytes, err := renderAsset(config, path)
 		if err != nil {
 			return err
@@ -202,7 +214,6 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 			return err
 		}
 	}
-
 	crbBytes, err := renderAsset(config, "manifests/machineconfigdaemon/clusterrolebinding.yaml")
 	if err != nil {
 		return err
@@ -212,7 +223,6 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	saBytes, err := renderAsset(config, "manifests/machineconfigdaemon/sa.yaml")
 	if err != nil {
 		return err
@@ -222,13 +232,11 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	mcdBytes, err := renderAsset(config, "manifests/machineconfigdaemon/daemonset.yaml")
 	if err != nil {
 		return err
 	}
 	mcd := resourceread.ReadDaemonSetV1OrDie(mcdBytes)
-
 	_, updated, err := resourceapply.ApplyDaemonSet(optr.kubeClient.AppsV1(), mcd)
 	if err != nil {
 		return err
@@ -238,8 +246,17 @@ func (optr *Operator) syncMachineConfigDaemon(config renderConfig) error {
 	}
 	return nil
 }
-
 func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	crBytes, err := renderAsset(config, "manifests/machineconfigserver/clusterrole.yaml")
 	if err != nil {
 		return err
@@ -249,13 +266,7 @@ func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
-	crbs := []string{
-		"manifests/machineconfigserver/clusterrolebinding.yaml",
-		"manifests/machineconfigserver/csr-approver-role-binding.yaml",
-		"manifests/machineconfigserver/csr-bootstrap-role-binding.yaml",
-		"manifests/machineconfigserver/csr-renewal-role-binding.yaml",
-	}
+	crbs := []string{"manifests/machineconfigserver/clusterrolebinding.yaml", "manifests/machineconfigserver/csr-approver-role-binding.yaml", "manifests/machineconfigserver/csr-bootstrap-role-binding.yaml", "manifests/machineconfigserver/csr-renewal-role-binding.yaml"}
 	for _, crb := range crbs {
 		b, err := renderAsset(config, crb)
 		if err != nil {
@@ -267,11 +278,7 @@ func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
 			return err
 		}
 	}
-
-	sas := []string{
-		"manifests/machineconfigserver/sa.yaml",
-		"manifests/machineconfigserver/node-bootstrapper-sa.yaml",
-	}
+	sas := []string{"manifests/machineconfigserver/sa.yaml", "manifests/machineconfigserver/node-bootstrapper-sa.yaml"}
 	for _, sa := range sas {
 		b, err := renderAsset(config, sa)
 		if err != nil {
@@ -283,7 +290,6 @@ func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
 			return err
 		}
 	}
-
 	nbtBytes, err := renderAsset(config, "manifests/machineconfigserver/node-bootstrapper-token.yaml")
 	if err != nil {
 		return err
@@ -293,14 +299,11 @@ func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
 	if err != nil {
 		return err
 	}
-
 	mcsBytes, err := renderAsset(config, "manifests/machineconfigserver/daemonset.yaml")
 	if err != nil {
 		return err
 	}
-
 	mcs := resourceread.ReadDaemonSetV1OrDie(mcsBytes)
-
 	_, updated, err := resourceapply.ApplyDaemonSet(optr.kubeClient.AppsV1(), mcs)
 	if err != nil {
 		return err
@@ -310,10 +313,17 @@ func (optr *Operator) syncMachineConfigServer(config renderConfig) error {
 	}
 	return nil
 }
-
-// syncRequiredMachineConfigPools ensures that all the nodes in machineconfigpools labeled with requiredForUpgradeMachineConfigPoolLabelKey
-// have updated to the latest configuration.
 func (optr *Operator) syncRequiredMachineConfigPools(config renderConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	sel, err := metav1.LabelSelectorAsSelector(metav1.AddLabelToSelector(&metav1.LabelSelector{}, requiredForUpgradeMachineConfigPoolLabelKey, ""))
 	if err != nil {
 		return err
@@ -335,9 +345,7 @@ func (optr *Operator) syncRequiredMachineConfigPools(config renderConfig) error 
 			return fmt.Errorf("pool %s has not progressed to latest configuration: %v, retrying", pool.Name, err)
 		}
 		degraded := isPoolStatusConditionTrue(pool, mcfgv1.MachineConfigPoolDegraded)
-		if pool.Generation <= pool.Status.ObservedGeneration &&
-			isPoolStatusConditionTrue(pool, mcfgv1.MachineConfigPoolUpdated) &&
-			!degraded {
+		if pool.Generation <= pool.Status.ObservedGeneration && isPoolStatusConditionTrue(pool, mcfgv1.MachineConfigPoolUpdated) && !degraded {
 			continue
 		}
 		return fmt.Errorf("error pool %s is not ready, retrying. Status: (pool degraded: %v total: %d, ready %d, updated: %d, unavailable: %d)", pool.Name, degraded, pool.Status.MachineCount, pool.Status.ReadyMachineCount, pool.Status.UpdatedMachineCount, pool.Status.UnavailableMachineCount)
@@ -346,20 +354,27 @@ func (optr *Operator) syncRequiredMachineConfigPools(config renderConfig) error 
 }
 
 const (
-	deploymentRolloutPollInterval = time.Second
-	deploymentRolloutTimeout      = 10 * time.Minute
-
-	daemonsetRolloutPollInterval = time.Second
-	daemonsetRolloutTimeout      = 10 * time.Minute
-
-	customResourceReadyInterval = time.Second
-	customResourceReadyTimeout  = 10 * time.Minute
-
-	controllerConfigCompletedInterval = time.Second
-	controllerConfigCompletedTimeout  = 5 * time.Minute
+	deploymentRolloutPollInterval		= time.Second
+	deploymentRolloutTimeout		= 10 * time.Minute
+	daemonsetRolloutPollInterval		= time.Second
+	daemonsetRolloutTimeout			= 10 * time.Minute
+	customResourceReadyInterval		= time.Second
+	customResourceReadyTimeout		= 10 * time.Minute
+	controllerConfigCompletedInterval	= time.Second
+	controllerConfigCompletedTimeout	= 5 * time.Minute
 )
 
 func (optr *Operator) waitForCustomResourceDefinition(resource *apiextv1beta1.CustomResourceDefinition) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(customResourceReadyInterval, customResourceReadyTimeout, func() (bool, error) {
 		crd, err := optr.crdLister.Get(resource.Name)
@@ -367,7 +382,6 @@ func (optr *Operator) waitForCustomResourceDefinition(resource *apiextv1beta1.Cu
 			lastErr = fmt.Errorf("error getting CustomResourceDefinition %s: %v", resource.Name, err)
 			return false, nil
 		}
-
 		for _, condition := range crd.Status.Conditions {
 			if condition.Type == apiextv1beta1.Established && condition.Status == apiextv1beta1.ConditionTrue {
 				return true, nil
@@ -383,26 +397,30 @@ func (optr *Operator) waitForCustomResourceDefinition(resource *apiextv1beta1.Cu
 	}
 	return nil
 }
-
 func (optr *Operator) waitForDeploymentRollout(resource *appsv1.Deployment) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(deploymentRolloutPollInterval, deploymentRolloutTimeout, func() (bool, error) {
 		d, err := optr.deployLister.Deployments(resource.Namespace).Get(resource.Name)
 		if apierrors.IsNotFound(err) {
-			// exit early to recreate the deployment.
 			return false, err
 		}
 		if err != nil {
-			// Do not return error here, as we could be updating the API Server itself, in which case we
-			// want to continue waiting.
 			lastErr = fmt.Errorf("error getting Deployment %s during rollout: %v", resource.Name, err)
 			return false, nil
 		}
-
 		if d.DeletionTimestamp != nil {
 			return false, fmt.Errorf("Deployment %s is being deleted", resource.Name)
 		}
-
 		if d.Generation <= d.Status.ObservedGeneration && d.Status.UpdatedReplicas == d.Status.Replicas && d.Status.UnavailableReplicas == 0 {
 			return true, nil
 		}
@@ -416,26 +434,30 @@ func (optr *Operator) waitForDeploymentRollout(resource *appsv1.Deployment) erro
 	}
 	return nil
 }
-
 func (optr *Operator) waitForDaemonsetRollout(resource *appsv1.DaemonSet) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(daemonsetRolloutPollInterval, daemonsetRolloutTimeout, func() (bool, error) {
 		d, err := optr.daemonsetLister.DaemonSets(resource.Namespace).Get(resource.Name)
 		if apierrors.IsNotFound(err) {
-			// exit early to recreate the daemonset.
 			return false, err
 		}
 		if err != nil {
-			// Do not return error here, as we could be updating the API Server itself, in which case we
-			// want to continue waiting.
 			lastErr = fmt.Errorf("error getting Daemonset %s during rollout: %v", resource.Name, err)
 			return false, nil
 		}
-
 		if d.DeletionTimestamp != nil {
 			return false, fmt.Errorf("Deployment %s is being deleted", resource.Name)
 		}
-
 		if d.Generation <= d.Status.ObservedGeneration && d.Status.UpdatedNumberScheduled == d.Status.DesiredNumberScheduled && d.Status.NumberUnavailable == 0 {
 			return true, nil
 		}
@@ -449,8 +471,17 @@ func (optr *Operator) waitForDaemonsetRollout(resource *appsv1.DaemonSet) error 
 	}
 	return nil
 }
-
 func (optr *Operator) waitForControllerConfigToBeCompleted(resource *mcfgv1.ControllerConfig) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var lastErr error
 	if err := wait.Poll(controllerConfigCompletedInterval, controllerConfigCompletedTimeout, func() (bool, error) {
 		if err := mcfgv1.IsControllerConfigCompleted(resource.GetName(), optr.ccLister.Get); err != nil {

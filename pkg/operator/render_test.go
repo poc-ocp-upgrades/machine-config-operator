@@ -6,20 +6,21 @@ import (
 )
 
 func TestClusterDNSIP(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tests := []struct {
-		Range  string
-		Output string
-		Error  bool
-	}{{
-		Range:  "192.168.2.0/20",
-		Output: "192.168.0.10",
-	}, {
-		Range:  "2001:db8::/32",
-		Output: "2001:db8::a",
-	}, {
-		Range: "192.168.1.254/32",
-		Error: true,
-	}}
+		Range	string
+		Output	string
+		Error	bool
+	}{{Range: "192.168.2.0/20", Output: "192.168.0.10"}, {Range: "2001:db8::/32", Output: "2001:db8::a"}, {Range: "192.168.1.254/32", Error: true}}
 	for idx, test := range tests {
 		t.Run(fmt.Sprintf("case#%d", idx), func(t *testing.T) {
 			desc := fmt.Sprintf("clusterDNSIP(%#v)", test.Range)

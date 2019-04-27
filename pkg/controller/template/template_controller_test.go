@@ -5,10 +5,8 @@ import (
 	"reflect"
 	"testing"
 	"time"
-
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/record"
-
 	ignv2_2types "github.com/coreos/ignition/config/v2_2/types"
 	mcfgv1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
 	"github.com/openshift/machine-config-operator/pkg/generated/clientset/versioned/fake"
@@ -25,151 +23,188 @@ import (
 )
 
 var (
-	alwaysReady        = func() bool { return true }
-	noResyncPeriodFunc = func() time.Duration { return 0 }
+	alwaysReady	= func() bool {
+		return true
+	}
+	noResyncPeriodFunc	= func() time.Duration {
+		return 0
+	}
 )
 
 type fixture struct {
-	t *testing.T
-
-	client     *fake.Clientset
-	kubeclient *k8sfake.Clientset
-
-	ccLister []*mcfgv1.ControllerConfig
-	mcLister []*mcfgv1.MachineConfig
-
-	kubeactions []core.Action
-	actions     []core.Action
-
-	kubeobjects []runtime.Object
-	objects     []runtime.Object
+	t		*testing.T
+	client		*fake.Clientset
+	kubeclient	*k8sfake.Clientset
+	ccLister	[]*mcfgv1.ControllerConfig
+	mcLister	[]*mcfgv1.MachineConfig
+	kubeactions	[]core.Action
+	actions		[]core.Action
+	kubeobjects	[]runtime.Object
+	objects		[]runtime.Object
 }
 
 func newFixture(t *testing.T) *fixture {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := &fixture{}
 	f.t = t
 	f.objects = []runtime.Object{}
 	f.kubeobjects = []runtime.Object{}
 	return f
 }
-
 func newControllerConfig(name string) *mcfgv1.ControllerConfig {
-	return &mcfgv1.ControllerConfig{
-		TypeMeta:   metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()},
-		ObjectMeta: metav1.ObjectMeta{Name: name, Generation: 1},
-		Spec: mcfgv1.ControllerConfigSpec{
-			ClusterDNSIP:        "10.3.0.1/16",
-			EtcdDiscoveryDomain: fmt.Sprintf("%s.openshift.testing", name),
-			Platform:            "libvirt",
-			PullSecret: &corev1.ObjectReference{
-				Namespace: "default",
-				Name:      "coreos-pull-secret",
-			},
-		},
-	}
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	return &mcfgv1.ControllerConfig{TypeMeta: metav1.TypeMeta{APIVersion: mcfgv1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Generation: 1}, Spec: mcfgv1.ControllerConfigSpec{ClusterDNSIP: "10.3.0.1/16", EtcdDiscoveryDomain: fmt.Sprintf("%s.openshift.testing", name), Platform: "libvirt", PullSecret: &corev1.ObjectReference{Namespace: "default", Name: "coreos-pull-secret"}}}
 }
-
 func newPullSecret(name string, contents []byte) *corev1.Secret {
-	return &corev1.Secret{
-		TypeMeta:   metav1.TypeMeta{APIVersion: corev1.SchemeGroupVersion.String()},
-		ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: metav1.NamespaceDefault},
-		Type:       corev1.SecretTypeDockerConfigJson,
-		Data:       map[string][]byte{corev1.DockerConfigJsonKey: contents},
-	}
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	return &corev1.Secret{TypeMeta: metav1.TypeMeta{APIVersion: corev1.SchemeGroupVersion.String()}, ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: metav1.NamespaceDefault}, Type: corev1.SecretTypeDockerConfigJson, Data: map[string][]byte{corev1.DockerConfigJsonKey: contents}}
 }
-
 func (f *fixture) newController() *Controller {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.client = fake.NewSimpleClientset(f.objects...)
 	f.kubeclient = k8sfake.NewSimpleClientset(f.kubeobjects...)
-
 	cinformer := coreinformersv1.NewSharedInformerFactory(f.kubeclient, noResyncPeriodFunc())
 	i := informers.NewSharedInformerFactory(f.client, noResyncPeriodFunc())
-	c := New(templateDir,
-		i.Machineconfiguration().V1().ControllerConfigs(), i.Machineconfiguration().V1().MachineConfigs(), cinformer.Core().V1().Secrets(),
-		f.kubeclient, f.client)
-
+	c := New(templateDir, i.Machineconfiguration().V1().ControllerConfigs(), i.Machineconfiguration().V1().MachineConfigs(), cinformer.Core().V1().Secrets(), f.kubeclient, f.client)
 	c.ccListerSynced = alwaysReady
 	c.mcListerSynced = alwaysReady
 	c.eventRecorder = &record.FakeRecorder{}
-
 	stopCh := make(chan struct{})
 	defer close(stopCh)
 	i.Start(stopCh)
 	i.WaitForCacheSync(stopCh)
-
 	for _, c := range f.ccLister {
 		i.Machineconfiguration().V1().ControllerConfigs().Informer().GetIndexer().Add(c)
 	}
-
 	for _, m := range f.mcLister {
 		i.Machineconfiguration().V1().MachineConfigs().Informer().GetIndexer().Add(m)
 	}
-
 	return c
 }
-
 func (f *fixture) run(ccname string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(ccname, false)
 }
-
 func (f *fixture) runExpectError(ccname string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.runController(ccname, true)
 }
-
 func (f *fixture) runController(ccname string, expectError bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	c := f.newController()
-
 	err := c.syncHandler(ccname)
 	if !expectError && err != nil {
 		f.t.Errorf("error syncing controllerconfig: %v", err)
 	} else if expectError && err == nil {
 		f.t.Error("expected error syncing controllerconfig, got nil")
 	}
-
 	actions := filterInformerActions(f.client.Actions())
 	for i, action := range actions {
 		if len(f.actions) < i+1 {
 			f.t.Errorf("%d unexpected actions: %+v", len(actions)-len(f.actions), actions[i:])
 			break
 		}
-
 		expectedAction := f.actions[i]
 		checkAction(expectedAction, action, f.t)
 	}
-
 	if len(f.actions) > len(actions) {
 		f.t.Errorf("%d additional expected actions:%+v", len(f.actions)-len(actions), f.actions[len(actions):])
 	}
-
 	k8sActions := filterInformerActions(f.kubeclient.Actions())
 	for i, action := range k8sActions {
 		if len(f.kubeactions) < i+1 {
 			f.t.Errorf("%d unexpected actions: %+v", len(k8sActions)-len(f.kubeactions), k8sActions[i:])
 			break
 		}
-
 		expectedAction := f.kubeactions[i]
 		checkAction(expectedAction, action, f.t)
 	}
-
 	if len(f.kubeactions) > len(k8sActions) {
 		f.t.Errorf("%d additional expected actions:%+v", len(f.kubeactions)-len(k8sActions), f.kubeactions[len(k8sActions):])
 	}
 }
-
-// checkAction verifies that expected and actual actions are equal and both have
-// same attached resources
 func checkAction(expected, actual core.Action, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if !(expected.Matches(actual.GetVerb(), actual.GetResource().Resource) && actual.GetSubresource() == expected.GetSubresource()) {
 		t.Errorf("Expected\n\t%#v\ngot\n\t%#v", expected, actual)
 		return
 	}
-
 	if reflect.TypeOf(actual) != reflect.TypeOf(expected) {
 		t.Errorf("Action has wrong type. Expected: %t. Got: %t", expected, actual)
 		return
 	}
-
 	switch a := actual.(type) {
 	case core.CreateAction:
 		e, _ := expected.(core.CreateAction)
@@ -177,32 +212,36 @@ func checkAction(expected, actual core.Action, t *testing.T) {
 		object := a.GetObject()
 		filterTimeFromControllerStatus(object, expObject)
 		if !equality.Semantic.DeepEqual(expObject, object) {
-			t.Errorf("Action %s %s has wrong object\nDiff:\n %s",
-				a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expObject, object))
+			t.Errorf("Action %s %s has wrong object\nDiff:\n %s", a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expObject, object))
 		}
 	case core.UpdateAction:
 		e, _ := expected.(core.UpdateAction)
 		expObject := e.GetObject()
 		object := a.GetObject()
-
 		filterTimeFromControllerStatus(object, expObject)
 		if !equality.Semantic.DeepEqual(expObject, object) {
-			t.Errorf("Action %s %s has wrong object\nDiff:\n %s",
-				a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expObject, object))
+			t.Errorf("Action %s %s has wrong object\nDiff:\n %s", a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expObject, object))
 		}
 	case core.PatchAction:
 		e, _ := expected.(core.PatchAction)
 		expPatch := e.GetPatch()
 		patch := a.GetPatch()
-
 		if !equality.Semantic.DeepEqual(expPatch, expPatch) {
-			t.Errorf("Action %s %s has wrong patch\nDiff:\n %s",
-				a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expPatch, patch))
+			t.Errorf("Action %s %s has wrong patch\nDiff:\n %s", a.GetVerb(), a.GetResource().Resource, diff.ObjectGoPrintDiff(expPatch, patch))
 		}
 	}
 }
-
 func filterTimeFromControllerStatus(objs ...runtime.Object) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for i, o := range objs {
 		if _, ok := o.(*mcfgv1.ControllerConfig); ok {
 			cfg := objs[i].(*mcfgv1.ControllerConfig)
@@ -212,55 +251,108 @@ func filterTimeFromControllerStatus(objs ...runtime.Object) {
 		}
 	}
 }
-
-// filterInformerActions filters list and watch actions for testing resources.
-// Since list and watch don't change resource state we can filter it to lower
-// nose level in our tests.
 func filterInformerActions(actions []core.Action) []core.Action {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ret := []core.Action{}
 	for _, action := range actions {
-		if len(action.GetNamespace()) == 0 &&
-			(action.Matches("list", "controllerconfigs") ||
-				action.Matches("watch", "controllerconfigs") ||
-				action.Matches("list", "machineconfigs") ||
-				action.Matches("watch", "machineconfigs")) {
+		if len(action.GetNamespace()) == 0 && (action.Matches("list", "controllerconfigs") || action.Matches("watch", "controllerconfigs") || action.Matches("list", "machineconfigs") || action.Matches("watch", "machineconfigs")) {
 			continue
 		}
 		ret = append(ret, action)
 	}
-
 	return ret
 }
-
 func (f *fixture) expectGetMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootGetAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config.Name))
 }
-
 func (f *fixture) expectCreateMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootCreateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
-
 func (f *fixture) expectUpdateMachineConfigAction(config *mcfgv1.MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootUpdateAction(schema.GroupVersionResource{Resource: "machineconfigs"}, config))
 }
-
 func (f *fixture) expectGetSecretAction(secret *corev1.Secret) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.kubeactions = append(f.kubeactions, core.NewGetAction(schema.GroupVersionResource{Resource: "secrets"}, secret.Namespace, secret.Name))
 }
-
 func (f *fixture) expectUpdateControllerConfigStatus(status *mcfgv1.ControllerConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f.actions = append(f.actions, core.NewRootUpdateSubresourceAction(schema.GroupVersionResource{Resource: "controllerconfigs"}, "status", status))
 }
-
 func TestCreatesMachineConfigs(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	cc := newControllerConfig("test-cluster")
 	ps := newPullSecret("coreos-pull-secret", []byte(`{"dummy": "dummy"}`))
-
 	f.ccLister = append(f.ccLister, cc)
 	f.objects = append(f.objects, cc)
 	f.kubeobjects = append(f.kubeobjects, ps)
-
 	expMCs, err := getMachineConfigsForControllerConfig(templateDir, cc, []byte(`{"dummy": "dummy"}`))
 	if err != nil {
 		t.Fatal(err)
@@ -270,24 +362,27 @@ func TestCreatesMachineConfigs(t *testing.T) {
 	rcc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionTrue, Reason: "syncing towards (1) generation using controller version 0.0.0-was-not-built-properly"}}
 	f.expectUpdateControllerConfigStatus(rcc)
 	f.expectGetSecretAction(ps)
-
 	for idx := range expMCs {
 		f.expectGetMachineConfigAction(expMCs[idx])
 		f.expectCreateMachineConfigAction(expMCs[idx])
 	}
 	ccc := cc.DeepCopy()
 	ccc.Status.ObservedGeneration = 1
-	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{
-		{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"},
-		{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse},
-		{Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse},
-	}
+	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"}, {Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse}, {Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse}}
 	f.expectUpdateControllerConfigStatus(ccc)
-
 	f.run(getKey(cc, t))
 }
-
 func TestDoNothing(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	cc := newControllerConfig("test-cluster")
 	ps := newPullSecret("coreos-pull-secret", []byte(`{"dummy": "dummy"}`))
@@ -295,7 +390,6 @@ func TestDoNothing(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	f.ccLister = append(f.ccLister, cc)
 	f.objects = append(f.objects, cc)
 	f.kubeobjects = append(f.kubeobjects, ps)
@@ -303,7 +397,6 @@ func TestDoNothing(t *testing.T) {
 	for idx := range mcs {
 		f.objects = append(f.objects, mcs[idx])
 	}
-
 	rcc := cc.DeepCopy()
 	rcc.Status.ObservedGeneration = 1
 	rcc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionTrue, Reason: "syncing towards (1) generation using controller version 0.0.0-was-not-built-properly"}}
@@ -314,17 +407,21 @@ func TestDoNothing(t *testing.T) {
 	}
 	ccc := cc.DeepCopy()
 	ccc.Status.ObservedGeneration = 1
-	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{
-		{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"},
-		{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse},
-		{Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse},
-	}
+	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"}, {Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse}, {Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse}}
 	f.expectUpdateControllerConfigStatus(ccc)
-
 	f.run(getKey(cc, t))
 }
-
 func TestRecreateMachineConfig(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	cc := newControllerConfig("test-cluster")
 	ps := newPullSecret("coreos-pull-secret", []byte(`{"dummy": "dummy"}`))
@@ -332,7 +429,6 @@ func TestRecreateMachineConfig(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	f.ccLister = append(f.ccLister, cc)
 	f.objects = append(f.objects, cc)
 	f.kubeobjects = append(f.kubeobjects, ps)
@@ -340,29 +436,32 @@ func TestRecreateMachineConfig(t *testing.T) {
 		f.mcLister = append(f.mcLister, mcs[idx])
 		f.objects = append(f.objects, mcs[idx])
 	}
-
 	rcc := cc.DeepCopy()
 	rcc.Status.ObservedGeneration = 1
 	rcc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionTrue, Reason: "syncing towards (1) generation using controller version 0.0.0-was-not-built-properly"}}
 	f.expectUpdateControllerConfigStatus(rcc)
 	f.expectGetSecretAction(ps)
-
 	for idx := range mcs {
 		f.expectGetMachineConfigAction(mcs[idx])
 	}
 	f.expectCreateMachineConfigAction(mcs[len(mcs)-1])
 	ccc := cc.DeepCopy()
 	ccc.Status.ObservedGeneration = 1
-	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{
-		{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"},
-		{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse},
-		{Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse},
-	}
+	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"}, {Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse}, {Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse}}
 	f.expectUpdateControllerConfigStatus(ccc)
 	f.run(getKey(cc, t))
 }
-
 func TestUpdateMachineConfig(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	f := newFixture(t)
 	cc := newControllerConfig("test-cluster")
 	ps := newPullSecret("coreos-pull-secret", []byte(`{"dummy": "dummy"}`))
@@ -370,9 +469,7 @@ func TestUpdateMachineConfig(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	//update machineconfig
 	mcs[len(mcs)-1].Spec.Config = ignv2_2types.Config{}
-
 	f.ccLister = append(f.ccLister, cc)
 	f.kubeobjects = append(f.kubeobjects, ps)
 	f.objects = append(f.objects, cc)
@@ -380,7 +477,6 @@ func TestUpdateMachineConfig(t *testing.T) {
 		f.mcLister = append(f.mcLister, mcs[idx])
 		f.objects = append(f.objects, mcs[idx])
 	}
-
 	expmcs, err := getMachineConfigsForControllerConfig(templateDir, cc, []byte(`{"dummy": "dummy"}`))
 	if err != nil {
 		t.Fatal(err)
@@ -396,16 +492,21 @@ func TestUpdateMachineConfig(t *testing.T) {
 	f.expectUpdateMachineConfigAction(expmcs[len(expmcs)-1])
 	ccc := cc.DeepCopy()
 	ccc.Status.ObservedGeneration = 1
-	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{
-		{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"},
-		{Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse},
-		{Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse},
-	}
+	ccc.Status.Conditions = []mcfgv1.ControllerConfigStatusCondition{{Type: mcfgv1.TemplateContollerCompleted, Status: corev1.ConditionTrue, Reason: "sync completed towards (1) generation using controller version 0.0.0-was-not-built-properly"}, {Type: mcfgv1.TemplateContollerRunning, Status: corev1.ConditionFalse}, {Type: mcfgv1.TemplateContollerFailing, Status: corev1.ConditionFalse}}
 	f.expectUpdateControllerConfigStatus(ccc)
 	f.run(getKey(cc, t))
 }
-
 func getKey(config *mcfgv1.ControllerConfig, t *testing.T) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(config)
 	if err != nil {
 		t.Errorf("Unexpected error getting key for config %v: %v", config.Name, err)

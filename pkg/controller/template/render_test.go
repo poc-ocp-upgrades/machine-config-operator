@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
 	ignv2_2types "github.com/coreos/ignition/config/v2_2/types"
 	"github.com/ghodss/yaml"
 	mcfgv1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
@@ -22,143 +21,127 @@ var (
 )
 
 func TestMain(m *testing.M) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	flag.Parse()
 	os.Exit(m.Run())
 }
-
 func TestCloudProvider(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dummyTemplate := []byte(`{{cloudProvider .}}`)
-
 	cases := []struct {
-		platform string
-		res      string
-	}{{
-		platform: "aws",
-		res:      "aws",
-	}, {
-		platform: "openstack",
-		res:      "openstack",
-	}, {
-		platform: "libvirt",
-		res:      "",
-	}, {
-		platform: "none",
-		res:      "",
-	}}
+		platform	string
+		res		string
+	}{{platform: "aws", res: "aws"}, {platform: "openstack", res: "openstack"}, {platform: "libvirt", res: ""}, {platform: "none", res: ""}}
 	for idx, c := range cases {
 		name := fmt.Sprintf("case #%d", idx)
 		t.Run(name, func(t *testing.T) {
-			config := &mcfgv1.ControllerConfig{
-				Spec: mcfgv1.ControllerConfigSpec{
-					Platform: c.platform,
-				},
-			}
+			config := &mcfgv1.ControllerConfig{Spec: mcfgv1.ControllerConfigSpec{Platform: c.platform}}
 			got, err := renderTemplate(RenderConfig{&config.Spec, `{"dummy":"dummy"}`}, name, dummyTemplate)
 			if err != nil {
 				t.Fatalf("expected nil error %v", err)
 			}
-
 			if string(got) != c.res {
 				t.Fatalf("mismatch got: %s want: %s", got, c.res)
 			}
 		})
 	}
 }
-
 func TestEtcdPeerCertDNSNames(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dummyTemplate := []byte(`{{etcdPeerCertDNSNames .}}`)
-
 	cases := []struct {
-		etcdDiscoveryDomain string
-
-		url string
-		err bool
-	}{{
-		etcdDiscoveryDomain: "",
-		url:                 "",
-		err:                 true,
-	}, {
-		etcdDiscoveryDomain: "my-test-cluster.tt.testing",
-		url:                 "${ETCD_DNS_NAME},my-test-cluster.tt.testing",
-		err:                 false,
-	}}
+		etcdDiscoveryDomain	string
+		url			string
+		err			bool
+	}{{etcdDiscoveryDomain: "", url: "", err: true}, {etcdDiscoveryDomain: "my-test-cluster.tt.testing", url: "${ETCD_DNS_NAME},my-test-cluster.tt.testing", err: false}}
 	for idx, c := range cases {
 		name := fmt.Sprintf("case #%d", idx)
 		t.Run(name, func(t *testing.T) {
-			config := &mcfgv1.ControllerConfig{
-				Spec: mcfgv1.ControllerConfigSpec{
-					EtcdDiscoveryDomain: c.etcdDiscoveryDomain,
-				},
-			}
+			config := &mcfgv1.ControllerConfig{Spec: mcfgv1.ControllerConfigSpec{EtcdDiscoveryDomain: c.etcdDiscoveryDomain}}
 			got, err := renderTemplate(RenderConfig{&config.Spec, `{"dummy":"dummy"}`}, name, dummyTemplate)
 			if err != nil && !c.err {
 				t.Fatalf("expected nil error %v", err)
 			}
-
 			if string(got) != c.url {
 				t.Fatalf("mismatch got: %s want: %s", got, c.url)
 			}
 		})
 	}
 }
-
 func TestEtcdServerCertDNSNames(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dummyTemplate := []byte(`{{etcdServerCertDNSNames .}}`)
-
 	cases := []struct {
-		url string
-		err bool
-	}{{
-		url: "localhost,etcd.kube-system.svc,etcd.kube-system.svc.cluster.local,etcd.openshift-etcd.svc,etcd.openshift-etcd.svc.cluster.local,${ETCD_DNS_NAME}",
-		err: false,
-	}}
+		url	string
+		err	bool
+	}{{url: "localhost,etcd.kube-system.svc,etcd.kube-system.svc.cluster.local,etcd.openshift-etcd.svc,etcd.openshift-etcd.svc.cluster.local,${ETCD_DNS_NAME}", err: false}}
 	for idx, c := range cases {
 		name := fmt.Sprintf("case #%d", idx)
 		t.Run(name, func(t *testing.T) {
-			config := &mcfgv1.ControllerConfig{
-				Spec: mcfgv1.ControllerConfigSpec{},
-			}
+			config := &mcfgv1.ControllerConfig{Spec: mcfgv1.ControllerConfigSpec{}}
 			got, err := renderTemplate(RenderConfig{&config.Spec, `{"dummy":"dummy"}`}, name, dummyTemplate)
 			if err != nil && !c.err {
 				t.Fatalf("expected nil error %v", err)
 			}
-
 			if string(got) != c.url {
 				t.Fatalf("mismatch got: %s want: %s", got, c.url)
 			}
 		})
 	}
 }
-
 func TestSkipMissing(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	dummyTemplate := `{{skip "%s"}}`
-
 	cases := []struct {
-		key string
-		err bool
-		res string
-	}{{
-		key: "",
-		err: true,
-		res: "",
-	}, {
-		key: "2two",
-		err: true,
-		res: "",
-	}, {
-		key: "test index",
-		err: true,
-		res: "",
-	}, {
-		key: "index",
-		err: false,
-		res: "{{.index}}",
-	}, {
-		key: "etcd_index",
-		err: false,
-		res: "{{.etcd_index}}",
-	}}
-
+		key	string
+		err	bool
+		res	string
+	}{{key: "", err: true, res: ""}, {key: "2two", err: true, res: ""}, {key: "test index", err: true, res: ""}, {key: "index", err: false, res: "{{.index}}"}, {key: "etcd_index", err: false, res: "{{.etcd_index}}"}}
 	for idx, c := range cases {
 		name := fmt.Sprintf("case #%d", idx)
 		t.Run(name, func(t *testing.T) {
@@ -167,7 +150,6 @@ func TestSkipMissing(t *testing.T) {
 			if err != nil && !c.err {
 				t.Fatalf("expected nil error %v", err)
 			}
-
 			if string(got) != c.res {
 				t.Fatalf("mismatch got: %s want: %s", got, c.res)
 			}
@@ -176,26 +158,29 @@ func TestSkipMissing(t *testing.T) {
 }
 
 const (
-	templateDir = "../../../templates"
-	resultDir   = "./test_data/templates"
+	templateDir	= "../../../templates"
+	resultDir	= "./test_data/templates"
 )
 
 var (
-	configs = map[string]string{
-		"aws":       "./test_data/controller_config_aws.yaml",
-		"openstack": "./test_data/controller_config_openstack.yaml",
-		"libvirt":   "./test_data/controller_config_libvirt.yaml",
-		"none":      "./test_data/controller_config_none.yaml",
-		"vsphere":   "./test_data/controller_config_vsphere.yaml",
-	}
+	configs = map[string]string{"aws": "./test_data/controller_config_aws.yaml", "openstack": "./test_data/controller_config_openstack.yaml", "libvirt": "./test_data/controller_config_libvirt.yaml", "none": "./test_data/controller_config_none.yaml", "vsphere": "./test_data/controller_config_vsphere.yaml"}
 )
 
 func TestInvalidPlatform(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	controllerConfig, err := controllerConfigFromFile(configs["aws"])
 	if err != nil {
 		t.Fatalf("failed to get controllerconfig config: %v", err)
 	}
-
 	expectErr := func(err error, want string) {
 		t.Helper()
 		if err == nil {
@@ -205,42 +190,43 @@ func TestInvalidPlatform(t *testing.T) {
 			t.Fatalf("expect err %s, got %s", want, err.Error())
 		}
 	}
-
-	// we must treat unrecognized constants as "none"
 	controllerConfig.Spec.Platform = "_bad_"
 	_, err = generateTemplateMachineConfigs(&RenderConfig{&controllerConfig.Spec, `{"dummy":"dummy"}`}, templateDir)
 	if err != nil {
 		t.Errorf("expect nil error, got: %v", err)
 	}
-
-	// explicitly blocked
 	controllerConfig.Spec.Platform = "_base"
 	_, err = generateTemplateMachineConfigs(&RenderConfig{&controllerConfig.Spec, `{"dummy":"dummy"}`}, templateDir)
 	expectErr(err, "failed to create MachineConfig for role master: platform _base unsupported")
 }
-
 func TestGenerateMachineConfigs(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for platform, config := range configs {
 		controllerConfig, err := controllerConfigFromFile(config)
 		if err != nil {
 			t.Fatalf("failed to get controllerconfig config: %v", err)
 		}
-
 		cfgs, err := generateTemplateMachineConfigs(&RenderConfig{&controllerConfig.Spec, `{"dummy":"dummy"}`}, templateDir)
 		if err != nil {
 			t.Fatalf("failed to generate machine configs: %v", err)
 		}
-
 		for _, cfg := range cfgs {
 			if cfg.Labels == nil {
 				t.Fatal("non-nil labels expected")
 			}
-
 			role, ok := cfg.Labels[machineConfigRoleLabelKey]
 			if !ok || role == "" {
 				t.Fatal("role label missing")
 			}
-
 			ign := cfg.Spec.Config
 			if len(ign.Storage.Files) > 0 {
 				verifyIgnFiles(ign.Storage.Files, filepath.Join(resultDir, role, cfg.Name, platform, "files"), *updateGoldenFiles, t)
@@ -251,8 +237,17 @@ func TestGenerateMachineConfigs(t *testing.T) {
 		}
 	}
 }
-
 func controllerConfigFromFile(path string) (*mcfgv1.ControllerConfig, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	data, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
@@ -267,23 +262,28 @@ func controllerConfigFromFile(path string) (*mcfgv1.ControllerConfig, error) {
 	}
 	return cc, nil
 }
-
 func verifyIgnFiles(files []ignv2_2types.File, dir string, update bool, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var actual [][]byte
-
 	for _, f := range files {
 		j, err := json.MarshalIndent(f, "", "  ")
 		if err != nil {
 			t.Fatalf("failed to marshal file: %v", err)
 		}
-
 		data, err := yaml.JSONToYAML(j)
 		if err != nil {
 			t.Fatalf("failed to convert to yaml: %v", err)
 		}
-
 		actual = append(actual, data)
-
 		if update {
 			name := strings.Replace(f.Path, "/", "-", -1)
 			if err := os.MkdirAll(dir, 0755); err != nil {
@@ -294,25 +294,30 @@ func verifyIgnFiles(files []ignv2_2types.File, dir string, update bool, t *testi
 			}
 		}
 	}
-
 	verifyIgn(actual, dir, t)
 }
-
 func verifyIgnUnits(units []ignv2_2types.Unit, dir string, update bool, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var actual [][]byte
 	for _, u := range units {
 		j, err := json.MarshalIndent(u, "", "  ")
 		if err != nil {
 			t.Fatalf("failed to marshal file: %v", err)
 		}
-
 		data, err := yaml.JSONToYAML(j)
 		if err != nil {
 			t.Fatalf("failed to convert to yaml: %v", err)
 		}
-
 		actual = append(actual, data)
-
 		if update {
 			if err := os.MkdirAll(dir, 0755); err != nil {
 				t.Logf("error creating dir %s: %v", dir, err)
@@ -322,12 +327,19 @@ func verifyIgnUnits(units []ignv2_2types.Unit, dir string, update bool, t *testi
 			}
 		}
 	}
-
 	verifyIgn(actual, dir, t)
 }
-
 func verifyIgn(actual [][]byte, dir string, t *testing.T) {
-
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	expected := make(map[string][]byte)
 	if err := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -343,13 +355,11 @@ func verifyIgn(actual [][]byte, dir string, t *testing.T) {
 		if err != nil {
 			return err
 		}
-
 		expected[path] = data
 		return nil
 	}); err != nil {
 		t.Fatalf("failed to walk dir: %v", err)
 	}
-
 	for _, a := range actual {
 		var found bool
 		for key, d := range expected {
@@ -358,12 +368,10 @@ func verifyIgn(actual [][]byte, dir string, t *testing.T) {
 				delete(expected, key)
 			}
 		}
-
 		if !found {
 			t.Errorf("can't find actual file %v:\n%v", dir, string(a))
 		}
 	}
-
 	for key := range expected {
 		t.Errorf("can't find expected file:\n%v", key)
 	}

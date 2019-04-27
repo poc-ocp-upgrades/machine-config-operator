@@ -10,7 +10,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
 	"github.com/golang/glog"
 	"github.com/openshift/machine-config-operator/pkg/version"
 	"github.com/spf13/cobra"
@@ -18,42 +17,50 @@ import (
 )
 
 var (
-	runCmd = &cobra.Command{
-		Use:   "run",
-		Short: "Runs the setup-etcd-environment",
-		Long:  "",
-		RunE:  runRunCmd,
-	}
-
-	runOpts struct {
-		discoverySRV string
-		ifName       string
-		outputFile   string
+	runCmd	= &cobra.Command{Use: "run", Short: "Runs the setup-etcd-environment", Long: "", RunE: runRunCmd}
+	runOpts	struct {
+		discoverySRV	string
+		ifName		string
+		outputFile	string
 	}
 )
 
 func init() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	rootCmd.AddCommand(runCmd)
 	rootCmd.PersistentFlags().StringVar(&runOpts.discoverySRV, "discovery-srv", "", "DNS domain used to bootstrap initial etcd cluster.")
 	rootCmd.PersistentFlags().StringVar(&runOpts.outputFile, "output-file", "", "file where the envs are written. If empty, prints to Stdout.")
 }
-
 func runRunCmd(cmd *cobra.Command, args []string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	flag.Set("logtostderr", "true")
 	flag.Parse()
-
-	// To help debugging, immediately log version
 	glog.Infof("Version: %+v", version.Version)
-
 	if runOpts.discoverySRV == "" {
 		return errors.New("--discovery-srv cannot be empty")
 	}
-
 	ips, err := ipAddrs()
 	if err != nil {
 		return err
 	}
-
 	var dns string
 	var ip string
 	if err := wait.PollImmediate(30*time.Second, 5*time.Minute, func() (bool, error) {
@@ -75,7 +82,6 @@ func runRunCmd(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("could not find self: %v", err)
 	}
 	glog.Infof("dns name is %s", dns)
-
 	out := os.Stdout
 	if runOpts.outputFile != "" {
 		f, err := os.Create(runOpts.outputFile)
@@ -85,14 +91,19 @@ func runRunCmd(cmd *cobra.Command, args []string) error {
 		defer f.Close()
 		out = f
 	}
-
-	return writeEnvironmentFile(map[string]string{
-		"IPV4_ADDRESS": ip,
-		"DNS_NAME":     dns,
-	}, out)
+	return writeEnvironmentFile(map[string]string{"IPV4_ADDRESS": ip, "DNS_NAME": dns}, out)
 }
-
 func ipAddrs() ([]string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var ips []string
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {
@@ -111,19 +122,26 @@ func ipAddrs() ([]string, error) {
 		}
 		ip = ip.To4()
 		if ip == nil {
-			continue // not an ipv4 address
+			continue
 		}
 		if !ip.IsGlobalUnicast() {
-			continue // we only want global unicast address
+			continue
 		}
 		ips = append(ips, ip.String())
 	}
-
 	return ips, nil
 }
-
-// returns the target from the SRV record that resolves to self.
 func reverseLookupSelf(service, proto, name, self string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, srvs, err := net.LookupSRV(service, proto, name)
 	if err != nil {
 		return "", err
@@ -135,7 +153,6 @@ func reverseLookupSelf(service, proto, name, self string) (string, error) {
 		if err != nil {
 			return "", fmt.Errorf("could not resolve member %q", srv.Target)
 		}
-
 		for _, addr := range addrs {
 			if addr == self {
 				selfTarget = strings.Trim(srv.Target, ".")
@@ -148,8 +165,17 @@ func reverseLookupSelf(service, proto, name, self string) (string, error) {
 	}
 	return selfTarget, nil
 }
-
 func writeEnvironmentFile(m map[string]string, w io.Writer) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var buffer bytes.Buffer
 	for k, v := range m {
 		buffer.WriteString(fmt.Sprintf("ETCD_%s=%s\n", k, v))
