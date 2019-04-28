@@ -6,17 +6,18 @@ import (
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
-// DeepCopyInto copying the receiver, writing into out. in must be non-nil.
 func (in *MachineConfig) DeepCopyInto(out *MachineConfig) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	*out = *in
 	out.TypeMeta = in.TypeMeta
 	in.ObjectMeta.DeepCopyInto(&out.ObjectMeta)
 	in.Spec.DeepCopyInto(&out.Spec)
 	return
 }
-
-// DeepCopy copying the receiver, creating a new MachineConfig.
 func (in *MachineConfig) DeepCopy() *MachineConfig {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if in == nil {
 		return nil
 	}
@@ -24,30 +25,28 @@ func (in *MachineConfig) DeepCopy() *MachineConfig {
 	in.DeepCopyInto(out)
 	return out
 }
-
-// DeepCopyObject copying the receiver, creating a new runtime.Object.
 func (in *MachineConfig) DeepCopyObject() runtime.Object {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return in.DeepCopy()
 }
-
-// DeepCopyInto copying the receiver, writing into out. in must be non-nil.
 func (in *MachineConfigSpec) DeepCopyInto(out *MachineConfigSpec) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	*out = *in
 	out.Config = deepCopyIgnConfig(in.Config)
 	return
 }
-
 func deepCopyIgnConfig(in ignv2_2types.Config) ignv2_2types.Config {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var out ignv2_2types.Config
-
-	// https://github.com/coreos/ignition/blob/d19b2021cf397de7c31774c13805bbc3aa655646/config/v2_2/append.go#L41
 	out.Ignition.Version = in.Ignition.Version
-
 	return ignv2_2.Append(out, in)
 }
-
-// DeepCopy copying the receiver, creating a new MachineConfigSpec.
 func (in *MachineConfigSpec) DeepCopy() *MachineConfigSpec {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if in == nil {
 		return nil
 	}

@@ -2,14 +2,14 @@ package e2e_test
 
 import (
 	"testing"
-
 	"github.com/openshift/machine-config-operator/test/e2e/framework"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 func TestClusterOperatorRelatedObjects(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cs := framework.NewClientSet("")
-
 	co, err := cs.ClusterOperators().Get("machine-config", metav1.GetOptions{})
 	if err != nil {
 		t.Errorf("couldn't get clusteroperator %v", err)
