@@ -8,9 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
-
 	"github.com/golang/glog"
-
 	configclientset "github.com/openshift/client-go/config/clientset/versioned"
 	v1 "k8s.io/api/core/v1"
 	apiextclientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
@@ -30,11 +28,9 @@ import (
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/tools/record"
 	"k8s.io/client-go/util/workqueue"
-
 	configv1 "github.com/openshift/api/config/v1"
 	configinformersv1 "github.com/openshift/client-go/config/informers/externalversions/config/v1"
 	configlistersv1 "github.com/openshift/client-go/config/listers/config/v1"
-
 	mcfgv1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
 	templatectrl "github.com/openshift/machine-config-operator/pkg/controller/template"
 	mcfgclientset "github.com/openshift/machine-config-operator/pkg/generated/clientset/versioned"
@@ -45,123 +41,59 @@ import (
 )
 
 const (
-	// maxRetries is the number of times a machineconfig pool will be retried before it is dropped out of the queue.
-	// With the current rate-limiter in use (5ms*2^(maxRetries-1)) the following numbers represent the times
-	// a machineconfig pool is going to be requeued:
-	//
-	// 5ms, 10ms, 20ms, 40ms, 80ms, 160ms, 320ms, 640ms, 1.3s, 2.6s, 5.1s, 10.2s, 20.4s, 41s, 82s
-	maxRetries = 15
-
-	// osImageConfigMapName is the name of our configmap for the osImageURL
-	osImageConfigMapName = "machine-config-osimageurl"
+	maxRetries		= 15
+	osImageConfigMapName	= "machine-config-osimageurl"
 )
 
-// Operator defines machince config operator.
 type Operator struct {
-	namespace, name string
-
-	inClusterBringup bool
-
-	imagesFile string
-
-	vStore *versionStore
-
-	client        mcfgclientset.Interface
-	kubeClient    kubernetes.Interface
-	apiExtClient  apiextclientset.Interface
-	configClient  configclientset.Interface
-	eventRecorder record.EventRecorder
-
-	syncHandler func(ic string) error
-
-	crdLister       apiextlistersv1beta1.CustomResourceDefinitionLister
-	mcpLister       mcfglistersv1.MachineConfigPoolLister
-	ccLister        mcfglistersv1.ControllerConfigLister
-	mcLister        mcfglistersv1.MachineConfigLister
-	deployLister    appslisterv1.DeploymentLister
-	daemonsetLister appslisterv1.DaemonSetLister
-	infraLister     configlistersv1.InfrastructureLister
-	networkLister   configlistersv1.NetworkLister
-	mcoCmLister     corelisterv1.ConfigMapLister
-	clusterCmLister corelisterv1.ConfigMapLister
-
-	crdListerSynced                  cache.InformerSynced
-	deployListerSynced               cache.InformerSynced
-	daemonsetListerSynced            cache.InformerSynced
-	infraListerSynced                cache.InformerSynced
-	networkListerSynced              cache.InformerSynced
-	mcpListerSynced                  cache.InformerSynced
-	ccListerSynced                   cache.InformerSynced
-	mcListerSynced                   cache.InformerSynced
-	mcoCmListerSynced                cache.InformerSynced
-	clusterCmListerSynced            cache.InformerSynced
-	serviceAccountInformerSynced     cache.InformerSynced
-	clusterRoleInformerSynced        cache.InformerSynced
-	clusterRoleBindingInformerSynced cache.InformerSynced
-
-	// queue only ever has one item, but it has nice error handling backoff/retry semantics
-	queue workqueue.RateLimitingInterface
-
-	stopCh <-chan struct{}
+	namespace, name				string
+	inClusterBringup			bool
+	imagesFile				string
+	vStore					*versionStore
+	client					mcfgclientset.Interface
+	kubeClient				kubernetes.Interface
+	apiExtClient				apiextclientset.Interface
+	configClient				configclientset.Interface
+	eventRecorder				record.EventRecorder
+	syncHandler				func(ic string) error
+	crdLister				apiextlistersv1beta1.CustomResourceDefinitionLister
+	mcpLister				mcfglistersv1.MachineConfigPoolLister
+	ccLister				mcfglistersv1.ControllerConfigLister
+	mcLister				mcfglistersv1.MachineConfigLister
+	deployLister				appslisterv1.DeploymentLister
+	daemonsetLister				appslisterv1.DaemonSetLister
+	infraLister				configlistersv1.InfrastructureLister
+	networkLister				configlistersv1.NetworkLister
+	mcoCmLister				corelisterv1.ConfigMapLister
+	clusterCmLister				corelisterv1.ConfigMapLister
+	crdListerSynced				cache.InformerSynced
+	deployListerSynced			cache.InformerSynced
+	daemonsetListerSynced			cache.InformerSynced
+	infraListerSynced			cache.InformerSynced
+	networkListerSynced			cache.InformerSynced
+	mcpListerSynced				cache.InformerSynced
+	ccListerSynced				cache.InformerSynced
+	mcListerSynced				cache.InformerSynced
+	mcoCmListerSynced			cache.InformerSynced
+	clusterCmListerSynced			cache.InformerSynced
+	serviceAccountInformerSynced		cache.InformerSynced
+	clusterRoleInformerSynced		cache.InformerSynced
+	clusterRoleBindingInformerSynced	cache.InformerSynced
+	queue					workqueue.RateLimitingInterface
+	stopCh					<-chan struct{}
 }
 
-// New returns a new machine config operator.
-func New(
-	namespace, name string,
-	imagesFile string,
-	mcpInformer mcfginformersv1.MachineConfigPoolInformer,
-	mcInformer mcfginformersv1.MachineConfigInformer,
-	controllerConfigInformer mcfginformersv1.ControllerConfigInformer,
-	serviceAccountInfomer coreinformersv1.ServiceAccountInformer,
-	crdInformer apiextinformersv1beta1.CustomResourceDefinitionInformer,
-	deployInformer appsinformersv1.DeploymentInformer,
-	daemonsetInformer appsinformersv1.DaemonSetInformer,
-	clusterRoleInformer rbacinformersv1.ClusterRoleInformer,
-	clusterRoleBindingInformer rbacinformersv1.ClusterRoleBindingInformer,
-	mcoCmInformer coreinformersv1.ConfigMapInformer,
-	clusterCmInfomer coreinformersv1.ConfigMapInformer,
-	infraInformer configinformersv1.InfrastructureInformer,
-	networkInformer configinformersv1.NetworkInformer,
-	client mcfgclientset.Interface,
-	kubeClient kubernetes.Interface,
-	apiExtClient apiextclientset.Interface,
-	configClient configclientset.Interface,
-) *Operator {
+func New(namespace, name string, imagesFile string, mcpInformer mcfginformersv1.MachineConfigPoolInformer, mcInformer mcfginformersv1.MachineConfigInformer, controllerConfigInformer mcfginformersv1.ControllerConfigInformer, serviceAccountInfomer coreinformersv1.ServiceAccountInformer, crdInformer apiextinformersv1beta1.CustomResourceDefinitionInformer, deployInformer appsinformersv1.DeploymentInformer, daemonsetInformer appsinformersv1.DaemonSetInformer, clusterRoleInformer rbacinformersv1.ClusterRoleInformer, clusterRoleBindingInformer rbacinformersv1.ClusterRoleBindingInformer, mcoCmInformer coreinformersv1.ConfigMapInformer, clusterCmInfomer coreinformersv1.ConfigMapInformer, infraInformer configinformersv1.InfrastructureInformer, networkInformer configinformersv1.NetworkInformer, client mcfgclientset.Interface, kubeClient kubernetes.Interface, apiExtClient apiextclientset.Interface, configClient configclientset.Interface) *Operator {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
 	eventBroadcaster.StartRecordingToSink(&coreclientsetv1.EventSinkImpl{Interface: kubeClient.CoreV1().Events("")})
-
-	optr := &Operator{
-		namespace:     namespace,
-		name:          name,
-		imagesFile:    imagesFile,
-		vStore:        newVersionStore(),
-		client:        client,
-		kubeClient:    kubeClient,
-		apiExtClient:  apiExtClient,
-		configClient:  configClient,
-		eventRecorder: eventBroadcaster.NewRecorder(scheme.Scheme, v1.EventSource{Component: "machineconfigoperator"}),
-		queue:         workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "machineconfigoperator"),
-	}
-
-	for _, i := range []cache.SharedIndexInformer{
-		controllerConfigInformer.Informer(),
-		serviceAccountInfomer.Informer(),
-		crdInformer.Informer(),
-		deployInformer.Informer(),
-		daemonsetInformer.Informer(),
-		clusterRoleInformer.Informer(),
-		clusterRoleBindingInformer.Informer(),
-		mcoCmInformer.Informer(),
-		infraInformer.Informer(),
-		networkInformer.Informer(),
-		mcpInformer.Informer(),
-	} {
+	optr := &Operator{namespace: namespace, name: name, imagesFile: imagesFile, vStore: newVersionStore(), client: client, kubeClient: kubeClient, apiExtClient: apiExtClient, configClient: configClient, eventRecorder: eventBroadcaster.NewRecorder(scheme.Scheme, v1.EventSource{Component: "machineconfigoperator"}), queue: workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "machineconfigoperator")}
+	for _, i := range []cache.SharedIndexInformer{controllerConfigInformer.Informer(), serviceAccountInfomer.Informer(), crdInformer.Informer(), deployInformer.Informer(), daemonsetInformer.Informer(), clusterRoleInformer.Informer(), clusterRoleBindingInformer.Informer(), mcoCmInformer.Informer(), infraInformer.Informer(), networkInformer.Informer(), mcpInformer.Informer()} {
 		i.AddEventHandler(optr.eventHandler())
 	}
-
 	optr.syncHandler = optr.sync
-
 	optr.clusterCmLister = clusterCmInfomer.Lister()
 	optr.clusterCmListerSynced = clusterCmInfomer.Informer().HasSynced
 	optr.mcpLister = mcpInformer.Lister()
@@ -170,7 +102,6 @@ func New(
 	optr.ccListerSynced = controllerConfigInformer.Informer().HasSynced
 	optr.mcLister = mcInformer.Lister()
 	optr.mcListerSynced = mcInformer.Informer().HasSynced
-
 	optr.serviceAccountInformerSynced = serviceAccountInfomer.Informer().HasSynced
 	optr.clusterRoleInformerSynced = clusterRoleInformer.Informer().HasSynced
 	optr.clusterRoleBindingInformerSynced = clusterRoleBindingInformer.Informer().HasSynced
@@ -186,17 +117,14 @@ func New(
 	optr.infraListerSynced = infraInformer.Informer().HasSynced
 	optr.networkLister = networkInformer.Lister()
 	optr.networkListerSynced = networkInformer.Informer().HasSynced
-
 	optr.vStore.Set("operator", os.Getenv("RELEASE_VERSION"))
-
 	return optr
 }
-
-// Run runs the machine config operator.
 func (optr *Operator) Run(workers int, stopCh <-chan struct{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	defer utilruntime.HandleCrash()
 	defer optr.queue.ShutDown()
-
 	apiClient := optr.apiExtClient.ApiextensionsV1beta1()
 	_, err := apiClient.CustomResourceDefinitions().Get("machineconfigpools.machineconfiguration.openshift.io", metav1.GetOptions{})
 	if err != nil {
@@ -207,117 +135,93 @@ func (optr *Operator) Run(workers int, stopCh <-chan struct{}) {
 			glog.Errorf("While checking for cluster bringup: %v", err)
 		}
 	}
-
-	if !cache.WaitForCacheSync(stopCh,
-		optr.crdListerSynced,
-		optr.deployListerSynced,
-		optr.daemonsetListerSynced,
-		optr.infraListerSynced,
-		optr.mcoCmListerSynced,
-		optr.clusterCmListerSynced,
-		optr.serviceAccountInformerSynced,
-		optr.clusterRoleInformerSynced,
-		optr.clusterRoleBindingInformerSynced,
-		optr.networkListerSynced) {
+	if !cache.WaitForCacheSync(stopCh, optr.crdListerSynced, optr.deployListerSynced, optr.daemonsetListerSynced, optr.infraListerSynced, optr.mcoCmListerSynced, optr.clusterCmListerSynced, optr.serviceAccountInformerSynced, optr.clusterRoleInformerSynced, optr.clusterRoleBindingInformerSynced, optr.networkListerSynced) {
 		glog.Error("failed to sync caches")
 		return
 	}
-
-	// these can only be synced after CRDs are installed
 	if !optr.inClusterBringup {
-		if !cache.WaitForCacheSync(stopCh,
-			optr.mcpListerSynced,
-			optr.ccListerSynced,
-			optr.mcListerSynced,
-		) {
+		if !cache.WaitForCacheSync(stopCh, optr.mcpListerSynced, optr.ccListerSynced, optr.mcListerSynced) {
 			glog.Error("failed to sync caches")
 			return
 		}
 	}
-
 	glog.Info("Starting MachineConfigOperator")
 	defer glog.Info("Shutting down MachineConfigOperator")
-
 	optr.stopCh = stopCh
-
 	for i := 0; i < workers; i++ {
 		go wait.Until(optr.worker, time.Second, stopCh)
 	}
-
 	<-stopCh
 }
-
 func (optr *Operator) eventHandler() cache.ResourceEventHandler {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	workQueueKey := fmt.Sprintf("%s/%s", optr.namespace, optr.name)
-	return cache.ResourceEventHandlerFuncs{
-		AddFunc:    func(obj interface{}) { optr.queue.Add(workQueueKey) },
-		UpdateFunc: func(old, new interface{}) { optr.queue.Add(workQueueKey) },
-		DeleteFunc: func(obj interface{}) { optr.queue.Add(workQueueKey) },
-	}
+	return cache.ResourceEventHandlerFuncs{AddFunc: func(obj interface{}) {
+		optr.queue.Add(workQueueKey)
+	}, UpdateFunc: func(old, new interface{}) {
+		optr.queue.Add(workQueueKey)
+	}, DeleteFunc: func(obj interface{}) {
+		optr.queue.Add(workQueueKey)
+	}}
 }
-
 func (optr *Operator) worker() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for optr.processNextWorkItem() {
 	}
 }
-
 func (optr *Operator) processNextWorkItem() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	key, quit := optr.queue.Get()
 	if quit {
 		return false
 	}
 	defer optr.queue.Done(key)
-
 	err := optr.syncHandler(key.(string))
 	optr.handleErr(err, key)
-
 	return true
 }
-
 func (optr *Operator) handleErr(err error, key interface{}) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		optr.queue.Forget(key)
 		return
 	}
-
 	if optr.queue.NumRequeues(key) < maxRetries {
 		glog.V(2).Infof("Error syncing operator %v: %v", key, err)
 		optr.queue.AddRateLimited(key)
 		return
 	}
-
 	utilruntime.HandleError(err)
 	glog.V(2).Infof("Dropping operator %q out of the queue: %v", key, err)
 	optr.queue.Forget(key)
 	optr.queue.AddAfter(key, 1*time.Minute)
 }
-
 func (optr *Operator) sync(key string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	startTime := time.Now()
 	glog.V(4).Infof("Started syncing operator %q (%v)", key, startTime)
 	defer func() {
 		glog.V(4).Infof("Finished syncing operator %q (%v)", key, time.Since(startTime))
 	}()
-
 	if err := optr.syncCustomResourceDefinitions(); err != nil {
 		return err
 	}
-
 	if optr.inClusterBringup {
 		glog.V(4).Info("Starting inClusterBringup informers cache sync")
-		// sync now our own informers after having installed the CRDs
 		if !cache.WaitForCacheSync(optr.stopCh, optr.mcpListerSynced, optr.mcListerSynced, optr.ccListerSynced) {
 			return errors.New("failed to sync caches for informers")
 		}
 		glog.V(4).Info("Finished inClusterBringup informers cache sync")
 	}
-
 	namespace, _, err := cache.SplitMetaNamespaceKey(key)
 	if err != nil {
 		return err
 	}
-
-	// sync up the images used by operands.
 	imgsRaw, err := ioutil.ReadFile(optr.imagesFile)
 	if err != nil {
 		return err
@@ -326,8 +230,6 @@ func (optr *Operator) sync(key string) error {
 	if err := json.Unmarshal(imgsRaw, &imgs); err != nil {
 		return err
 	}
-
-	// sync up CAs
 	etcdCA, err := optr.getCAsFromConfigMap("openshift-config", "etcd-serving-ca", "ca-bundle.crt")
 	if err != nil {
 		return err
@@ -340,8 +242,6 @@ func (optr *Operator) sync(key string) error {
 	if err != nil {
 		return err
 	}
-	// as described by the name this is essentially static, but it no worse than what was here before.  Since changes disrupt workloads
-	// and since must perfectly match what the installer creates, this is effectively frozen in time.
 	kubeAPIServerServingCABytes, err := optr.getCAsFromConfigMap("openshift-config", "initial-kube-apiserver-server-ca", "ca-bundle.crt")
 	if err != nil {
 		return err
@@ -349,16 +249,11 @@ func (optr *Operator) sync(key string) error {
 	bundle := make([]byte, 0)
 	bundle = append(bundle, rootCA...)
 	bundle = append(bundle, kubeAPIServerServingCABytes...)
-
-	// sync up os image url
-	// TODO: this should probably be part of the imgs
 	osimageurl, err := optr.getOsImageURL(namespace)
 	if err != nil {
 		return err
 	}
 	imgs.MachineOSContent = osimageurl
-
-	// sync up the ControllerConfigSpec
 	infra, network, err := optr.getGlobalConfig()
 	if err != nil {
 		return err
@@ -367,8 +262,6 @@ func (optr *Operator) sync(key string) error {
 	if err != nil {
 		return err
 	}
-
-	// if the cloudConfig is set in infra read the cloud config reference
 	if infra.Spec.CloudConfig.Name != "" {
 		cc, err := optr.getCloudConfigFromConfigMap("openshift-config", infra.Spec.CloudConfig.Name, infra.Spec.CloudConfig.Key)
 		if err != nil {
@@ -376,42 +269,28 @@ func (optr *Operator) sync(key string) error {
 		}
 		spec.CloudProviderConfig = cc
 	}
-
 	spec.EtcdCAData = etcdCA
 	spec.EtcdMetricCAData = etcdMetricCA
 	spec.RootCAData = bundle
 	spec.PullSecret = &v1.ObjectReference{Namespace: "openshift-config", Name: "pull-secret"}
 	spec.OSImageURL = imgs.MachineOSContent
-	spec.Images = map[string]string{
-		templatectrl.EtcdImageKey:            imgs.Etcd,
-		templatectrl.SetupEtcdEnvKey:         imgs.SetupEtcdEnv,
-		templatectrl.InfraImageKey:           imgs.InfraImage,
-		templatectrl.KubeClientAgentImageKey: imgs.KubeClientAgent,
-	}
-
-	// create renderConfig
+	spec.Images = map[string]string{templatectrl.EtcdImageKey: imgs.Etcd, templatectrl.SetupEtcdEnvKey: imgs.SetupEtcdEnv, templatectrl.InfraImageKey: imgs.InfraImage, templatectrl.KubeClientAgentImageKey: imgs.KubeClientAgent}
 	rc := getRenderConfig(namespace, string(kubeAPIServerServingCABytes), spec, imgs, infra.Status.APIServerURL)
-	// syncFuncs is the list of sync functions that are executed in order.
-	// any error marks sync as failure but continues to next syncFunc
-	var syncFuncs = []syncFunc{
-		{"pools", optr.syncMachineConfigPools},
-		{"mcc", optr.syncMachineConfigController},
-		{"mcs", optr.syncMachineConfigServer},
-		{"mcd", optr.syncMachineConfigDaemon},
-		{"required-pools", optr.syncRequiredMachineConfigPools},
-	}
+	var syncFuncs = []syncFunc{{"pools", optr.syncMachineConfigPools}, {"mcc", optr.syncMachineConfigController}, {"mcs", optr.syncMachineConfigServer}, {"mcd", optr.syncMachineConfigDaemon}, {"required-pools", optr.syncRequiredMachineConfigPools}}
 	return optr.syncAll(rc, syncFuncs)
 }
-
 func (optr *Operator) getOsImageURL(namespace string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cm, err := optr.mcoCmLister.ConfigMaps(namespace).Get(osImageConfigMapName)
 	if err != nil {
 		return "", err
 	}
 	return cm.Data["osImageURL"], nil
 }
-
 func (optr *Operator) getCAsFromConfigMap(namespace, name, key string) ([]byte, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cm, err := optr.clusterCmLister.ConfigMaps(namespace).Get(name)
 	if err != nil {
 		return nil, err
@@ -421,8 +300,6 @@ func (optr *Operator) getCAsFromConfigMap(namespace, name, key string) ([]byte, 
 	} else if d, dok := cm.Data[key]; dok {
 		raw, err := base64.StdEncoding.DecodeString(d)
 		if err != nil {
-			// this is actually the result of a bad assumption.  configmap values are not encoded.
-			// After the installer pull merges, this entire attempt to decode can go away.
 			return []byte(d), nil
 		}
 		return raw, nil
@@ -430,8 +307,9 @@ func (optr *Operator) getCAsFromConfigMap(namespace, name, key string) ([]byte, 
 		return nil, fmt.Errorf("%s not found in %s/%s", key, namespace, name)
 	}
 }
-
 func (optr *Operator) getCloudConfigFromConfigMap(namespace, name, key string) (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cm, err := optr.clusterCmLister.ConfigMaps(namespace).Get(name)
 	if err != nil {
 		return "", err
@@ -442,10 +320,9 @@ func (optr *Operator) getCloudConfigFromConfigMap(namespace, name, key string) (
 		return "", fmt.Errorf("%s not found in %s/%s", key, namespace, name)
 	}
 }
-
-// getGlobalConfig gets global configuration for the cluster, namely, the Infrastructure and Network types.
-// Each type of global configuration is named `cluster` for easy discovery in the cluster.
 func (optr *Operator) getGlobalConfig() (*configv1.Infrastructure, *configv1.Network, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	infra, err := optr.infraLister.Get("cluster")
 	if err != nil {
 		return nil, nil, err
@@ -456,14 +333,8 @@ func (optr *Operator) getGlobalConfig() (*configv1.Infrastructure, *configv1.Net
 	}
 	return infra, network, nil
 }
-
 func getRenderConfig(tnamespace, kubeAPIServerServingCA string, ccSpec *mcfgv1.ControllerConfigSpec, imgs Images, apiServerURL string) renderConfig {
-	return renderConfig{
-		TargetNamespace:        tnamespace,
-		Version:                version.Raw,
-		ControllerConfig:       *ccSpec,
-		Images:                 imgs,
-		APIServerURL:           apiServerURL,
-		KubeAPIServerServingCA: kubeAPIServerServingCA,
-	}
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	return renderConfig{TargetNamespace: tnamespace, Version: version.Raw, ControllerConfig: *ccSpec, Images: imgs, APIServerURL: apiServerURL, KubeAPIServerServingCA: kubeAPIServerServingCA}
 }
