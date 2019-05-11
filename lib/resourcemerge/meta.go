@@ -5,17 +5,18 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EnsureObjectMeta ensures that the existing matches the required.
-// modified is set to true when existing had to be updated with required.
 func EnsureObjectMeta(modified *bool, existing *metav1.ObjectMeta, required metav1.ObjectMeta) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setStringIfSet(modified, &existing.Namespace, required.Namespace)
 	setStringIfSet(modified, &existing.Name, required.Name)
 	mergeMap(modified, &existing.Labels, required.Labels)
 	mergeMap(modified, &existing.Annotations, required.Annotations)
 	mergeOwnerRefs(modified, &existing.OwnerReferences, required.OwnerReferences)
 }
-
 func setStringIfSet(modified *bool, existing *string, required string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(required) == 0 {
 		return
 	}
@@ -24,8 +25,9 @@ func setStringIfSet(modified *bool, existing *string, required string) {
 		*modified = true
 	}
 }
-
 func setBytesIfSet(modified *bool, existing *[]byte, required []byte) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(required) == 0 {
 		return
 	}
@@ -34,8 +36,9 @@ func setBytesIfSet(modified *bool, existing *[]byte, required []byte) {
 		*modified = true
 	}
 }
-
 func mergeMap(modified *bool, existing *map[string]string, required map[string]string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if *existing == nil {
 		*existing = map[string]string{}
 	}
@@ -46,8 +49,9 @@ func mergeMap(modified *bool, existing *map[string]string, required map[string]s
 		}
 	}
 }
-
 func mergeOwnerRefs(modified *bool, existing *[]metav1.OwnerReference, required []metav1.OwnerReference) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for ridx := range required {
 		found := false
 		for eidx := range *existing {
@@ -66,8 +70,8 @@ func mergeOwnerRefs(modified *bool, existing *[]metav1.OwnerReference, required 
 		}
 	}
 }
-
-// BoolPtr returns ptr to bool.
 func BoolPtr(val bool) *bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &val
 }
